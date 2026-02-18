@@ -13,9 +13,10 @@ const MotionBox = motion(Box)
 interface SearchBarProps {
     value: string
     onChange: (value: string) => void
+    placeholder?: string
 }
 
-export default function SearchBar({ value, onChange }: SearchBarProps) {
+export default function SearchBar({ value, onChange, placeholder = 'Search AI terms...' }: SearchBarProps) {
     return (
         <MotionBox
             initial={{ opacity: 0, y: 20 }}
@@ -32,7 +33,7 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
                 <Input
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
-                    placeholder="Search AI terms..."
+                    placeholder={placeholder}
                     bg="whiteAlpha.50"
                     border="1px solid"
                     borderColor="brand.700"

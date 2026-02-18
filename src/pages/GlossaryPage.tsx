@@ -16,8 +16,11 @@ import SearchBar from '../components/SearchBar'
 import AlphabetNav from '../components/AlphabetNav'
 import TermCard from '../components/TermCard'
 import TermModal from '../components/TermModal'
-import glossaryData from '../data/glossaryData'
+import glossaryDataEn from '../data/glossaryData'
+import glossaryDataEs from '../data/glossaryDataEs'
 import { GlossaryTerm } from '../types/glossary'
+import { useLanguage } from '../context/LanguageContext'
+import { useStrings } from '../i18n/strings'
 
 const MotionBox = motion(Box)
 
@@ -27,10 +30,22 @@ export default function GlossaryPage() {
     const [selectedTerm, setSelectedTerm] = useState<GlossaryTerm | null>(null)
     const { isOpen, onOpen, onClose } = useDisclosure()
 
+    const { language } = useLanguage()
+    const s = useStrings(language)
+
+    // Pick dataset based on language
+    const glossaryData = language === 'es' ? glossaryDataEs : glossaryDataEn
+
     // Compute available letters
     const availableLetters = useMemo(() => {
         return new Set(glossaryData.map((t) => t.letter))
-    }, [])
+    }, [glossaryData])
+
+    // Reset filters when language changes
+    useMemo(() => {
+        setActiveLetter(null)
+        setSearch('')
+    }, [language])
 
     // Filter terms
     const filteredTerms = useMemo(() => {
@@ -52,7 +67,7 @@ export default function GlossaryPage() {
         }
 
         return terms.sort((a, b) => a.term.localeCompare(b.term))
-    }, [activeLetter, search])
+    }, [activeLetter, search, glossaryData])
 
     const handleCardClick = useCallback((term: GlossaryTerm) => {
         setSelectedTerm(term)
@@ -63,6 +78,8 @@ export default function GlossaryPage() {
         setActiveLetter(letter)
         setSearch('')
     }, [])
+
+    const subtitle = s.subtitle.replace('{count}', String(glossaryData.length))
 
     return (
         <Box
@@ -107,7 +124,7 @@ export default function GlossaryPage() {
                     textAlign="center"
                     mb={10}
                 >
-                    <Logo />
+                    <Logo subtitle={s.logoSubtitle} />
 
                     <Text
                         fontSize={{ base: 'sm', md: 'md' }}
@@ -118,12 +135,11 @@ export default function GlossaryPage() {
                         mb={8}
                         lineHeight={1.7}
                     >
-                        Explore {glossaryData.length} essential terms in Artificial Intelligence
-                        and Generative AI — from fundamentals to cutting-edge concepts.
+                        {subtitle}
                     </Text>
 
                     {/* Search */}
-                    <SearchBar value={search} onChange={setSearch} />
+                    <SearchBar value={search} onChange={setSearch} placeholder={s.searchPlaceholder} />
                 </MotionBox>
 
                 {/* A-Z Nav */}
@@ -132,17 +148,17 @@ export default function GlossaryPage() {
                         activeLetter={activeLetter}
                         availableLetters={availableLetters}
                         onLetterClick={handleLetterClick}
+                        allLabel={s.allButton}
+                        clearLabel={s.clearFilter}
                     />
                 </Box>
 
                 {/* Results count */}
                 <Flex align="center" justify="space-between" mb={6} px={1}>
                     <Text fontSize="sm" color="whiteAlpha.500">
-                        {filteredTerms.length === glossaryData.length
-                            ? `${glossaryData.length} terms`
-                            : `${filteredTerms.length} of ${glossaryData.length} terms`}
-                        {activeLetter && ` · Letter "${activeLetter}"`}
-                        {search && ` · "${search}"`}
+                        {s.termsCount(filteredTerms.length, glossaryData.length)}
+                        {activeLetter && s.letterFilter(activeLetter)}
+                        {search && s.searchFilter(search)}
                     </Text>
                 </Flex>
 
@@ -160,6 +176,7 @@ export default function GlossaryPage() {
                                     term={term}
                                     index={i}
                                     onClick={() => handleCardClick(term)}
+                                    readMoreLabel={s.readMore}
                                 />
                             ))}
                         </SimpleGrid>
@@ -186,10 +203,10 @@ export default function GlossaryPage() {
                                     <Icon as={FiSearch} boxSize={8} color="whiteAlpha.300" />
                                 </Box>
                                 <Text color="whiteAlpha.500" fontSize="lg" fontWeight="600">
-                                    No terms found
+                                    {s.noTermsFound}
                                 </Text>
                                 <Text color="whiteAlpha.400" fontSize="sm">
-                                    Try a different search or letter filter
+                                    {s.noTermsHint}
                                 </Text>
                             </Center>
                         </MotionBox>
@@ -199,13 +216,20 @@ export default function GlossaryPage() {
                 {/* Footer */}
                 <Box mt={16} textAlign="center">
                     <Text fontSize="xs" color="whiteAlpha.300">
-                        IA Glossary · AI & Generative AI Reference · {new Date().getFullYear()}
+                        {s.footerText} · {new Date().getFullYear()}
                     </Text>
                 </Box>
             </Container>
 
             {/* Modal */}
-            <TermModal term={selectedTerm} isOpen={isOpen} onClose={onClose} />
+            <TermModal
+                term={selectedTerm}
+                isOpen={isOpen}
+                onClose={onClose}
+                summaryLabel={s.summaryLabel}
+                definitionLabel={s.definitionLabel}
+                relatedTermsLabel={s.relatedTermsLabel}
+            />
         </Box>
     )
 }

@@ -4,7 +4,11 @@ import { FaBrain } from 'react-icons/fa'
 
 const MotionBox = motion(Box)
 
-export default function Logo() {
+interface LogoProps {
+    subtitle?: string
+}
+
+export default function Logo({ subtitle = 'AI & Generative AI Terms' }: LogoProps) {
     return (
         <MotionBox
             initial={{ opacity: 0, scale: 0.8 }}
@@ -73,7 +77,7 @@ export default function Logo() {
                         letterSpacing="widest"
                         textTransform="uppercase"
                     >
-                        AI & Generative AI Terms
+                        {subtitle}
                     </Text>
                 </Box>
             </HStack>

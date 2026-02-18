@@ -24,15 +24,28 @@ const categoryColors: Record<string, string> = {
     Fundamentals: 'gray',
     'Learning Paradigm': 'messenger',
     'Safety & Alignment': 'whatsapp',
+    // Spanish categories
+    Arquitectura: 'purple',
+    'Tipo de Modelo': 'blue',
+    Modelo: 'cyan',
+    Entrenamiento: 'green',
+    'IA Generativa': 'pink',
+    Representación: 'teal',
+    Despliegue: 'yellow',
+    Infraestructura: 'red',
+    Fundamentos: 'gray',
+    'Paradigma de Aprendizaje': 'messenger',
+    'Seguridad y Alineación': 'whatsapp',
 }
 
 interface TermCardProps {
     term: GlossaryTerm
     index: number
     onClick: () => void
+    readMoreLabel?: string
 }
 
-export default function TermCard({ term, index, onClick }: TermCardProps) {
+export default function TermCard({ term, index, onClick, readMoreLabel = 'Read more' }: TermCardProps) {
     const badgeColor = categoryColors[term.category] || 'purple'
 
     return (
@@ -144,7 +157,7 @@ export default function TermCard({ term, index, onClick }: TermCardProps) {
             {/* Read more */}
             <Flex align="center" mt={4} color="brand.300" gap={1}>
                 <Text fontSize="xs" fontWeight="600">
-                    Read more
+                    {readMoreLabel}
                 </Text>
                 <Icon as={FiArrowRight} boxSize={3} />
             </Flex>

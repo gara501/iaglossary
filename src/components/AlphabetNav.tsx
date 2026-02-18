@@ -10,12 +10,16 @@ interface AlphabetNavProps {
     activeLetter: string | null
     availableLetters: Set<string>
     onLetterClick: (letter: string | null) => void
+    allLabel?: string
+    clearLabel?: string
 }
 
 export default function AlphabetNav({
     activeLetter,
     availableLetters,
     onLetterClick,
+    allLabel = 'ALL',
+    clearLabel = '✕ Clear filter',
 }: AlphabetNavProps) {
     return (
         <MotionBox
@@ -44,7 +48,7 @@ export default function AlphabetNav({
                     fontWeight="700"
                     letterSpacing="wider"
                 >
-                    ALL
+                    {allLabel}
                 </MotionButton>
 
                 {ALPHABET.map((letter, i) => {
@@ -94,7 +98,7 @@ export default function AlphabetNav({
                         _hover={{ color: 'brand.300' }}
                         transition="color 0.2s"
                     >
-                        ✕ Clear filter
+                        {clearLabel}
                     </Text>
                 </Flex>
             )}

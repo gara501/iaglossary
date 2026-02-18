@@ -34,15 +34,37 @@ const categoryColors: Record<string, string> = {
     Fundamentals: 'gray',
     'Learning Paradigm': 'messenger',
     'Safety & Alignment': 'whatsapp',
+    // Spanish categories
+    Arquitectura: 'purple',
+    'Tipo de Modelo': 'blue',
+    Modelo: 'cyan',
+    Entrenamiento: 'green',
+    'IA Generativa': 'pink',
+    Representación: 'teal',
+    Despliegue: 'yellow',
+    Infraestructura: 'red',
+    Fundamentos: 'gray',
+    'Paradigma de Aprendizaje': 'messenger',
+    'Seguridad y Alineación': 'whatsapp',
 }
 
 interface TermModalProps {
     term: GlossaryTerm | null
     isOpen: boolean
     onClose: () => void
+    summaryLabel?: string
+    definitionLabel?: string
+    relatedTermsLabel?: string
 }
 
-export default function TermModal({ term, isOpen, onClose }: TermModalProps) {
+export default function TermModal({
+    term,
+    isOpen,
+    onClose,
+    summaryLabel = 'Summary',
+    definitionLabel = 'Full Definition',
+    relatedTermsLabel = 'Related Terms',
+}: TermModalProps) {
     if (!term) return null
 
     const badgeColor = categoryColors[term.category] || 'purple'
@@ -147,7 +169,7 @@ export default function TermModal({ term, isOpen, onClose }: TermModalProps) {
                                 <Flex align="center" gap={2} mb={2}>
                                     <Icon as={FiBookOpen} color="brand.300" boxSize={4} />
                                     <Text fontSize="xs" fontWeight="700" color="brand.300" letterSpacing="wider" textTransform="uppercase">
-                                        Summary
+                                        {summaryLabel}
                                     </Text>
                                 </Flex>
                                 <Text fontSize="sm" color="whiteAlpha.800" fontStyle="italic" lineHeight={1.7}>
@@ -162,7 +184,7 @@ export default function TermModal({ term, isOpen, onClose }: TermModalProps) {
                                 <Flex align="center" gap={2} mb={3}>
                                     <Icon as={FiTag} color="accent.400" boxSize={4} />
                                     <Text fontSize="xs" fontWeight="700" color="accent.400" letterSpacing="wider" textTransform="uppercase">
-                                        Full Definition
+                                        {definitionLabel}
                                     </Text>
                                 </Flex>
                                 <Text
@@ -180,7 +202,7 @@ export default function TermModal({ term, isOpen, onClose }: TermModalProps) {
                                     <Flex align="center" gap={2} mb={3}>
                                         <Icon as={FiLink} color="brand.300" boxSize={4} />
                                         <Text fontSize="xs" fontWeight="700" color="brand.300" letterSpacing="wider" textTransform="uppercase">
-                                            Related Terms
+                                            {relatedTermsLabel}
                                         </Text>
                                     </Flex>
                                     <Wrap spacing={2}>
