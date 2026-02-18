@@ -34,7 +34,7 @@ const strings: Record<Language, UIStrings> = {
         summaryLabel: 'Summary',
         definitionLabel: 'Full Definition',
         relatedTermsLabel: 'Related Terms',
-        footerText: 'IA Glossary · AI & Generative AI Reference',
+        footerText: 'IA Glossary · AI & Generative AI Reference - Aram',
         logoSubtitle: 'AI & Generative AI Terms',
     },
     es: {
@@ -52,7 +52,7 @@ const strings: Record<Language, UIStrings> = {
         summaryLabel: 'Resumen',
         definitionLabel: 'Definición Completa',
         relatedTermsLabel: 'Términos Relacionados',
-        footerText: 'IA Glossary · Referencia de IA e IA Generativa',
+        footerText: 'IA Glossary · Referencia de IA e IA Generativa - Aram',
         logoSubtitle: 'Términos de IA e IA Generativa',
     },
 }
