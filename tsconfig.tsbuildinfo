@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/theme.ts","./src/components/alphabetnav.tsx","./src/components/logo.tsx","./src/components/searchbar.tsx","./src/components/termcard.tsx","./src/components/termmodal.tsx","./src/data/glossarydata.ts","./src/pages/glossarypage.tsx","./src/types/glossary.ts"],"version":"5.9.3"}

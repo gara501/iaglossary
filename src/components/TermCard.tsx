@@ -56,7 +56,7 @@ export default function TermCard({ term, index, onClick }: TermCardProps) {
             flexDirection="column"
             role="button"
             tabIndex={0}
-            onKeyDown={(e) => e.key === 'Enter' && onClick()}
+            onKeyDown={(e: React.KeyboardEvent) => e.key === 'Enter' && onClick()}
             _focus={{ outline: '2px solid', outlineColor: 'brand.400', outlineOffset: '2px' }}
         >
             {/* Top gradient accent */}
