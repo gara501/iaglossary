@@ -24,15 +24,15 @@ export default function Logo({ subtitle = 'AI & Generative AI Terms' }: LogoProp
                     w="56px"
                     h="56px"
                     borderRadius="18px"
-                    bg="rgba(99, 120, 255, 0.18)"
-                    border="1px solid rgba(120, 150, 255, 0.25)"
+                    bg="rgba(225, 29, 72, 0.15)"
+                    border="1px solid rgba(225, 29, 72, 0.25)"
                     backdropFilter="blur(12px)"
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
-                    boxShadow="0 8px 32px rgba(80, 100, 255, 0.25), inset 0 1px 0 rgba(255,255,255,0.12)"
+                    boxShadow="0 8px 32px rgba(180, 20, 50, 0.22), inset 0 1px 0 rgba(255,255,255,0.10)"
                 >
-                    <Icon as={FaBrain} color="rgba(180,200,255,0.9)" boxSize={6} />
+                    <Icon as={FaBrain} color="rgba(251,113,133,0.9)" boxSize={6} />
                 </Box>
 
                 <Box>
@@ -49,7 +49,7 @@ export default function Logo({ subtitle = 'AI & Generative AI Terms' }: LogoProp
                     </Text>
                     <Text
                         fontSize="10px"
-                        color="rgba(160, 185, 255, 0.65)"
+                        color="rgba(251, 113, 133, 0.55)"
                         fontWeight="600"
                         letterSpacing="0.14em"
                         textTransform="uppercase"

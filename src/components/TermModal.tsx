@@ -44,7 +44,7 @@ export default function TermModal({
             {isOpen && (
                 <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered scrollBehavior="inside">
                     <ModalOverlay
-                        bg="rgba(0,0,0,0.6)"
+                        bg="rgba(0,0,0,0.65)"
                         backdropFilter="blur(10px)"
                     />
                     <MotionModalContent
@@ -52,18 +52,18 @@ export default function TermModal({
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.93, y: 16 }}
                         transition={{ duration: 0.22, ease: 'easeOut' }}
-                        bg="rgba(10, 16, 45, 0.88)"
+                        bg="rgba(12, 5, 8, 0.90)"
                         backdropFilter="blur(28px)"
-                        border="1px solid rgba(255,255,255,0.10)"
+                        border="1px solid rgba(255,255,255,0.08)"
                         borderRadius="24px"
                         overflow="hidden"
-                        boxShadow="0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(120,150,255,0.08)"
+                        boxShadow="0 32px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(225,29,72,0.08)"
                         mx={4}
                     >
-                        {/* Top accent line */}
+                        {/* Top accent line — neon crimson */}
                         <Box
                             h="2px"
-                            bgGradient="linear(to-r, rgba(100,130,255,0.8), rgba(160,120,255,0.6), rgba(100,130,255,0.3))"
+                            bgGradient="linear(to-r, rgba(225,29,72,0.9), rgba(251,113,133,0.6), rgba(225,29,72,0.2))"
                         />
 
                         <ModalHeader pt={6} pb={3}>
@@ -73,8 +73,8 @@ export default function TermModal({
                                     minW="44px"
                                     h="44px"
                                     borderRadius="14px"
-                                    bg="rgba(100,130,255,0.18)"
-                                    border="1px solid rgba(120,150,255,0.25)"
+                                    bg="rgba(225, 29, 72, 0.14)"
+                                    border="1px solid rgba(225, 29, 72, 0.24)"
                                     display="flex"
                                     alignItems="center"
                                     justifyContent="center"
@@ -85,7 +85,7 @@ export default function TermModal({
                                         fontFamily="Space Grotesk, sans-serif"
                                         fontWeight="800"
                                         fontSize="lg"
-                                        color="rgba(180,200,255,0.9)"
+                                        color="rgba(251, 113, 133, 0.9)"
                                     >
                                         {term.letter}
                                     </Text>
@@ -99,7 +99,7 @@ export default function TermModal({
                                         fontFamily="Space Grotesk, sans-serif"
                                         fontWeight="800"
                                         fontSize={{ base: 'xl', md: '2xl' }}
-                                        color="rgba(235,240,255,0.97)"
+                                        color="rgba(255, 240, 243, 0.97)"
                                         lineHeight={1.2}
                                         letterSpacing="-0.02em"
                                     >
@@ -110,8 +110,8 @@ export default function TermModal({
                         </ModalHeader>
 
                         <ModalCloseButton
-                            color="rgba(160,185,255,0.5)"
-                            _hover={{ color: 'white', bg: 'rgba(255,255,255,0.08)' }}
+                            color="rgba(255,200,210,0.4)"
+                            _hover={{ color: 'white', bg: 'rgba(225,29,72,0.12)' }}
                             borderRadius="10px"
                             top={5}
                             right={5}
@@ -120,34 +120,34 @@ export default function TermModal({
                         <ModalBody pb={8}>
                             {/* Summary box */}
                             <Box
-                                bg="rgba(100,130,255,0.07)"
-                                border="1px solid rgba(120,150,255,0.12)"
+                                bg="rgba(225, 29, 72, 0.06)"
+                                border="1px solid rgba(225, 29, 72, 0.12)"
                                 borderRadius="16px"
                                 p={4}
                                 mb={5}
                             >
                                 <Flex align="center" gap={2} mb={2}>
-                                    <Icon as={FiBookOpen} color="rgba(140,165,255,0.7)" boxSize={3.5} />
-                                    <Text fontSize="10px" fontWeight="700" color="rgba(140,165,255,0.7)" letterSpacing="0.1em" textTransform="uppercase">
+                                    <Icon as={FiBookOpen} color="rgba(251,113,133,0.65)" boxSize={3.5} />
+                                    <Text fontSize="10px" fontWeight="700" color="rgba(251,113,133,0.65)" letterSpacing="0.1em" textTransform="uppercase">
                                         {summaryLabel}
                                     </Text>
                                 </Flex>
-                                <Text fontSize="sm" color="rgba(200,215,255,0.75)" fontStyle="italic" lineHeight={1.7}>
+                                <Text fontSize="sm" color="rgba(255, 210, 220, 0.72)" fontStyle="italic" lineHeight={1.7}>
                                     {term.summary}
                                 </Text>
                             </Box>
 
-                            <Divider borderColor="rgba(255,255,255,0.06)" mb={5} />
+                            <Divider borderColor="rgba(255,255,255,0.05)" mb={5} />
 
                             {/* Full definition */}
                             <Box mb={6}>
                                 <Flex align="center" gap={2} mb={3}>
-                                    <Icon as={FiTag} color="rgba(160,185,255,0.6)" boxSize={3.5} />
-                                    <Text fontSize="10px" fontWeight="700" color="rgba(160,185,255,0.6)" letterSpacing="0.1em" textTransform="uppercase">
+                                    <Icon as={FiTag} color="rgba(251,113,133,0.55)" boxSize={3.5} />
+                                    <Text fontSize="10px" fontWeight="700" color="rgba(251,113,133,0.55)" letterSpacing="0.1em" textTransform="uppercase">
                                         {definitionLabel}
                                     </Text>
                                 </Flex>
-                                <Text fontSize="sm" color="rgba(210,225,255,0.85)" lineHeight={1.8} fontWeight="400">
+                                <Text fontSize="sm" color="rgba(255, 230, 235, 0.85)" lineHeight={1.8} fontWeight="400">
                                     {term.definition}
                                 </Text>
                             </Box>
@@ -156,8 +156,8 @@ export default function TermModal({
                             {term.relatedTerms && term.relatedTerms.length > 0 && (
                                 <Box>
                                     <Flex align="center" gap={2} mb={3}>
-                                        <Icon as={FiLink} color="rgba(140,165,255,0.6)" boxSize={3.5} />
-                                        <Text fontSize="10px" fontWeight="700" color="rgba(140,165,255,0.6)" letterSpacing="0.1em" textTransform="uppercase">
+                                        <Icon as={FiLink} color="rgba(251,113,133,0.55)" boxSize={3.5} />
+                                        <Text fontSize="10px" fontWeight="700" color="rgba(251,113,133,0.55)" letterSpacing="0.1em" textTransform="uppercase">
                                             {relatedTermsLabel}
                                         </Text>
                                     </Flex>
@@ -166,13 +166,13 @@ export default function TermModal({
                                             <WrapItem key={related}>
                                                 <Tag
                                                     size="sm"
-                                                    bg="rgba(255,255,255,0.06)"
-                                                    color="rgba(190,210,255,0.75)"
-                                                    border="1px solid rgba(255,255,255,0.10)"
+                                                    bg="rgba(255,255,255,0.05)"
+                                                    color="rgba(255, 200, 210, 0.70)"
+                                                    border="1px solid rgba(255,255,255,0.08)"
                                                     borderRadius="full"
                                                     fontWeight="500"
                                                     fontSize="12px"
-                                                    _hover={{ bg: 'rgba(100,130,255,0.15)', borderColor: 'rgba(120,150,255,0.3)', color: 'white' }}
+                                                    _hover={{ bg: 'rgba(225,29,72,0.14)', borderColor: 'rgba(225,29,72,0.30)', color: 'white' }}
                                                     transition="all 0.18s"
                                                     cursor="default"
                                                 >

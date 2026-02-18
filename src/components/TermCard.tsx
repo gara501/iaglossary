@@ -28,7 +28,7 @@ export default function TermCard({ term, index, onClick, readMoreLabel = 'Read m
             role="button"
             tabIndex={0}
             onKeyDown={(e: React.KeyboardEvent) => e.key === 'Enter' && onClick()}
-            _focus={{ outline: '2px solid rgba(120,150,255,0.5)', outlineOffset: '2px' }}
+            _focus={{ outline: '2px solid rgba(225,29,72,0.45)', outlineOffset: '2px' }}
         >
             {/* Top row: category badge + letter */}
             <Flex justify="space-between" align="center" mb={3}>
@@ -37,8 +37,8 @@ export default function TermCard({ term, index, onClick, readMoreLabel = 'Read m
                     w="28px"
                     h="28px"
                     borderRadius="9px"
-                    bg="rgba(100,130,255,0.15)"
-                    border="1px solid rgba(120,150,255,0.2)"
+                    bg="rgba(225, 29, 72, 0.12)"
+                    border="1px solid rgba(225, 29, 72, 0.20)"
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
@@ -47,7 +47,7 @@ export default function TermCard({ term, index, onClick, readMoreLabel = 'Read m
                     <Text
                         fontSize="11px"
                         fontWeight="800"
-                        color="rgba(160,185,255,0.9)"
+                        color="rgba(251, 113, 133, 0.9)"
                         fontFamily="Space Grotesk, sans-serif"
                     >
                         {term.letter}
@@ -60,7 +60,7 @@ export default function TermCard({ term, index, onClick, readMoreLabel = 'Read m
                 fontFamily="Space Grotesk, sans-serif"
                 fontWeight="700"
                 fontSize="md"
-                color="rgba(235,240,255,0.95)"
+                color="rgba(255, 240, 243, 0.95)"
                 mb={2}
                 lineHeight={1.35}
                 letterSpacing="-0.01em"
@@ -71,7 +71,7 @@ export default function TermCard({ term, index, onClick, readMoreLabel = 'Read m
             {/* Summary */}
             <Text
                 fontSize="13px"
-                color="rgba(180,200,255,0.55)"
+                color="rgba(255, 200, 210, 0.45)"
                 lineHeight={1.65}
                 flex={1}
                 noOfLines={3}
@@ -82,10 +82,10 @@ export default function TermCard({ term, index, onClick, readMoreLabel = 'Read m
 
             {/* Read more */}
             <Flex align="center" mt={4} gap={1.5}>
-                <Text fontSize="12px" fontWeight="600" color="rgba(140,165,255,0.7)">
+                <Text fontSize="12px" fontWeight="600" color="rgba(225, 29, 72, 0.65)">
                     {readMoreLabel}
                 </Text>
-                <Icon as={FiArrowRight} boxSize="11px" color="rgba(140,165,255,0.7)" />
+                <Icon as={FiArrowRight} boxSize="11px" color="rgba(225, 29, 72, 0.65)" />
             </Flex>
         </MotionBox>
     )

@@ -1,4 +1,4 @@
-import { Box, HStack, Text } from '@chakra-ui/react'
+import { Box, Text, HStack } from '@chakra-ui/react'
 import { useLanguage } from '../context/LanguageContext'
 
 export default function LanguageSelector() {
@@ -13,12 +13,12 @@ export default function LanguageSelector() {
         >
             <HStack
                 spacing={0}
-                bg="rgba(255,255,255,0.06)"
+                bg="rgba(255,255,255,0.05)"
                 backdropFilter="blur(16px)"
-                border="1px solid rgba(255,255,255,0.10)"
+                border="1px solid rgba(255,255,255,0.08)"
                 borderRadius="12px"
                 p="3px"
-                boxShadow="0 4px 24px rgba(0,0,0,0.3)"
+                boxShadow="0 4px 24px rgba(0,0,0,0.35)"
             >
                 {(['en', 'es'] as const).map((lang) => {
                     const isActive = language === lang
@@ -30,10 +30,10 @@ export default function LanguageSelector() {
                             px={3}
                             py={1.5}
                             borderRadius="9px"
-                            bg={isActive ? 'rgba(100,130,255,0.25)' : 'transparent'}
-                            border={isActive ? '1px solid rgba(120,150,255,0.35)' : '1px solid transparent'}
+                            bg={isActive ? 'rgba(225,29,72,0.20)' : 'transparent'}
+                            border={isActive ? '1px solid rgba(225,29,72,0.38)' : '1px solid transparent'}
                             transition="all 0.18s"
-                            _hover={{ bg: isActive ? undefined : 'rgba(255,255,255,0.06)' }}
+                            _hover={{ bg: isActive ? undefined : 'rgba(225,29,72,0.08)' }}
                             cursor="pointer"
                         >
                             <HStack spacing={1.5}>
@@ -41,7 +41,7 @@ export default function LanguageSelector() {
                                 <Text
                                     fontSize="11px"
                                     fontWeight="700"
-                                    color={isActive ? 'rgba(200,215,255,0.95)' : 'rgba(160,185,255,0.45)'}
+                                    color={isActive ? 'rgba(251,113,133,0.95)' : 'rgba(255,200,210,0.38)'}
                                     letterSpacing="0.06em"
                                 >
                                     {lang.toUpperCase()}

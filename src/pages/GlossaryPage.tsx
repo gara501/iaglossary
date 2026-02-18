@@ -85,7 +85,7 @@ export default function GlossaryPage() {
                 w="700px"
                 h="700px"
                 borderRadius="full"
-                bg="rgba(60, 90, 220, 0.22)"
+                bg="rgba(180, 20, 50, 0.22)"
                 filter="blur(120px)"
                 pointerEvents="none"
                 zIndex={0}
@@ -98,7 +98,7 @@ export default function GlossaryPage() {
                 w="600px"
                 h="600px"
                 borderRadius="full"
-                bg="rgba(100, 50, 200, 0.18)"
+                bg="rgba(140, 10, 60, 0.18)"
                 filter="blur(100px)"
                 pointerEvents="none"
                 zIndex={0}
@@ -111,7 +111,7 @@ export default function GlossaryPage() {
                 w="400px"
                 h="400px"
                 borderRadius="full"
-                bg="rgba(40, 80, 200, 0.12)"
+                bg="rgba(100, 10, 35, 0.14)"
                 filter="blur(80px)"
                 pointerEvents="none"
                 zIndex={0}
@@ -202,12 +202,12 @@ export default function GlossaryPage() {
                                     alignItems="center"
                                     justifyContent="center"
                                 >
-                                    <Icon as={FiSearch} boxSize={7} color="rgba(160,185,255,0.3)" />
+                                    <Icon as={FiSearch} boxSize={7} color="rgba(225,29,72,0.28)" />
                                 </Box>
-                                <Text color="rgba(200,215,255,0.6)" fontSize="md" fontWeight="600">
+                                <Text color="rgba(255,230,235,0.6)" fontSize="md" fontWeight="600">
                                     {s.noTermsFound}
                                 </Text>
-                                <Text color="rgba(160,185,255,0.35)" fontSize="sm">
+                                <Text color="rgba(255,200,210,0.32)" fontSize="sm">
                                     {s.noTermsHint}
                                 </Text>
                             </Center>
@@ -217,7 +217,7 @@ export default function GlossaryPage() {
 
                 {/* Footer */}
                 <Box mt={16} textAlign="center">
-                    <Text fontSize="11px" color="rgba(160,185,255,0.25)" letterSpacing="0.04em">
+                    <Text fontSize="11px" color="rgba(255,200,210,0.20)" letterSpacing="0.04em">
                         {s.footerText} · {new Date().getFullYear()}
                     </Text>
                 </Box>

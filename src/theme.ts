@@ -8,8 +8,8 @@ const theme = extendTheme({
     styles: {
         global: {
             body: {
-                bg: '#060d1f',
-                color: 'white',
+                bg: '#0a0608',
+                color: '#f1e8ea',
             },
         },
     },
@@ -20,37 +20,32 @@ const theme = extendTheme({
     colors: {
         glass: {
             50: 'rgba(255,255,255,0.03)',
-            100: 'rgba(255,255,255,0.06)',
-            200: 'rgba(255,255,255,0.09)',
-            300: 'rgba(255,255,255,0.13)',
-            400: 'rgba(255,255,255,0.18)',
-            border: 'rgba(255,255,255,0.10)',
-            borderHover: 'rgba(255,255,255,0.20)',
+            100: 'rgba(255,255,255,0.05)',
+            200: 'rgba(255,255,255,0.08)',
+            300: 'rgba(255,255,255,0.12)',
+            400: 'rgba(255,255,255,0.17)',
+            border: 'rgba(255,255,255,0.08)',
+            borderHover: 'rgba(225,29,72,0.25)',
         },
         accent: {
-            300: '#a5b4fc',
-            400: '#818cf8',
-            500: '#6366f1',
-            600: '#4f46e5',
-            700: '#3730a3',
-        },
-        blue: {
-            300: '#93c5fd',
-            400: '#60a5fa',
-            500: '#3b82f6',
+            300: '#fda4af',  // rose-300
+            400: '#fb7185',  // rose-400
+            500: '#f43f5e',  // rose-500
+            600: '#e11d48',  // rose-600
+            700: '#be123c',  // rose-700
         },
     },
     components: {
         Modal: {
             baseStyle: {
                 dialog: {
-                    bg: 'rgba(10, 15, 40, 0.85)',
+                    bg: 'rgba(12, 5, 8, 0.88)',
                     backdropFilter: 'blur(24px)',
-                    border: '1px solid rgba(255,255,255,0.10)',
+                    border: '1px solid rgba(255,255,255,0.08)',
                     borderRadius: '24px',
                 },
                 overlay: {
-                    bg: 'rgba(0,0,0,0.65)',
+                    bg: 'rgba(0,0,0,0.70)',
                     backdropFilter: 'blur(8px)',
                 },
             },
