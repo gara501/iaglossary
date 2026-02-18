@@ -1,10 +1,4 @@
-import {
-    InputGroup,
-    InputLeftElement,
-    Input,
-    Icon,
-    Box,
-} from '@chakra-ui/react'
+import { Box, InputGroup, InputLeftElement, Input, Icon } from '@chakra-ui/react'
 import { FiSearch } from 'react-icons/fi'
 import { motion } from 'framer-motion'
 
@@ -19,41 +13,27 @@ interface SearchBarProps {
 export default function SearchBar({ value, onChange, placeholder = 'Search AI terms...' }: SearchBarProps) {
     return (
         <MotionBox
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             w="100%"
-            maxW="600px"
+            maxW="560px"
             mx="auto"
         >
             <InputGroup size="lg">
-                <InputLeftElement pointerEvents="none" h="full">
-                    <Icon as={FiSearch} color="brand.300" boxSize={5} />
+                <InputLeftElement pointerEvents="none" h="full" pl={1}>
+                    <Icon as={FiSearch} color="rgba(160,185,255,0.5)" boxSize={4} />
                 </InputLeftElement>
                 <Input
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
                     placeholder={placeholder}
-                    bg="whiteAlpha.50"
-                    border="1px solid"
-                    borderColor="brand.700"
-                    borderRadius="xl"
-                    color="white"
-                    fontSize="md"
-                    h="54px"
-                    pl="48px"
-                    _placeholder={{ color: 'whiteAlpha.400' }}
-                    _hover={{
-                        borderColor: 'brand.500',
-                        bg: 'whiteAlpha.100',
-                    }}
-                    _focus={{
-                        borderColor: 'brand.400',
-                        bg: 'whiteAlpha.100',
-                        boxShadow: '0 0 0 1px rgba(130, 38, 255, 0.5), 0 0 20px rgba(130, 38, 255, 0.15)',
-                        outline: 'none',
-                    }}
-                    transition="all 0.2s"
+                    className="glass-input"
+                    h="50px"
+                    pl="44px"
+                    fontSize="sm"
+                    fontWeight="500"
+                    _placeholder={{ color: 'rgba(160,185,255,0.4)', fontWeight: '400' }}
                 />
             </InputGroup>
         </MotionBox>

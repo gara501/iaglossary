@@ -6,7 +6,6 @@ import {
     ModalBody,
     ModalCloseButton,
     Text,
-    Badge,
     Box,
     Flex,
     Divider,
@@ -20,45 +19,6 @@ import { FiBookOpen, FiTag, FiLink } from 'react-icons/fi'
 import { GlossaryTerm } from '../types/glossary'
 
 const MotionModalContent = motion(ModalContent)
-
-const categoryColors: Record<string, string> = {
-    Architecture: 'purple',
-    'Model Type': 'blue',
-    Model: 'cyan',
-    Training: 'green',
-    'Generative AI': 'pink',
-    Prompting: 'orange',
-    Representation: 'teal',
-    Deployment: 'yellow',
-    Infrastructure: 'red',
-    Fundamentals: 'gray',
-    'Learning Paradigm': 'messenger',
-    'Safety & Alignment': 'whatsapp',
-    // Spanish categories
-    Arquitectura: 'purple',
-    'Tipo de Modelo': 'blue',
-    Modelo: 'cyan',
-    Entrenamiento: 'green',
-    'IA Generativa': 'pink',
-    Representación: 'teal',
-    Despliegue: 'yellow',
-    Infraestructura: 'red',
-    Fundamentos: 'gray',
-    'Paradigma de Aprendizaje': 'messenger',
-    'Seguridad y Alineación': 'whatsapp',
-    // New categories
-    Organization: 'linkedin',
-    Field: 'facebook',
-    'Data Science': 'twitter',
-    NLP: 'telegram',
-    Engineering: 'orange',
-    // New Spanish categories
-    Organización: 'linkedin',
-    Campo: 'facebook',
-    'Ciencia de Datos': 'twitter',
-    PLN: 'telegram',
-    Ingeniería: 'orange',
-}
 
 interface TermModalProps {
     term: GlossaryTerm | null
@@ -79,80 +39,69 @@ export default function TermModal({
 }: TermModalProps) {
     if (!term) return null
 
-    const badgeColor = categoryColors[term.category] || 'purple'
-
     return (
         <AnimatePresence>
             {isOpen && (
                 <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered scrollBehavior="inside">
                     <ModalOverlay
-                        bg="blackAlpha.800"
-                        backdropFilter="blur(12px)"
+                        bg="rgba(0,0,0,0.6)"
+                        backdropFilter="blur(10px)"
                     />
                     <MotionModalContent
-                        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                        initial={{ opacity: 0, scale: 0.93, y: 16 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                        transition={{ duration: 0.25, ease: 'easeOut' }}
-                        bg="rgba(15, 15, 40, 0.95)"
-                        border="1px solid"
-                        borderColor="brand.700"
-                        borderRadius="2xl"
+                        exit={{ opacity: 0, scale: 0.93, y: 16 }}
+                        transition={{ duration: 0.22, ease: 'easeOut' }}
+                        bg="rgba(10, 16, 45, 0.88)"
+                        backdropFilter="blur(28px)"
+                        border="1px solid rgba(255,255,255,0.10)"
+                        borderRadius="24px"
                         overflow="hidden"
-                        boxShadow="0 25px 80px rgba(130, 38, 255, 0.3), 0 0 0 1px rgba(130, 38, 255, 0.2)"
+                        boxShadow="0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(120,150,255,0.08)"
                         mx={4}
                     >
-                        {/* Top gradient bar */}
+                        {/* Top accent line */}
                         <Box
-                            h="3px"
-                            bgGradient="linear(to-r, brand.500, accent.400, brand.300)"
+                            h="2px"
+                            bgGradient="linear(to-r, rgba(100,130,255,0.8), rgba(160,120,255,0.6), rgba(100,130,255,0.3))"
                         />
 
-                        <ModalHeader pt={6} pb={2}>
+                        <ModalHeader pt={6} pb={3}>
                             <Flex align="flex-start" gap={3} pr={8}>
-                                {/* Letter circle */}
+                                {/* Letter bubble */}
                                 <Box
-                                    minW="48px"
-                                    h="48px"
-                                    borderRadius="xl"
-                                    bgGradient="linear(135deg, brand.600, accent.400)"
+                                    minW="44px"
+                                    h="44px"
+                                    borderRadius="14px"
+                                    bg="rgba(100,130,255,0.18)"
+                                    border="1px solid rgba(120,150,255,0.25)"
                                     display="flex"
                                     alignItems="center"
                                     justifyContent="center"
-                                    boxShadow="0 0 20px rgba(130, 38, 255, 0.4)"
+                                    flexShrink={0}
                                     mt={0.5}
                                 >
                                     <Text
                                         fontFamily="Space Grotesk, sans-serif"
                                         fontWeight="800"
-                                        fontSize="xl"
-                                        color="white"
+                                        fontSize="lg"
+                                        color="rgba(180,200,255,0.9)"
                                     >
                                         {term.letter}
                                     </Text>
                                 </Box>
 
                                 <Box>
-                                    <Badge
-                                        colorScheme={badgeColor}
-                                        variant="subtle"
-                                        borderRadius="full"
-                                        px={2}
-                                        py={0.5}
-                                        fontSize="2xs"
-                                        fontWeight="600"
-                                        letterSpacing="wider"
-                                        textTransform="uppercase"
-                                        mb={1}
-                                    >
+                                    <span className="glass-badge" style={{ marginBottom: '6px', display: 'inline-block' }}>
                                         {term.category}
-                                    </Badge>
+                                    </span>
                                     <Text
                                         fontFamily="Space Grotesk, sans-serif"
                                         fontWeight="800"
                                         fontSize={{ base: 'xl', md: '2xl' }}
-                                        color="white"
+                                        color="rgba(235,240,255,0.97)"
                                         lineHeight={1.2}
+                                        letterSpacing="-0.02em"
                                     >
                                         {term.term}
                                     </Text>
@@ -161,49 +110,44 @@ export default function TermModal({
                         </ModalHeader>
 
                         <ModalCloseButton
-                            color="whiteAlpha.600"
-                            _hover={{ color: 'white', bg: 'whiteAlpha.100' }}
-                            borderRadius="lg"
+                            color="rgba(160,185,255,0.5)"
+                            _hover={{ color: 'white', bg: 'rgba(255,255,255,0.08)' }}
+                            borderRadius="10px"
                             top={5}
                             right={5}
                         />
 
                         <ModalBody pb={8}>
-                            {/* Summary */}
+                            {/* Summary box */}
                             <Box
-                                bg="whiteAlpha.50"
-                                border="1px solid"
-                                borderColor="brand.800"
-                                borderRadius="xl"
+                                bg="rgba(100,130,255,0.07)"
+                                border="1px solid rgba(120,150,255,0.12)"
+                                borderRadius="16px"
                                 p={4}
                                 mb={5}
                             >
                                 <Flex align="center" gap={2} mb={2}>
-                                    <Icon as={FiBookOpen} color="brand.300" boxSize={4} />
-                                    <Text fontSize="xs" fontWeight="700" color="brand.300" letterSpacing="wider" textTransform="uppercase">
+                                    <Icon as={FiBookOpen} color="rgba(140,165,255,0.7)" boxSize={3.5} />
+                                    <Text fontSize="10px" fontWeight="700" color="rgba(140,165,255,0.7)" letterSpacing="0.1em" textTransform="uppercase">
                                         {summaryLabel}
                                     </Text>
                                 </Flex>
-                                <Text fontSize="sm" color="whiteAlpha.800" fontStyle="italic" lineHeight={1.7}>
+                                <Text fontSize="sm" color="rgba(200,215,255,0.75)" fontStyle="italic" lineHeight={1.7}>
                                     {term.summary}
                                 </Text>
                             </Box>
 
-                            <Divider borderColor="whiteAlpha.100" mb={5} />
+                            <Divider borderColor="rgba(255,255,255,0.06)" mb={5} />
 
                             {/* Full definition */}
                             <Box mb={6}>
                                 <Flex align="center" gap={2} mb={3}>
-                                    <Icon as={FiTag} color="accent.400" boxSize={4} />
-                                    <Text fontSize="xs" fontWeight="700" color="accent.400" letterSpacing="wider" textTransform="uppercase">
+                                    <Icon as={FiTag} color="rgba(160,185,255,0.6)" boxSize={3.5} />
+                                    <Text fontSize="10px" fontWeight="700" color="rgba(160,185,255,0.6)" letterSpacing="0.1em" textTransform="uppercase">
                                         {definitionLabel}
                                     </Text>
                                 </Flex>
-                                <Text
-                                    fontSize="sm"
-                                    color="whiteAlpha.900"
-                                    lineHeight={1.8}
-                                >
+                                <Text fontSize="sm" color="rgba(210,225,255,0.85)" lineHeight={1.8} fontWeight="400">
                                     {term.definition}
                                 </Text>
                             </Box>
@@ -212,8 +156,8 @@ export default function TermModal({
                             {term.relatedTerms && term.relatedTerms.length > 0 && (
                                 <Box>
                                     <Flex align="center" gap={2} mb={3}>
-                                        <Icon as={FiLink} color="brand.300" boxSize={4} />
-                                        <Text fontSize="xs" fontWeight="700" color="brand.300" letterSpacing="wider" textTransform="uppercase">
+                                        <Icon as={FiLink} color="rgba(140,165,255,0.6)" boxSize={3.5} />
+                                        <Text fontSize="10px" fontWeight="700" color="rgba(140,165,255,0.6)" letterSpacing="0.1em" textTransform="uppercase">
                                             {relatedTermsLabel}
                                         </Text>
                                     </Flex>
@@ -222,14 +166,14 @@ export default function TermModal({
                                             <WrapItem key={related}>
                                                 <Tag
                                                     size="sm"
-                                                    bg="whiteAlpha.100"
-                                                    color="whiteAlpha.800"
-                                                    border="1px solid"
-                                                    borderColor="whiteAlpha.200"
+                                                    bg="rgba(255,255,255,0.06)"
+                                                    color="rgba(190,210,255,0.75)"
+                                                    border="1px solid rgba(255,255,255,0.10)"
                                                     borderRadius="full"
                                                     fontWeight="500"
-                                                    _hover={{ bg: 'brand.800', borderColor: 'brand.500', color: 'white' }}
-                                                    transition="all 0.2s"
+                                                    fontSize="12px"
+                                                    _hover={{ bg: 'rgba(100,130,255,0.15)', borderColor: 'rgba(120,150,255,0.3)', color: 'white' }}
+                                                    transition="all 0.18s"
                                                     cursor="default"
                                                 >
                                                     {related}

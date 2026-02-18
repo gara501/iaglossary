@@ -1,8 +1,7 @@
-import { Box, Flex, Button, Text } from '@chakra-ui/react'
+import { Box, Flex, Text } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
 const MotionBox = motion(Box)
-const MotionButton = motion(Button)
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
@@ -23,80 +22,61 @@ export default function AlphabetNav({
 }: AlphabetNavProps) {
     return (
         <MotionBox
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
             w="100%"
         >
-            <Flex
-                wrap="wrap"
-                gap={1.5}
-                justify="center"
-                align="center"
-                mb={2}
-            >
+            <Flex wrap="wrap" gap={1.5} justify="center" align="center" mb={2}>
                 {/* ALL button */}
-                <MotionButton
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    size="sm"
+                <button
+                    className={`letter-btn${activeLetter === null ? ' active' : ''}`}
                     onClick={() => onLetterClick(null)}
-                    variant={activeLetter === null ? 'letterActive' : 'letter'}
-                    minW="42px"
-                    h="36px"
-                    fontSize="xs"
-                    fontWeight="700"
-                    letterSpacing="wider"
+                    style={{ width: 'auto', padding: '0 12px', fontSize: '11px', letterSpacing: '0.08em' }}
                 >
                     {allLabel}
-                </MotionButton>
+                </button>
 
-                {ALPHABET.map((letter, i) => {
+                {ALPHABET.map((letter) => {
                     const isAvailable = availableLetters.has(letter)
                     const isActive = activeLetter === letter
                     return (
-                        <MotionButton
+                        <button
                             key={letter}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.4 + i * 0.015 }}
-                            whileHover={isAvailable ? { scale: 1.1 } : {}}
-                            whileTap={isAvailable ? { scale: 0.9 } : {}}
-                            size="sm"
+                            className={`letter-btn${isActive ? ' active' : ''}`}
                             onClick={() => isAvailable && onLetterClick(letter)}
-                            variant={isActive ? 'letterActive' : 'letter'}
-                            minW="36px"
-                            h="36px"
-                            opacity={isAvailable ? 1 : 0.25}
-                            cursor={isAvailable ? 'pointer' : 'not-allowed'}
-                            position="relative"
+                            disabled={!isAvailable}
                         >
                             {letter}
                             {isAvailable && (
-                                <Box
-                                    position="absolute"
-                                    bottom="2px"
-                                    left="50%"
-                                    transform="translateX(-50%)"
-                                    w="3px"
-                                    h="3px"
-                                    borderRadius="full"
-                                    bg={isActive ? 'white' : 'brand.300'}
+                                <span
+                                    style={{
+                                        position: 'absolute',
+                                        bottom: '3px',
+                                        left: '50%',
+                                        transform: 'translateX(-50%)',
+                                        width: '3px',
+                                        height: '3px',
+                                        borderRadius: '50%',
+                                        background: isActive ? 'white' : 'rgba(160,185,255,0.6)',
+                                    }}
                                 />
                             )}
-                        </MotionButton>
+                        </button>
                     )
                 })}
             </Flex>
+
             {activeLetter && (
                 <Flex justify="center">
                     <Text
-                        fontSize="xs"
-                        color="whiteAlpha.500"
+                        fontSize="11px"
+                        color="rgba(160,185,255,0.45)"
                         cursor="pointer"
                         onClick={() => onLetterClick(null)}
-                        _hover={{ color: 'brand.300' }}
+                        _hover={{ color: 'rgba(160,185,255,0.8)' }}
                         transition="color 0.2s"
+                        fontWeight="500"
                     >
                         {clearLabel}
                     </Text>

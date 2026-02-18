@@ -1,73 +1,66 @@
-import { extendTheme, type ThemeConfig } from '@chakra-ui/react'
-
-const config: ThemeConfig = {
-    initialColorMode: 'dark',
-    useSystemColorMode: false,
-}
+import { extendTheme } from '@chakra-ui/react'
 
 const theme = extendTheme({
-    config,
-    fonts: {
-        heading: `'Space Grotesk', sans-serif`,
-        body: `'Inter', sans-serif`,
-    },
-    colors: {
-        brand: {
-            50: '#f0e6ff',
-            100: '#d4b3ff',
-            200: '#b980ff',
-            300: '#9d4dff',
-            400: '#8226ff',
-            500: '#6600e6',
-            600: '#5000b3',
-            700: '#3a0080',
-            800: '#25004d',
-            900: '#10001a',
-        },
-        accent: {
-            400: '#00d4ff',
-            500: '#00b8e6',
-        },
+    config: {
+        initialColorMode: 'dark',
+        useSystemColorMode: false,
     },
     styles: {
         global: {
             body: {
-                bg: '#0a0a1a',
+                bg: '#060d1f',
                 color: 'white',
             },
         },
     },
+    fonts: {
+        heading: "'Space Grotesk', sans-serif",
+        body: "'Inter', sans-serif",
+    },
+    colors: {
+        glass: {
+            50: 'rgba(255,255,255,0.03)',
+            100: 'rgba(255,255,255,0.06)',
+            200: 'rgba(255,255,255,0.09)',
+            300: 'rgba(255,255,255,0.13)',
+            400: 'rgba(255,255,255,0.18)',
+            border: 'rgba(255,255,255,0.10)',
+            borderHover: 'rgba(255,255,255,0.20)',
+        },
+        accent: {
+            300: '#a5b4fc',
+            400: '#818cf8',
+            500: '#6366f1',
+            600: '#4f46e5',
+            700: '#3730a3',
+        },
+        blue: {
+            300: '#93c5fd',
+            400: '#60a5fa',
+            500: '#3b82f6',
+        },
+    },
     components: {
-        Button: {
-            variants: {
-                letter: {
-                    bg: 'whiteAlpha.100',
-                    color: 'white',
-                    borderRadius: 'md',
-                    fontWeight: '600',
-                    fontSize: 'sm',
-                    _hover: {
-                        bg: 'brand.500',
-                        transform: 'translateY(-2px)',
-                        boxShadow: '0 4px 15px rgba(130, 38, 255, 0.4)',
-                    },
-                    _active: {
-                        bg: 'brand.400',
-                    },
-                    transition: 'all 0.2s',
+        Modal: {
+            baseStyle: {
+                dialog: {
+                    bg: 'rgba(10, 15, 40, 0.85)',
+                    backdropFilter: 'blur(24px)',
+                    border: '1px solid rgba(255,255,255,0.10)',
+                    borderRadius: '24px',
                 },
-                letterActive: {
-                    bg: 'brand.500',
-                    color: 'white',
-                    borderRadius: 'md',
-                    fontWeight: '700',
-                    fontSize: 'sm',
-                    boxShadow: '0 4px 15px rgba(130, 38, 255, 0.5)',
-                    transform: 'translateY(-2px)',
-                    _hover: {
-                        bg: 'brand.400',
-                    },
+                overlay: {
+                    bg: 'rgba(0,0,0,0.65)',
+                    backdropFilter: 'blur(8px)',
                 },
+            },
+        },
+        Badge: {
+            baseStyle: {
+                borderRadius: 'full',
+                fontWeight: '600',
+                letterSpacing: '0.06em',
+                fontSize: '10px',
             },
         },
     },

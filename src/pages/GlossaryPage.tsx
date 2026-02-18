@@ -33,28 +33,20 @@ export default function GlossaryPage() {
     const { language } = useLanguage()
     const s = useStrings(language)
 
-    // Pick dataset based on language
     const glossaryData = language === 'es' ? glossaryDataEs : glossaryDataEn
 
-    // Compute available letters
     const availableLetters = useMemo(() => {
         return new Set(glossaryData.map((t) => t.letter))
     }, [glossaryData])
 
-    // Reset filters when language changes
     useMemo(() => {
         setActiveLetter(null)
         setSearch('')
     }, [language])
 
-    // Filter terms
     const filteredTerms = useMemo(() => {
         let terms = glossaryData
-
-        if (activeLetter) {
-            terms = terms.filter((t) => t.letter === activeLetter)
-        }
-
+        if (activeLetter) terms = terms.filter((t) => t.letter === activeLetter)
         if (search.trim()) {
             const q = search.toLowerCase()
             terms = terms.filter(
@@ -65,7 +57,6 @@ export default function GlossaryPage() {
                     t.category.toLowerCase().includes(q)
             )
         }
-
         return terms.sort((a, b) => a.term.localeCompare(b.term))
     }, [activeLetter, search, glossaryData])
 
@@ -82,43 +73,55 @@ export default function GlossaryPage() {
     const subtitle = s.subtitle.replace('{count}', String(glossaryData.length))
 
     return (
-        <Box
-            minH="100vh"
-            className="bg-grid"
-            position="relative"
-        >
-            {/* Background blobs */}
+        <Box minH="100vh" position="relative">
+            {/* Glass background */}
+            <div className="glass-bg" />
+
+            {/* Animated blobs */}
             <Box
                 position="fixed"
-                top="-20%"
-                left="-10%"
-                w="600px"
-                h="600px"
+                top="-15%"
+                left="-5%"
+                w="700px"
+                h="700px"
                 borderRadius="full"
-                bg="brand.600"
-                opacity={0.06}
-                filter="blur(100px)"
+                bg="rgba(60, 90, 220, 0.22)"
+                filter="blur(120px)"
                 pointerEvents="none"
                 zIndex={0}
+                style={{ animation: 'float-blob 18s ease-in-out infinite' }}
             />
             <Box
                 position="fixed"
                 bottom="-20%"
                 right="-10%"
-                w="500px"
-                h="500px"
+                w="600px"
+                h="600px"
                 borderRadius="full"
-                bg="accent.400"
-                opacity={0.04}
+                bg="rgba(100, 50, 200, 0.18)"
                 filter="blur(100px)"
                 pointerEvents="none"
                 zIndex={0}
+                style={{ animation: 'float-blob 22s ease-in-out infinite reverse' }}
+            />
+            <Box
+                position="fixed"
+                top="40%"
+                left="60%"
+                w="400px"
+                h="400px"
+                borderRadius="full"
+                bg="rgba(40, 80, 200, 0.12)"
+                filter="blur(80px)"
+                pointerEvents="none"
+                zIndex={0}
+                style={{ animation: 'float-blob 26s ease-in-out infinite 4s' }}
             />
 
-            <Container maxW="1400px" px={{ base: 4, md: 8 }} py={10} position="relative" zIndex={1}>
+            <Container maxW="1400px" px={{ base: 4, md: 8 }} py={12} position="relative" zIndex={1}>
                 {/* Header */}
                 <MotionBox
-                    initial={{ opacity: 0, y: -20 }}
+                    initial={{ opacity: 0, y: -16 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     textAlign="center"
@@ -127,18 +130,18 @@ export default function GlossaryPage() {
                     <Logo subtitle={s.logoSubtitle} />
 
                     <Text
-                        fontSize={{ base: 'sm', md: 'md' }}
-                        color="whiteAlpha.600"
-                        maxW="500px"
+                        fontSize="sm"
+                        color="rgba(160,185,255,0.5)"
+                        maxW="480px"
                         mx="auto"
-                        mt={2}
+                        mt={3}
                         mb={8}
                         lineHeight={1.7}
+                        fontWeight="400"
                     >
                         {subtitle}
                     </Text>
 
-                    {/* Search */}
                     <SearchBar value={search} onChange={setSearch} placeholder={s.searchPlaceholder} />
                 </MotionBox>
 
@@ -154,8 +157,8 @@ export default function GlossaryPage() {
                 </Box>
 
                 {/* Results count */}
-                <Flex align="center" justify="space-between" mb={6} px={1}>
-                    <Text fontSize="sm" color="whiteAlpha.500">
+                <Flex align="center" mb={5} px={1}>
+                    <Text fontSize="12px" color="rgba(160,185,255,0.4)" fontWeight="500">
                         {s.termsCount(filteredTerms.length, glossaryData.length)}
                         {activeLetter && s.letterFilter(activeLetter)}
                         {search && s.searchFilter(search)}
@@ -168,7 +171,7 @@ export default function GlossaryPage() {
                         <SimpleGrid
                             key="grid"
                             columns={{ base: 1, sm: 2, lg: 3, xl: 4 }}
-                            spacing={5}
+                            spacing={4}
                         >
                             {filteredTerms.map((term, i) => (
                                 <TermCard
@@ -183,29 +186,27 @@ export default function GlossaryPage() {
                     ) : (
                         <MotionBox
                             key="empty"
-                            initial={{ opacity: 0, scale: 0.9 }}
+                            initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0 }}
-                            transition={{ duration: 0.3 }}
+                            transition={{ duration: 0.25 }}
                         >
                             <Center flexDirection="column" py={20} gap={4}>
                                 <Box
-                                    w="80px"
-                                    h="80px"
-                                    borderRadius="2xl"
-                                    bg="whiteAlpha.50"
+                                    w="72px"
+                                    h="72px"
+                                    borderRadius="20px"
+                                    className="glass-card"
                                     display="flex"
                                     alignItems="center"
                                     justifyContent="center"
-                                    border="1px solid"
-                                    borderColor="whiteAlpha.100"
                                 >
-                                    <Icon as={FiSearch} boxSize={8} color="whiteAlpha.300" />
+                                    <Icon as={FiSearch} boxSize={7} color="rgba(160,185,255,0.3)" />
                                 </Box>
-                                <Text color="whiteAlpha.500" fontSize="lg" fontWeight="600">
+                                <Text color="rgba(200,215,255,0.6)" fontSize="md" fontWeight="600">
                                     {s.noTermsFound}
                                 </Text>
-                                <Text color="whiteAlpha.400" fontSize="sm">
+                                <Text color="rgba(160,185,255,0.35)" fontSize="sm">
                                     {s.noTermsHint}
                                 </Text>
                             </Center>
@@ -215,13 +216,12 @@ export default function GlossaryPage() {
 
                 {/* Footer */}
                 <Box mt={16} textAlign="center">
-                    <Text fontSize="xs" color="whiteAlpha.300">
+                    <Text fontSize="11px" color="rgba(160,185,255,0.25)" letterSpacing="0.04em">
                         {s.footerText} · {new Date().getFullYear()}
                     </Text>
                 </Box>
             </Container>
 
-            {/* Modal */}
             <TermModal
                 term={selectedTerm}
                 isOpen={isOpen}
