@@ -153,6 +153,7 @@ export default function GlossaryPage() {
                         onLetterClick={handleLetterClick}
                         allLabel={s.allButton}
                         clearLabel={s.clearFilter}
+                        language={language}
                     />
                 </Box>
 

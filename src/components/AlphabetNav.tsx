@@ -3,7 +3,8 @@ import { motion } from 'framer-motion'
 
 const MotionBox = motion(Box)
 
-const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+const EN_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+const ES_ALPHABET = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('')
 
 interface AlphabetNavProps {
     activeLetter: string | null
@@ -11,6 +12,7 @@ interface AlphabetNavProps {
     onLetterClick: (letter: string | null) => void
     allLabel?: string
     clearLabel?: string
+    language?: string
 }
 
 export default function AlphabetNav({
@@ -19,7 +21,9 @@ export default function AlphabetNav({
     onLetterClick,
     allLabel = 'ALL',
     clearLabel = '✕ Clear filter',
+    language = 'en',
 }: AlphabetNavProps) {
+    const ALPHABET = language === 'es' ? ES_ALPHABET : EN_ALPHABET
     return (
         <MotionBox
             initial={{ opacity: 0, y: 12 }}
