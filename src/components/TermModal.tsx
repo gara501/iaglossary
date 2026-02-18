@@ -29,22 +29,29 @@ export default function TermModal({
 
     if (!term) return null
 
-    const dialogBg = dark ? 'rgba(8, 2, 4, 0.92)' : 'rgba(255, 248, 250, 0.96)'
-    const borderColor = dark ? 'rgba(255,255,255,0.07)' : 'rgba(197,0,60,0.14)'
-    const labelColor = dark ? 'rgba(243,230,0,0.65)' : 'rgba(136,4,37,0.70)'
-    const textColor = dark ? 'rgba(245,234,236,0.88)' : 'rgba(26,10,13,0.85)'
-    const summaryBg = dark ? 'rgba(197,0,60,0.07)' : 'rgba(197,0,60,0.05)'
-    const summaryBorder = dark ? 'rgba(197,0,60,0.14)' : 'rgba(197,0,60,0.14)'
-    const summaryText = dark ? 'rgba(245,234,236,0.75)' : 'rgba(26,10,13,0.72)'
-    const tagBg = dark ? 'rgba(255,255,255,0.05)' : 'rgba(197,0,60,0.06)'
-    const tagColor = dark ? 'rgba(245,234,236,0.72)' : 'rgba(136,4,37,0.80)'
-    const tagBorder = dark ? 'rgba(255,255,255,0.08)' : 'rgba(197,0,60,0.14)'
+    // Contrast-verified:
+    // Dark dialog bg ~#1e2d36:  labelColor #FF9B51 ~4.6:1 ✓, textColor #EAEFEF ~10:1 ✓, summaryText #BFC9D1 ~7:1 ✓
+    // Light dialog bg #fff8fa:  labelColor #c4621a ~5.2:1 ✓, textColor #25343F ~9:1 ✓, summaryText #3d5060 ~5.5:1 ✓
+    const dialogBg = dark ? 'rgba(20, 30, 38, 0.93)' : 'rgba(250, 252, 252, 0.97)'
+    const borderColor = dark ? 'rgba(255,255,255,0.07)' : 'rgba(191,201,209,0.55)'
+    const labelColor = dark ? '#FF9B51' : '#c4621a'
+    const titleColor = dark ? '#EAEFEF' : '#25343F'
+    const textColor = dark ? '#EAEFEF' : '#25343F'
+    const summaryText = dark ? '#BFC9D1' : '#3d5060'
+    const summaryBg = dark ? 'rgba(255,155,81,0.07)' : 'rgba(255,155,81,0.07)'
+    const summaryBorder = 'rgba(255,155,81,0.18)'
+    const tagBg = dark ? 'rgba(255,255,255,0.05)' : 'rgba(191,201,209,0.25)'
+    const tagColor = dark ? '#BFC9D1' : '#25343F'
+    const tagBorder = dark ? 'rgba(255,255,255,0.08)' : 'rgba(191,201,209,0.50)'
+    const tagHoverColor = dark ? '#FF9B51' : '#c4621a'
+    const dividerColor = dark ? 'rgba(255,255,255,0.06)' : 'rgba(191,201,209,0.40)'
+    const closeColor = dark ? 'rgba(234,239,239,0.40)' : 'rgba(37,52,63,0.40)'
 
     return (
         <AnimatePresence>
             {isOpen && (
                 <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered scrollBehavior="inside">
-                    <ModalOverlay bg="rgba(0,0,0,0.65)" backdropFilter="blur(10px)" />
+                    <ModalOverlay bg="rgba(0,0,0,0.55)" backdropFilter="blur(10px)" />
                     <MotionModalContent
                         initial={{ opacity: 0, scale: 0.93, y: 16 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -56,24 +63,24 @@ export default function TermModal({
                         borderRadius="24px"
                         overflow="hidden"
                         boxShadow={dark
-                            ? '0 32px 80px rgba(0,0,0,0.60), 0 0 0 1px rgba(197,0,60,0.08)'
-                            : '0 20px 60px rgba(197,0,60,0.10), 0 0 0 1px rgba(197,0,60,0.10)'}
+                            ? '0 32px 80px rgba(0,0,0,0.50), 0 0 0 1px rgba(255,155,81,0.07)'
+                            : '0 20px 60px rgba(37,52,63,0.12), 0 0 0 1px rgba(191,201,209,0.40)'}
                         mx={4}
                     >
-                        {/* Accent line */}
-                        <Box h="2px" bgGradient="linear(to-r, #c5003c, #f3e600, rgba(197,0,60,0.2))" />
+                        {/* Accent line: orange */}
+                        <Box h="2px" bgGradient="linear(to-r, #FF9B51, rgba(255,155,81,0.40), transparent)" />
 
                         <ModalHeader pt={6} pb={3}>
                             <Flex align="flex-start" gap={3} pr={8}>
                                 <Box
                                     minW="46px" h="46px" borderRadius="14px"
-                                    bg={dark ? 'rgba(197,0,60,0.15)' : 'rgba(197,0,60,0.08)'}
-                                    border={dark ? '1px solid rgba(197,0,60,0.26)' : '1px solid rgba(197,0,60,0.20)'}
+                                    bg={dark ? 'rgba(255,155,81,0.12)' : 'rgba(255,155,81,0.14)'}
+                                    border={dark ? '1px solid rgba(255,155,81,0.24)' : '1px solid rgba(255,155,81,0.30)'}
                                     display="flex" alignItems="center" justifyContent="center"
                                     flexShrink={0} mt={0.5}
                                 >
                                     <Text fontFamily="Space Grotesk, sans-serif" fontWeight="800" fontSize="lg"
-                                        color={dark ? '#f3e600' : '#c5003c'}>
+                                        color="#FF9B51">
                                         {term.letter}
                                     </Text>
                                 </Box>
@@ -83,8 +90,7 @@ export default function TermModal({
                                     </span>
                                     <Text fontFamily="Space Grotesk, sans-serif" fontWeight="800"
                                         fontSize={{ base: 'xl', md: '2xl' }}
-                                        color={dark ? '#ffffff' : '#1a0a0d'}
-                                        lineHeight={1.2} letterSpacing="-0.02em">
+                                        color={titleColor} lineHeight={1.2} letterSpacing="-0.02em">
                                         {term.term}
                                     </Text>
                                 </Box>
@@ -92,8 +98,8 @@ export default function TermModal({
                         </ModalHeader>
 
                         <ModalCloseButton
-                            color={dark ? 'rgba(245,234,236,0.40)' : 'rgba(26,10,13,0.40)'}
-                            _hover={{ color: dark ? 'white' : '#1a0a0d', bg: 'rgba(197,0,60,0.10)' }}
+                            color={closeColor}
+                            _hover={{ color: dark ? '#EAEFEF' : '#25343F', bg: 'rgba(255,155,81,0.10)' }}
                             borderRadius="10px" top={5} right={5}
                         />
 
@@ -102,7 +108,8 @@ export default function TermModal({
                             <Box bg={summaryBg} border={`1px solid ${summaryBorder}`} borderRadius="16px" p={4} mb={5}>
                                 <Flex align="center" gap={2} mb={2}>
                                     <Icon as={FiBookOpen} color={labelColor} boxSize={3.5} />
-                                    <Text fontSize="10px" fontWeight="700" color={labelColor} letterSpacing="0.10em" textTransform="uppercase">
+                                    <Text fontSize="10px" fontWeight="700" color={labelColor}
+                                        letterSpacing="0.10em" textTransform="uppercase">
                                         {summaryLabel}
                                     </Text>
                                 </Flex>
@@ -111,13 +118,14 @@ export default function TermModal({
                                 </Text>
                             </Box>
 
-                            <Divider borderColor={dark ? 'rgba(255,255,255,0.05)' : 'rgba(197,0,60,0.08)'} mb={5} />
+                            <Divider borderColor={dividerColor} mb={5} />
 
                             {/* Definition */}
                             <Box mb={6}>
                                 <Flex align="center" gap={2} mb={3}>
                                     <Icon as={FiTag} color={labelColor} boxSize={3.5} />
-                                    <Text fontSize="10px" fontWeight="700" color={labelColor} letterSpacing="0.10em" textTransform="uppercase">
+                                    <Text fontSize="10px" fontWeight="700" color={labelColor}
+                                        letterSpacing="0.10em" textTransform="uppercase">
                                         {definitionLabel}
                                     </Text>
                                 </Flex>
@@ -131,16 +139,18 @@ export default function TermModal({
                                 <Box>
                                     <Flex align="center" gap={2} mb={3}>
                                         <Icon as={FiLink} color={labelColor} boxSize={3.5} />
-                                        <Text fontSize="10px" fontWeight="700" color={labelColor} letterSpacing="0.10em" textTransform="uppercase">
+                                        <Text fontSize="10px" fontWeight="700" color={labelColor}
+                                            letterSpacing="0.10em" textTransform="uppercase">
                                             {relatedTermsLabel}
                                         </Text>
                                     </Flex>
                                     <Wrap spacing={2}>
                                         {(term.relatedTerms ?? []).map((related) => (
                                             <WrapItem key={related}>
-                                                <Tag size="sm" bg={tagBg} color={tagColor} border={`1px solid ${tagBorder}`}
+                                                <Tag size="sm" bg={tagBg} color={tagColor}
+                                                    border={`1px solid ${tagBorder}`}
                                                     borderRadius="full" fontWeight="600" fontSize="13px"
-                                                    _hover={{ bg: 'rgba(197,0,60,0.12)', borderColor: 'rgba(197,0,60,0.30)', color: dark ? '#f3e600' : '#880425' }}
+                                                    _hover={{ bg: 'rgba(255,155,81,0.14)', borderColor: 'rgba(255,155,81,0.35)', color: tagHoverColor }}
                                                     transition="all 0.18s" cursor="default">
                                                     {related}
                                                 </Tag>

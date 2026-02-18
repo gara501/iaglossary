@@ -79,17 +79,17 @@ export default function GlossaryPage() {
 
     const subtitle = s.subtitle.replace('{count}', String(glossaryData.length))
 
-    const subtitleColor = dark ? 'rgba(245,234,236,0.45)' : 'rgba(26,10,13,0.50)'
-    const countColor = dark ? 'rgba(245,234,236,0.35)' : 'rgba(26,10,13,0.40)'
-    const footerColor = dark ? 'rgba(245,234,236,0.18)' : 'rgba(26,10,13,0.25)'
-    const emptyIconColor = dark ? 'rgba(197,0,60,0.28)' : 'rgba(197,0,60,0.22)'
-    const emptyTextColor = dark ? 'rgba(245,234,236,0.60)' : 'rgba(26,10,13,0.55)'
-    const emptyHintColor = dark ? 'rgba(245,234,236,0.30)' : 'rgba(26,10,13,0.35)'
+    const subtitleColor = dark ? 'rgba(234,239,239,0.55)' : 'rgba(37,52,63,0.60)'
+    const countColor = dark ? 'rgba(191,201,209,0.65)' : 'rgba(37,52,63,0.50)'
+    const footerColor = dark ? 'rgba(234,239,239,0.22)' : 'rgba(37,52,63,0.30)'
+    const emptyIconColor = dark ? 'rgba(255,155,81,0.35)' : 'rgba(255,155,81,0.45)'
+    const emptyTextColor = dark ? '#BFC9D1' : '#25343F'
+    const emptyHintColor = dark ? 'rgba(191,201,209,0.50)' : 'rgba(37,52,63,0.45)'
 
-    // Blob colors
-    const blob1 = dark ? 'rgba(197, 0, 60, 0.22)' : 'rgba(197, 0, 60, 0.10)'
-    const blob2 = dark ? 'rgba(136, 4, 37, 0.18)' : 'rgba(136, 4, 37, 0.07)'
-    const blob3 = dark ? 'rgba(85, 234, 212, 0.06)' : 'rgba(85, 234, 212, 0.08)'
+    // Blob colors — orange tint in dark, muted in light
+    const blob1 = dark ? 'rgba(255, 155, 81, 0.12)' : 'rgba(255, 155, 81, 0.10)'
+    const blob2 = dark ? 'rgba(37,  52,  63, 0.80)' : 'rgba(191, 201, 209, 0.50)'
+    const blob3 = dark ? 'rgba(191, 201, 209, 0.05)' : 'rgba(191, 201, 209, 0.30)'
 
     return (
         <Box minH="100vh" position="relative">

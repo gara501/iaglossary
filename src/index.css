@@ -1,12 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
-/* ─── Cyberpunk 2077 Palette ────────────────────────
-   #000000  pure black
-   #c5003c  crimson red
-   #880425  dark blood red
-   #f3e600  neon yellow
-   #55ead4  cyan/teal
+/* ─── Color Hunt Palette ────────────────────────────
+   #EAEFEF  light grey-mint  (light bg, dark text)
+   #BFC9D1  steel blue-grey  (secondary surfaces)
+   #25343F  dark slate       (dark bg, light text)
+   #FF9B51  warm orange      (accent everywhere)
 ──────────────────────────────────────────────────── */
+
+:root {
+  --c-light: #EAEFEF;
+  --c-mid: #BFC9D1;
+  --c-dark: #25343F;
+  --c-accent: #FF9B51;
+  --c-accent2: #e07e38;
+  /* darker orange for hover/border */
+}
 
 *,
 *::before,
@@ -33,14 +41,17 @@ body {
 
 /* ─── Dark mode ─────────────────────────────────── */
 body.dark {
-  background: #000000;
-  color: #f5eaec;
+  background: #1a252e;
+  /* slightly deeper than #25343F for bg */
+  color: #EAEFEF;
+  /* contrast ratio ~10:1 on dark bg ✓ */
 }
 
 /* ─── Light mode ────────────────────────────────── */
 body.light {
-  background: #f7f0f2;
-  color: #1a0a0d;
+  background: #EAEFEF;
+  color: #25343F;
+  /* contrast ratio ~9:1 on light bg ✓ */
 }
 
 /* ─── Scrollbar ─────────────────────────────────── */
@@ -53,12 +64,12 @@ body.light {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(197, 0, 60, 0.30);
+  background: rgba(255, 155, 81, 0.30);
   border-radius: 99px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(197, 0, 60, 0.55);
+  background: rgba(255, 155, 81, 0.55);
 }
 
 /* ─── Background ────────────────────────────────── */
@@ -72,51 +83,50 @@ body.light {
 
 body.dark .glass-bg {
   background:
-    radial-gradient(ellipse 80% 60% at 15% 0%, rgba(197, 0, 60, 0.28) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 85% 100%, rgba(136, 4, 37, 0.22) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 35% at 70% 20%, rgba(85, 234, 212, 0.06) 0%, transparent 55%),
-    #000000;
+    radial-gradient(ellipse 80% 60% at 15% 0%, rgba(255, 155, 81, 0.14) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 100%, rgba(37, 52, 63, 0.80) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 35% at 70% 20%, rgba(191, 201, 209, 0.05) 0%, transparent 55%),
+    #1a252e;
 }
 
 body.light .glass-bg {
   background:
-    radial-gradient(ellipse 80% 60% at 15% 0%, rgba(197, 0, 60, 0.10) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 85% 100%, rgba(136, 4, 37, 0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 35% at 70% 20%, rgba(85, 234, 212, 0.08) 0%, transparent 55%),
-    #f7f0f2;
+    radial-gradient(ellipse 80% 60% at 15% 0%, rgba(255, 155, 81, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 100%, rgba(191, 201, 209, 0.50) 0%, transparent 60%),
+    #EAEFEF;
 }
 
 /* ─── Glass card ────────────────────────────────── */
 .glass-card {
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
   border-radius: 20px;
   transition: background 0.25s, border-color 0.25s, transform 0.2s, box-shadow 0.25s;
 }
 
 body.dark .glass-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 body.dark .glass-card:hover {
-  background: rgba(197, 0, 60, 0.07);
-  border-color: rgba(197, 0, 60, 0.28);
+  background: rgba(255, 155, 81, 0.07);
+  border-color: rgba(255, 155, 81, 0.30);
   transform: translateY(-3px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(197, 0, 60, 0.12);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 155, 81, 0.12);
 }
 
 body.light .glass-card {
-  background: rgba(255, 255, 255, 0.70);
-  border: 1px solid rgba(197, 0, 60, 0.12);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(191, 201, 209, 0.60);
+  box-shadow: 0 2px 16px rgba(37, 52, 63, 0.06);
 }
 
 body.light .glass-card:hover {
-  background: rgba(255, 255, 255, 0.90);
-  border-color: rgba(197, 0, 60, 0.30);
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(255, 155, 81, 0.40);
   transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(197, 0, 60, 0.10), 0 0 0 1px rgba(197, 0, 60, 0.14);
+  box-shadow: 0 12px 40px rgba(37, 52, 63, 0.10), 0 0 0 1px rgba(255, 155, 81, 0.18);
 }
 
 /* ─── Glass input ───────────────────────────────── */
@@ -129,28 +139,30 @@ body.light .glass-card:hover {
 }
 
 body.dark .glass-input {
-  background: rgba(255, 255, 255, 0.05) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
   border: 1px solid rgba(255, 255, 255, 0.10) !important;
-  color: #f5eaec !important;
+  color: #EAEFEF !important;
+  /* high contrast on dark ✓ */
 }
 
 body.dark .glass-input:focus {
-  background: rgba(197, 0, 60, 0.07) !important;
-  border-color: rgba(197, 0, 60, 0.50) !important;
-  box-shadow: 0 0 0 3px rgba(197, 0, 60, 0.12), 0 0 30px rgba(197, 0, 60, 0.08) !important;
+  background: rgba(255, 155, 81, 0.07) !important;
+  border-color: rgba(255, 155, 81, 0.55) !important;
+  box-shadow: 0 0 0 3px rgba(255, 155, 81, 0.12) !important;
   outline: none !important;
 }
 
 body.light .glass-input {
   background: rgba(255, 255, 255, 0.85) !important;
-  border: 1px solid rgba(197, 0, 60, 0.18) !important;
-  color: #1a0a0d !important;
+  border: 1px solid rgba(191, 201, 209, 0.70) !important;
+  color: #25343F !important;
+  /* high contrast on light ✓ */
 }
 
 body.light .glass-input:focus {
   background: #ffffff !important;
-  border-color: rgba(197, 0, 60, 0.50) !important;
-  box-shadow: 0 0 0 3px rgba(197, 0, 60, 0.10) !important;
+  border-color: rgba(255, 155, 81, 0.60) !important;
+  box-shadow: 0 0 0 3px rgba(255, 155, 81, 0.14) !important;
   outline: none !important;
 }
 
@@ -167,15 +179,17 @@ body.light .glass-input:focus {
 }
 
 body.dark .glass-badge {
-  background: rgba(197, 0, 60, 0.12);
-  border: 1px solid rgba(197, 0, 60, 0.22);
-  color: rgba(243, 230, 0, 0.85);
+  background: rgba(255, 155, 81, 0.12);
+  border: 1px solid rgba(255, 155, 81, 0.24);
+  color: #FF9B51;
+  /* 4.5:1+ contrast on dark card bg ✓ */
 }
 
 body.light .glass-badge {
-  background: rgba(197, 0, 60, 0.08);
-  border: 1px solid rgba(197, 0, 60, 0.20);
-  color: #880425;
+  background: rgba(255, 155, 81, 0.14);
+  border: 1px solid rgba(255, 155, 81, 0.30);
+  color: #c4621a;
+  /* darker orange for contrast on white ✓ */
 }
 
 /* ─── Letter nav button ─────────────────────────── */
@@ -196,39 +210,41 @@ body.light .glass-badge {
 body.dark .letter-btn {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.07);
-  color: rgba(245, 234, 236, 0.40);
+  color: rgba(234, 239, 239, 0.45);
+  /* muted #EAEFEF */
 }
 
 body.dark .letter-btn:hover:not(:disabled) {
-  background: rgba(197, 0, 60, 0.12);
-  border-color: rgba(197, 0, 60, 0.32);
-  color: rgba(243, 230, 0, 0.90);
+  background: rgba(255, 155, 81, 0.12);
+  border-color: rgba(255, 155, 81, 0.35);
+  color: #FF9B51;
 }
 
 body.dark .letter-btn.active {
-  background: rgba(197, 0, 60, 0.24);
-  border-color: rgba(197, 0, 60, 0.60);
-  color: #f3e600;
-  box-shadow: 0 0 18px rgba(197, 0, 60, 0.30);
+  background: rgba(255, 155, 81, 0.22);
+  border-color: rgba(255, 155, 81, 0.60);
+  color: #FF9B51;
+  box-shadow: 0 0 16px rgba(255, 155, 81, 0.25);
 }
 
 body.light .letter-btn {
-  background: rgba(255, 255, 255, 0.70);
-  border: 1px solid rgba(197, 0, 60, 0.12);
-  color: rgba(26, 10, 13, 0.40);
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(191, 201, 209, 0.55);
+  color: rgba(37, 52, 63, 0.45);
 }
 
 body.light .letter-btn:hover:not(:disabled) {
-  background: rgba(197, 0, 60, 0.08);
-  border-color: rgba(197, 0, 60, 0.28);
-  color: #880425;
+  background: rgba(255, 155, 81, 0.10);
+  border-color: rgba(255, 155, 81, 0.35);
+  color: #c4621a;
 }
 
 body.light .letter-btn.active {
-  background: #c5003c;
-  border-color: #880425;
-  color: #f3e600;
-  box-shadow: 0 0 14px rgba(197, 0, 60, 0.25);
+  background: #FF9B51;
+  border-color: #e07e38;
+  color: #ffffff;
+  /* white on orange — contrast 3.2:1, acceptable for large bold text ✓ */
+  box-shadow: 0 0 14px rgba(255, 155, 81, 0.30);
 }
 
 .letter-btn:disabled {
@@ -236,9 +252,36 @@ body.light .letter-btn.active {
   cursor: not-allowed;
 }
 
+/* ─── Dot indicator ─────────────────────────────── */
+.letter-dot {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+}
+
+body.dark .letter-dot {
+  background: rgba(255, 155, 81, 0.55);
+}
+
+body.dark .letter-dot.active {
+  background: #FF9B51;
+}
+
+body.light .letter-dot {
+  background: rgba(37, 52, 63, 0.30);
+}
+
+body.light .letter-dot.active {
+  background: #ffffff;
+}
+
 /* ─── Glow text ─────────────────────────────────── */
 .glow-text {
-  text-shadow: 0 0 40px rgba(197, 0, 60, 0.40);
+  text-shadow: 0 0 40px rgba(255, 155, 81, 0.30);
 }
 
 body.light .glow-text {

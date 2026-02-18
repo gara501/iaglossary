@@ -24,20 +24,16 @@ export default function Logo({ subtitle = 'AI & Generative AI Terms' }: LogoProp
         >
             <HStack spacing={4} align="center">
                 <Box
-                    w="58px"
-                    h="58px"
-                    borderRadius="18px"
-                    bg={dark ? 'rgba(197, 0, 60, 0.16)' : 'rgba(197, 0, 60, 0.10)'}
-                    border={dark ? '1px solid rgba(197, 0, 60, 0.28)' : '1px solid rgba(197, 0, 60, 0.22)'}
+                    w="58px" h="58px" borderRadius="18px"
+                    bg={dark ? 'rgba(255,155,81,0.14)' : 'rgba(255,155,81,0.16)'}
+                    border={dark ? '1px solid rgba(255,155,81,0.28)' : '1px solid rgba(255,155,81,0.35)'}
                     backdropFilter="blur(12px)"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
+                    display="flex" alignItems="center" justifyContent="center"
                     boxShadow={dark
-                        ? '0 8px 32px rgba(197, 0, 60, 0.22), inset 0 1px 0 rgba(255,255,255,0.08)'
-                        : '0 4px 20px rgba(197, 0, 60, 0.14)'}
+                        ? '0 8px 32px rgba(255,155,81,0.18), inset 0 1px 0 rgba(255,255,255,0.07)'
+                        : '0 4px 20px rgba(255,155,81,0.20)'}
                 >
-                    <Icon as={FaBrain} color={dark ? '#f3e600' : '#c5003c'} boxSize={6} />
+                    <Icon as={FaBrain} color="#FF9B51" boxSize={6} />
                 </Box>
 
                 <Box>
@@ -45,7 +41,7 @@ export default function Logo({ subtitle = 'AI & Generative AI Terms' }: LogoProp
                         fontFamily="Space Grotesk, sans-serif"
                         fontWeight="800"
                         fontSize={{ base: '2xl', md: '3xl' }}
-                        color={dark ? 'white' : '#1a0a0d'}
+                        color={dark ? '#EAEFEF' : '#25343F'}
                         lineHeight={1}
                         className="glow-text"
                         letterSpacing="-0.02em"
@@ -54,7 +50,7 @@ export default function Logo({ subtitle = 'AI & Generative AI Terms' }: LogoProp
                     </Text>
                     <Text
                         fontSize="10px"
-                        color={dark ? 'rgba(243, 230, 0, 0.55)' : 'rgba(136, 4, 37, 0.60)'}
+                        color={dark ? 'rgba(255,155,81,0.65)' : 'rgba(196,98,26,0.70)'}
                         fontWeight="700"
                         letterSpacing="0.16em"
                         textTransform="uppercase"
