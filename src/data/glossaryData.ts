@@ -279,7 +279,243 @@ const glossaryData: GlossaryTerm[] = [
         definition: "Zero-shot learning refers to a model's ability to perform a task without having seen any examples of that task during training or in the prompt. Large language models exhibit zero-shot capabilities because their pre-training on diverse data gives them broad knowledge and reasoning abilities. For example, GPT-4 can translate text to a language it was never explicitly trained to translate, or solve novel logic puzzles. Zero-shot performance is a key measure of a model's generalization ability and is contrasted with few-shot learning, where a small number of examples are provided.",
         category: "Learning Paradigm",
         relatedTerms: ["Few-Shot Learning", "Prompt Engineering", "Large Language Model", "Generalization"]
+    },
+    // --- New terms ---
+    {
+        id: "agent",
+        term: "Agent",
+        letter: "A",
+        summary: "An AI system that perceives its environment and takes actions to achieve goals.",
+        definition: "In AI, an agent is any software or program that interacts with the world (or a simulation) by receiving inputs and producing outputs or actions. Agents operate within an environment, perceive its state through sensors or data inputs, and act upon it through actuators or API calls. They range from simple rule-based systems (like a thermostat) to complex autonomous agents powered by large language models that can plan, use tools, browse the web, write code, and execute multi-step tasks. Agentic AI systems are increasingly used in automation, robotics, and AI assistants.",
+        category: "Architecture",
+        relatedTerms: ["Reinforcement Learning", "Large Language Model", "Tool Use", "Autonomous AI"]
+    },
+    {
+        id: "generative-ai",
+        term: "Generative AI",
+        letter: "G",
+        summary: "AI that creates new content such as text, images, audio, or video.",
+        definition: "Generative AI refers to a class of AI models designed to produce original data that resembles the examples they were trained on. These systems learn statistical patterns from large datasets and use those patterns to generate new content — including natural-sounding text, realistic images, music, video, code, and 3D models. Key architectures include Transformers (for text), Diffusion Models (for images), and GANs. Prominent examples are GPT-4 (text), DALL-E and Stable Diffusion (images), Sora (video), and MusicLM (audio). Generative AI has transformed creative industries, software development, and scientific research.",
+        category: "Generative AI",
+        relatedTerms: ["Large Language Model", "Diffusion Model", "Generative Adversarial Network", "Foundation Model"]
+    },
+    {
+        id: "context",
+        term: "Context",
+        letter: "C",
+        summary: "Information surrounding an input that helps a model interpret meaning accurately.",
+        definition: "In AI, context refers to any relevant background information that helps a model understand or respond appropriately. For language models, context includes the conversation history, system instructions, user intent, topic, tone, and any documents provided in the prompt. The amount of context a model can use is bounded by its context window. Effective use of context is critical for accurate, relevant responses — a model with insufficient context may misinterpret ambiguous queries. Context engineering — the practice of structuring context inputs optimally — has become a key skill in building AI applications.",
+        category: "Fundamentals",
+        relatedTerms: ["Context Window", "Prompt Engineering", "Context Engineering", "Retrieval-Augmented Generation"]
+    },
+    {
+        id: "claude",
+        term: "Claude",
+        letter: "C",
+        summary: "A family of AI assistant models developed by Anthropic, known for safety and helpfulness.",
+        definition: "Claude is a family of large language models developed by Anthropic, an AI safety company. Claude models are designed with a strong emphasis on being helpful, harmless, and honest (the 'HHH' framework). They are trained using Constitutional AI (CAI) and RLHF techniques to align model behavior with human values. Claude excels at tasks including summarization, reasoning, coding assistance, analysis, and creative writing. The Claude model family includes multiple tiers (Haiku, Sonnet, Opus) optimized for different speed/capability trade-offs. Claude is widely used via API and in Anthropic's consumer products.",
+        category: "Model",
+        relatedTerms: ["Large Language Model", "RLHF", "Alignment", "OpenAI", "GPT"]
+    },
+    {
+        id: "openai",
+        term: "OpenAI",
+        letter: "O",
+        summary: "An AI research organization that develops advanced AI systems including the GPT series.",
+        definition: "OpenAI is an AI research laboratory and technology company founded in 2015, with a mission to ensure that artificial general intelligence (AGI) benefits all of humanity. It is responsible for developing some of the most influential AI systems, including the GPT series of language models, DALL-E image generation models, Codex (code generation), Whisper (speech recognition), and the Sora video generation model. OpenAI also created ChatGPT, one of the most widely used AI applications in history. The organization operates as a capped-profit company with a non-profit parent, balancing commercial operations with safety research.",
+        category: "Organization",
+        relatedTerms: ["GPT", "ChatGPT", "DALL-E", "Large Language Model", "AGI"]
+    },
+    {
+        id: "chatgpt",
+        term: "ChatGPT",
+        letter: "C",
+        summary: "A conversational AI assistant by OpenAI, built on GPT large language models.",
+        definition: "ChatGPT is a conversational AI application developed by OpenAI, launched in November 2022. It is built on top of the GPT series of large language models (initially GPT-3.5, later GPT-4) and fine-tuned with RLHF to be a helpful, conversational assistant. ChatGPT can engage in multi-turn dialogue, answer questions, write and debug code, draft documents, summarize text, translate languages, and perform many other language tasks. It became one of the fastest-growing consumer applications in history, reaching 100 million users in two months. It supports plugins, image input (GPT-4V), and custom GPTs.",
+        category: "Model",
+        relatedTerms: ["GPT", "OpenAI", "RLHF", "Large Language Model", "Instruction Tuning"]
+    },
+    {
+        id: "deep-learning",
+        term: "Deep Learning",
+        letter: "D",
+        summary: "A subset of machine learning using neural networks with many layers to learn from data.",
+        definition: "Deep learning is a subfield of machine learning that uses artificial neural networks with many layers (hence 'deep') to automatically learn hierarchical representations from raw data. Each layer learns increasingly abstract features — for example, in image recognition, early layers detect edges, middle layers detect shapes, and later layers detect objects. Deep learning has driven breakthroughs in computer vision (CNNs), natural language processing (Transformers), speech recognition (RNNs, attention), and generative AI (GANs, diffusion models). It requires large datasets and significant compute, typically using GPUs or TPUs.",
+        category: "Fundamentals",
+        relatedTerms: ["Neural Network", "Transformer", "Convolutional Neural Network", "Backpropagation"]
+    },
+    {
+        id: "reinforcement-learning",
+        term: "Reinforcement Learning",
+        letter: "R",
+        summary: "A learning paradigm where an agent learns by receiving rewards or penalties for its actions.",
+        definition: "Reinforcement learning (RL) is a machine learning paradigm where an agent learns to make decisions by interacting with an environment. The agent observes the current state, takes an action, receives a reward signal (positive or negative), and updates its policy to maximize cumulative reward over time. Key algorithms include Q-learning, SARSA, and policy gradient methods like PPO and A3C. RL has achieved superhuman performance in games (AlphaGo, Atari), robotics, and autonomous driving. In the context of LLMs, RLHF uses RL to align model outputs with human preferences.",
+        category: "Learning Paradigm",
+        relatedTerms: ["RLHF", "Agent", "Deep Learning", "Policy Gradient"]
+    },
+    {
+        id: "computer-vision",
+        term: "Computer Vision",
+        letter: "C",
+        summary: "AI that enables machines to interpret and understand visual information from images and videos.",
+        definition: "Computer vision is a field of AI focused on enabling machines to extract meaningful information from visual inputs such as images and videos. Core tasks include image classification (identifying what is in an image), object detection (locating objects), semantic segmentation (labeling each pixel), and image generation. Modern computer vision relies heavily on convolutional neural networks (CNNs) and Vision Transformers (ViT). Applications span autonomous vehicles, medical imaging, facial recognition, augmented reality, quality control in manufacturing, and satellite imagery analysis.",
+        category: "Field",
+        relatedTerms: ["Neural Network", "Convolutional Neural Network", "Deep Learning", "Multimodal AI"]
+    },
+    {
+        id: "nlp",
+        term: "NLP",
+        letter: "N",
+        summary: "Natural Language Processing — AI that enables computers to understand and generate human language.",
+        definition: "Natural Language Processing (NLP) is a branch of AI that combines linguistics, computer science, and machine learning to enable computers to process, understand, and generate human language. NLP encompasses a wide range of tasks: text classification, sentiment analysis, machine translation, question answering, summarization, named entity recognition, and dialogue systems. Modern NLP is dominated by Transformer-based models like BERT and GPT. NLP powers applications including search engines, virtual assistants, chatbots, grammar checkers, and content moderation systems.",
+        category: "Field",
+        relatedTerms: ["Natural Language Understanding", "Natural Language Generation", "Transformer", "BERT", "Large Language Model"]
+    },
+    {
+        id: "supervised-learning",
+        term: "Supervised Learning",
+        letter: "S",
+        summary: "Machine learning where models are trained on labeled input-output pairs.",
+        definition: "Supervised learning is a machine learning paradigm where a model is trained on a dataset of labeled examples — pairs of inputs and their correct outputs. The model learns a mapping from inputs to outputs by minimizing the difference between its predictions and the true labels. Common tasks include classification (predicting a category) and regression (predicting a continuous value). Examples include spam detection, image classification, and price prediction. Supervised learning requires labeled data, which can be expensive to obtain, but it is the most widely used ML paradigm in production systems.",
+        category: "Learning Paradigm",
+        relatedTerms: ["Unsupervised Learning", "Fine-tuning", "Neural Network", "Transfer Learning"]
+    },
+    {
+        id: "unsupervised-learning",
+        term: "Unsupervised Learning",
+        letter: "U",
+        summary: "Machine learning on unlabeled data to discover hidden patterns or structure.",
+        definition: "Unsupervised learning is a machine learning paradigm where models learn patterns and structure from data without labeled outputs. The model must discover the underlying organization of the data on its own. Common techniques include clustering (grouping similar data points, e.g., K-means), dimensionality reduction (e.g., PCA, t-SNE, autoencoders), and density estimation. Unsupervised learning is valuable when labeled data is scarce or expensive. Self-supervised learning — where models generate their own labels from unlabeled data — is a powerful variant used to pre-train large language models.",
+        category: "Learning Paradigm",
+        relatedTerms: ["Self-Supervised Learning", "Supervised Learning", "Clustering", "Pre-training"]
+    },
+    {
+        id: "data-mining",
+        term: "Data Mining",
+        letter: "D",
+        summary: "The process of discovering useful patterns and insights from large datasets.",
+        definition: "Data mining is the process of applying statistical, mathematical, and computational techniques to extract meaningful patterns, correlations, and insights from large collections of data. It sits at the intersection of statistics, machine learning, and database systems. Common data mining tasks include classification, clustering, association rule learning (e.g., market basket analysis), anomaly detection, and regression. Data mining is foundational to business intelligence, fraud detection, scientific discovery, and recommendation systems. Modern data mining increasingly leverages machine learning and AI techniques.",
+        category: "Data Science",
+        relatedTerms: ["Machine Learning", "Supervised Learning", "Unsupervised Learning", "Pattern Recognition"]
+    },
+    {
+        id: "entity-annotation",
+        term: "Entity Annotation",
+        letter: "E",
+        summary: "Labeling meaningful entities (names, places, dates) in text or data for AI training.",
+        definition: "Entity annotation is the process of marking up entities — such as person names, organizations, locations, dates, and product names — in text datasets so that AI models can learn to recognize them. It is a critical step in creating training data for Named Entity Recognition (NER) systems and other NLP tasks. Annotation can be done manually by human annotators or semi-automatically using pre-trained models. High-quality entity annotation is essential for training accurate information extraction systems used in search, knowledge graphs, and document processing pipelines.",
+        category: "NLP",
+        relatedTerms: ["Entity Extraction", "Named Entity Recognition", "NLP", "Supervised Learning"]
+    },
+    {
+        id: "entity-extraction",
+        term: "Entity Extraction",
+        letter: "E",
+        summary: "Automatically identifying and categorizing key entities from unstructured text.",
+        definition: "Entity extraction, also known as Named Entity Recognition (NER), is an NLP task where an AI model automatically identifies and classifies named entities in unstructured text into predefined categories such as people, organizations, locations, dates, monetary values, and more. For example, in the sentence 'Apple was founded by Steve Jobs in Cupertino in 1976,' a NER model would extract Apple (organization), Steve Jobs (person), Cupertino (location), and 1976 (date). Entity extraction is fundamental to information retrieval, knowledge graph construction, and document intelligence.",
+        category: "NLP",
+        relatedTerms: ["Entity Annotation", "NLP", "Natural Language Understanding", "Information Extraction"]
+    },
+    {
+        id: "intent",
+        term: "Intent",
+        letter: "I",
+        summary: "The goal or purpose behind a user's input in a conversational AI system.",
+        definition: "In conversational AI and NLP, intent refers to the underlying goal or purpose that a user aims to achieve with their input. For example, the query 'What's the weather like tomorrow?' has the intent 'get weather forecast.' Intent recognition (or intent classification) is the task of automatically identifying the user's intent from their utterance. It is a core component of dialogue systems, virtual assistants, and chatbots. Modern systems use machine learning classifiers or large language models to detect intent, enabling appropriate routing and response generation.",
+        category: "NLP",
+        relatedTerms: ["Natural Language Understanding", "NLP", "Dialogue System", "Entity Extraction"]
+    },
+    {
+        id: "model",
+        term: "Model",
+        letter: "M",
+        summary: "A mathematical system trained on data to make predictions, classifications, or generate outputs.",
+        definition: "In AI and machine learning, a model is a computational system that has learned patterns from training data and can apply that knowledge to new inputs. Models are defined by their architecture (the structure of the computation) and their parameters (the learned weights). After training, a model can make predictions (regression, classification), generate content (language, images), or take actions (agents). The term encompasses everything from simple linear regression models to billion-parameter neural networks. Model selection, training, evaluation, and deployment are the core stages of the machine learning lifecycle.",
+        category: "Fundamentals",
+        relatedTerms: ["Neural Network", "Training", "Inference", "Foundation Model"]
+    },
+    {
+        id: "nlu",
+        term: "Natural Language Understanding",
+        letter: "N",
+        summary: "AI that interprets the meaning, intent, and context of human language.",
+        definition: "Natural Language Understanding (NLU) is a subfield of NLP focused on enabling machines to comprehend the meaning, intent, sentiment, and context of human language — going beyond surface-level text processing. NLU tasks include intent recognition, sentiment analysis, semantic role labeling, coreference resolution, and reading comprehension. NLU is the 'understanding' component of conversational AI systems, enabling them to correctly interpret what users mean rather than just what they say. Modern NLU is powered by large pre-trained language models like BERT and its variants.",
+        category: "NLP",
+        relatedTerms: ["NLP", "Natural Language Generation", "Intent", "BERT", "Sentiment Analysis"]
+    },
+    {
+        id: "nlg",
+        term: "Natural Language Generation",
+        letter: "N",
+        summary: "AI that produces coherent, human-like text or speech from data or other inputs.",
+        definition: "Natural Language Generation (NLG) is a subfield of NLP focused on automatically producing coherent, fluent, and contextually appropriate text or speech from structured data, knowledge, or other inputs. NLG tasks include text summarization, report generation, dialogue response generation, machine translation, and creative writing. Modern NLG is dominated by autoregressive language models like GPT-4, which generate text token by token. NLG is the 'generation' component of conversational AI and is used in chatbots, automated journalism, data-to-text systems, and virtual assistants.",
+        category: "NLP",
+        relatedTerms: ["NLP", "Natural Language Understanding", "Large Language Model", "Autoregressive Model"]
+    },
+    {
+        id: "overfitting",
+        term: "Overfitting",
+        letter: "O",
+        summary: "When a model memorizes training data too closely and fails to generalize to new data.",
+        definition: "Overfitting occurs when a machine learning model learns the training data too precisely — including its noise and random fluctuations — rather than the underlying general patterns. An overfitted model performs very well on training data but poorly on unseen test data, because it has essentially memorized the training examples rather than learning transferable patterns. Overfitting is more likely with complex models and small datasets. Common mitigation strategies include regularization (L1/L2), dropout, early stopping, data augmentation, and cross-validation.",
+        category: "Fundamentals",
+        relatedTerms: ["Supervised Learning", "Regularization", "Generalization", "Neural Network"]
+    },
+    {
+        id: "pattern-recognition",
+        term: "Pattern Recognition",
+        letter: "P",
+        summary: "The ability of algorithms to identify recurring structures or regularities in data.",
+        definition: "Pattern recognition is the ability of algorithms and AI systems to detect, classify, and respond to recurring structures, regularities, or relationships in data. It is one of the foundational tasks of AI and machine learning, underlying applications such as image recognition (detecting faces or objects), speech recognition (identifying phonemes and words), handwriting recognition, anomaly detection, and biometric identification. Modern pattern recognition is largely achieved through deep learning, where neural networks automatically learn hierarchical feature representations from raw data.",
+        category: "Fundamentals",
+        relatedTerms: ["Deep Learning", "Computer Vision", "Neural Network", "Classification"]
+    },
+    {
+        id: "context-engineering",
+        term: "Context Engineering",
+        letter: "C",
+        summary: "Structuring and optimizing the information provided to AI models to improve output quality.",
+        definition: "Context engineering is the practice of deliberately designing and structuring the information provided to an AI model — including system prompts, conversation history, retrieved documents, examples, and environmental data — to maximize the quality and relevance of its outputs. It goes beyond basic prompt engineering to encompass the full information architecture around a model call: what to include, how to format it, what to retrieve, and how to prioritize. As AI systems become more capable, context engineering has emerged as a critical discipline for building reliable, accurate AI applications.",
+        category: "Prompting",
+        relatedTerms: ["Prompt Engineering", "Retrieval-Augmented Generation", "Context Window", "Context"]
+    },
+    {
+        id: "turing-test",
+        term: "Turing Test",
+        letter: "T",
+        summary: "A test proposed by Alan Turing to assess whether a machine's behavior is indistinguishable from a human's.",
+        definition: "The Turing Test, proposed by mathematician Alan Turing in his 1950 paper 'Computing Machinery and Intelligence,' is a test of a machine's ability to exhibit intelligent behavior indistinguishable from that of a human. In the original formulation (the Imitation Game), a human evaluator converses via text with both a human and a machine without knowing which is which; if the evaluator cannot reliably distinguish the machine from the human, the machine is said to have passed the test. While influential as a philosophical benchmark, the Turing Test is now considered insufficient as a measure of true AI intelligence, as modern LLMs can pass it without possessing genuine understanding.",
+        category: "Fundamentals",
+        relatedTerms: ["Large Language Model", "AGI", "Narrow AI", "ChatGPT"]
+    },
+    {
+        id: "narrow-ai",
+        term: "Narrow AI",
+        letter: "N",
+        summary: "AI designed to perform a specific, limited set of tasks — also called Weak AI.",
+        definition: "Narrow AI (also called Weak AI or Artificial Narrow Intelligence, ANI) refers to AI systems designed and trained to perform a specific task or a limited set of related tasks. Unlike hypothetical Artificial General Intelligence (AGI), narrow AI cannot transfer its knowledge to domains outside its training. Examples include image classifiers, spam filters, recommendation engines, chess-playing programs, and speech recognition systems. Despite the 'narrow' label, modern narrow AI systems like GPT-4 can perform impressively across many language tasks, blurring the line with more general capabilities.",
+        category: "Fundamentals",
+        relatedTerms: ["AGI", "Turing Test", "Large Language Model", "Foundation Model"]
+    },
+    {
+        id: "spec-driven-development",
+        term: "Spec-Driven Development",
+        letter: "S",
+        summary: "A development methodology where detailed specifications guide design, implementation, and testing.",
+        definition: "Spec-driven development (SDD) is a software engineering methodology in which clear, structured specifications are written before implementation begins. These specs define expected behavior, inputs, outputs, edge cases, and acceptance criteria. In the context of AI systems, SDD is increasingly important for defining how AI components should behave, what outputs are acceptable, and how to evaluate correctness. It aligns closely with test-driven development (TDD) and behavior-driven development (BDD), and is gaining traction as a way to build more reliable, auditable AI-powered applications.",
+        category: "Engineering",
+        relatedTerms: ["Context Engineering", "Prompt Engineering", "Alignment", "Evaluation"]
+    },
+    {
+        id: "nlu-nlg-nlp",
+        term: "NLU / NLG / NLP",
+        letter: "N",
+        summary: "The three pillars of language AI: Understanding, Generation, and Processing.",
+        definition: "NLU (Natural Language Understanding), NLG (Natural Language Generation), and NLP (Natural Language Processing) are three closely related but distinct subfields of language AI. NLP is the broadest term, covering all computational techniques for processing human language. NLU focuses specifically on comprehension — extracting meaning, intent, and structure from text. NLG focuses on production — generating coherent, contextually appropriate language from data or knowledge. Modern large language models like GPT-4 integrate all three capabilities: they process input (NLP), understand it (NLU), and generate responses (NLG) in a unified architecture.",
+        category: "NLP",
+        relatedTerms: ["NLP", "Natural Language Understanding", "Natural Language Generation", "Large Language Model"]
     }
 ];
 
 export default glossaryData;
+

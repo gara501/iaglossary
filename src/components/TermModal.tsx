@@ -46,6 +46,18 @@ const categoryColors: Record<string, string> = {
     Fundamentos: 'gray',
     'Paradigma de Aprendizaje': 'messenger',
     'Seguridad y Alineación': 'whatsapp',
+    // New categories
+    Organization: 'linkedin',
+    Field: 'facebook',
+    'Data Science': 'twitter',
+    NLP: 'telegram',
+    Engineering: 'orange',
+    // New Spanish categories
+    Organización: 'linkedin',
+    Campo: 'facebook',
+    'Ciencia de Datos': 'twitter',
+    PLN: 'telegram',
+    Ingeniería: 'orange',
 }
 
 interface TermModalProps {

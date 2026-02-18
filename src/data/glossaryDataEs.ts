@@ -279,7 +279,243 @@ const glossaryDataEs: GlossaryTerm[] = [
         definition: "El aprendizaje zero-shot se refiere a la capacidad de un modelo para realizar una tarea sin haber visto ningún ejemplo de esa tarea durante el entrenamiento o en el prompt. Los grandes modelos de lenguaje exhiben capacidades zero-shot porque su preentrenamiento en datos diversos les da amplio conocimiento y habilidades de razonamiento. Por ejemplo, GPT-4 puede traducir texto a un idioma para el que nunca fue entrenado explícitamente, o resolver acertijos lógicos novedosos. El rendimiento zero-shot es una medida clave de la capacidad de generalización de un modelo y se contrasta con el aprendizaje few-shot, donde se proporcionan un pequeño número de ejemplos.",
         category: "Paradigma de Aprendizaje",
         relatedTerms: ["Aprendizaje Few-Shot", "Ingeniería de Prompts", "Modelo de Lenguaje Grande", "Generalización"]
+    },
+    // --- Nuevos términos ---
+    {
+        id: "agent",
+        term: "Agente",
+        letter: "A",
+        summary: "Sistema de IA que percibe su entorno y toma acciones para alcanzar objetivos.",
+        definition: "En IA, un agente es cualquier software o programa que interactúa con el mundo (o una simulación) recibiendo entradas y produciendo salidas o acciones. Los agentes operan dentro de un entorno, perciben su estado a través de sensores o entradas de datos, y actúan sobre él mediante actuadores o llamadas a APIs. Van desde sistemas simples basados en reglas (como un termostato) hasta agentes autónomos complejos impulsados por grandes modelos de lenguaje que pueden planificar, usar herramientas, navegar por la web, escribir código y ejecutar tareas de múltiples pasos. Los sistemas de IA agéntica se usan cada vez más en automatización, robótica y asistentes de IA.",
+        category: "Arquitectura",
+        relatedTerms: ["Aprendizaje por Refuerzo", "Modelo de Lenguaje Grande", "Uso de Herramientas", "IA Autónoma"]
+    },
+    {
+        id: "generative-ai",
+        term: "IA Generativa",
+        letter: "I",
+        summary: "IA que crea contenido nuevo como texto, imágenes, audio o video.",
+        definition: "La IA generativa se refiere a una clase de modelos de IA diseñados para producir datos originales que se asemejan a los ejemplos con los que fueron entrenados. Estos sistemas aprenden patrones estadísticos de grandes conjuntos de datos y usan esos patrones para generar nuevo contenido — incluyendo texto natural, imágenes realistas, música, video, código y modelos 3D. Las arquitecturas clave incluyen Transformers (para texto), Modelos de Difusión (para imágenes) y GANs. Ejemplos prominentes son GPT-4 (texto), DALL-E y Stable Diffusion (imágenes), Sora (video) y MusicLM (audio). La IA generativa ha transformado las industrias creativas, el desarrollo de software y la investigación científica.",
+        category: "IA Generativa",
+        relatedTerms: ["Modelo de Lenguaje Grande", "Modelo de Difusión", "Red Generativa Adversarial", "Modelo Fundacional"]
+    },
+    {
+        id: "context",
+        term: "Contexto",
+        letter: "C",
+        summary: "Información que rodea una entrada y ayuda al modelo a interpretar el significado con precisión.",
+        definition: "En IA, el contexto se refiere a cualquier información de fondo relevante que ayuda a un modelo a entender o responder adecuadamente. Para los modelos de lenguaje, el contexto incluye el historial de conversación, las instrucciones del sistema, la intención del usuario, el tema, el tono y cualquier documento proporcionado en el prompt. La cantidad de contexto que un modelo puede usar está limitada por su ventana de contexto. El uso efectivo del contexto es fundamental para respuestas precisas y relevantes — un modelo con contexto insuficiente puede malinterpretar consultas ambiguas. La ingeniería de contexto — la práctica de estructurar las entradas de contexto de forma óptima — se ha convertido en una habilidad clave para construir aplicaciones de IA.",
+        category: "Fundamentos",
+        relatedTerms: ["Ventana de Contexto", "Ingeniería de Prompts", "Ingeniería de Contexto", "Generación Aumentada por Recuperación"]
+    },
+    {
+        id: "claude",
+        term: "Claude",
+        letter: "C",
+        summary: "Familia de modelos de asistente de IA desarrollados por Anthropic, conocidos por su seguridad y utilidad.",
+        definition: "Claude es una familia de grandes modelos de lenguaje desarrollados por Anthropic, una empresa de seguridad en IA. Los modelos Claude están diseñados con un fuerte énfasis en ser útiles, inofensivos y honestos (el marco 'HHH'). Se entrenan usando técnicas de IA Constitucional (CAI) y RLHF para alinear el comportamiento del modelo con los valores humanos. Claude destaca en tareas como resumen, razonamiento, asistencia en programación, análisis y escritura creativa. La familia de modelos Claude incluye múltiples niveles (Haiku, Sonnet, Opus) optimizados para diferentes equilibrios de velocidad y capacidad. Claude se usa ampliamente a través de API y en los productos de consumo de Anthropic.",
+        category: "Modelo",
+        relatedTerms: ["Modelo de Lenguaje Grande", "RLHF", "Alineación", "OpenAI", "GPT"]
+    },
+    {
+        id: "openai",
+        term: "OpenAI",
+        letter: "O",
+        summary: "Organización de investigación en IA que desarrolla sistemas avanzados incluyendo la serie GPT.",
+        definition: "OpenAI es un laboratorio de investigación en IA y empresa tecnológica fundada en 2015, con la misión de garantizar que la inteligencia artificial general (AGI) beneficie a toda la humanidad. Es responsable de desarrollar algunos de los sistemas de IA más influyentes, incluyendo la serie GPT de modelos de lenguaje, los modelos de generación de imágenes DALL-E, Codex (generación de código), Whisper (reconocimiento de voz) y el modelo de generación de video Sora. OpenAI también creó ChatGPT, una de las aplicaciones de IA más utilizadas en la historia. La organización opera como una empresa de beneficio limitado con una organización sin fines de lucro como matriz, equilibrando operaciones comerciales con investigación de seguridad.",
+        category: "Organización",
+        relatedTerms: ["GPT", "ChatGPT", "DALL-E", "Modelo de Lenguaje Grande", "AGI"]
+    },
+    {
+        id: "chatgpt",
+        term: "ChatGPT",
+        letter: "C",
+        summary: "Asistente de IA conversacional de OpenAI, construido sobre los grandes modelos de lenguaje GPT.",
+        definition: "ChatGPT es una aplicación de IA conversacional desarrollada por OpenAI, lanzada en noviembre de 2022. Está construida sobre la serie GPT de grandes modelos de lenguaje (inicialmente GPT-3.5, luego GPT-4) y ajustada finamente con RLHF para ser un asistente conversacional útil. ChatGPT puede mantener diálogos de múltiples turnos, responder preguntas, escribir y depurar código, redactar documentos, resumir texto, traducir idiomas y realizar muchas otras tareas de lenguaje. Se convirtió en una de las aplicaciones de consumo de más rápido crecimiento en la historia, alcanzando 100 millones de usuarios en dos meses. Admite plugins, entrada de imágenes (GPT-4V) y GPTs personalizados.",
+        category: "Modelo",
+        relatedTerms: ["GPT", "OpenAI", "RLHF", "Modelo de Lenguaje Grande", "Ajuste por Instrucciones"]
+    },
+    {
+        id: "deep-learning",
+        term: "Aprendizaje Profundo",
+        letter: "A",
+        summary: "Subconjunto del aprendizaje automático que usa redes neuronales con muchas capas para aprender de los datos.",
+        definition: "El aprendizaje profundo es un subcampo del aprendizaje automático que utiliza redes neuronales artificiales con muchas capas (de ahí 'profundo') para aprender automáticamente representaciones jerárquicas de datos brutos. Cada capa aprende características cada vez más abstractas — por ejemplo, en el reconocimiento de imágenes, las capas tempranas detectan bordes, las capas intermedias detectan formas y las capas posteriores detectan objetos. El aprendizaje profundo ha impulsado avances en visión por computadora (CNNs), procesamiento de lenguaje natural (Transformers), reconocimiento de voz (RNNs, atención) e IA generativa (GANs, modelos de difusión). Requiere grandes conjuntos de datos y cómputo significativo, típicamente usando GPUs o TPUs.",
+        category: "Fundamentos",
+        relatedTerms: ["Red Neuronal", "Transformer", "Red Neuronal Convolucional", "Retropropagación"]
+    },
+    {
+        id: "reinforcement-learning",
+        term: "Aprendizaje por Refuerzo",
+        letter: "A",
+        summary: "Paradigma de aprendizaje donde un agente aprende recibiendo recompensas o penalizaciones por sus acciones.",
+        definition: "El aprendizaje por refuerzo (RL) es un paradigma de aprendizaje automático donde un agente aprende a tomar decisiones interactuando con un entorno. El agente observa el estado actual, toma una acción, recibe una señal de recompensa (positiva o negativa) y actualiza su política para maximizar la recompensa acumulada a lo largo del tiempo. Los algoritmos clave incluyen Q-learning, SARSA y métodos de gradiente de política como PPO y A3C. El RL ha logrado rendimiento sobrehumano en juegos (AlphaGo, Atari), robótica y conducción autónoma. En el contexto de los LLMs, el RLHF usa RL para alinear las salidas del modelo con las preferencias humanas.",
+        category: "Paradigma de Aprendizaje",
+        relatedTerms: ["RLHF", "Agente", "Aprendizaje Profundo", "Gradiente de Política"]
+    },
+    {
+        id: "computer-vision",
+        term: "Visión por Computadora",
+        letter: "V",
+        summary: "IA que permite a las máquinas interpretar y comprender información visual de imágenes y videos.",
+        definition: "La visión por computadora es un campo de la IA centrado en permitir que las máquinas extraigan información significativa de entradas visuales como imágenes y videos. Las tareas principales incluyen clasificación de imágenes (identificar qué hay en una imagen), detección de objetos (localizar objetos), segmentación semántica (etiquetar cada píxel) y generación de imágenes. La visión por computadora moderna depende en gran medida de las redes neuronales convolucionales (CNNs) y los Vision Transformers (ViT). Las aplicaciones abarcan vehículos autónomos, imágenes médicas, reconocimiento facial, realidad aumentada, control de calidad en manufactura y análisis de imágenes satelitales.",
+        category: "Campo",
+        relatedTerms: ["Red Neuronal", "Red Neuronal Convolucional", "Aprendizaje Profundo", "IA Multimodal"]
+    },
+    {
+        id: "nlp",
+        term: "PLN",
+        letter: "P",
+        summary: "Procesamiento de Lenguaje Natural — IA que permite a las computadoras entender y generar lenguaje humano.",
+        definition: "El Procesamiento de Lenguaje Natural (PLN) es una rama de la IA que combina lingüística, ciencias de la computación y aprendizaje automático para permitir que las computadoras procesen, comprendan y generen lenguaje humano. El PLN abarca una amplia gama de tareas: clasificación de texto, análisis de sentimientos, traducción automática, respuesta a preguntas, resumen, reconocimiento de entidades nombradas y sistemas de diálogo. El PLN moderno está dominado por modelos basados en Transformers como BERT y GPT. El PLN impulsa aplicaciones incluyendo motores de búsqueda, asistentes virtuales, chatbots, correctores gramaticales y sistemas de moderación de contenido.",
+        category: "Campo",
+        relatedTerms: ["Comprensión del Lenguaje Natural", "Generación de Lenguaje Natural", "Transformer", "BERT", "Modelo de Lenguaje Grande"]
+    },
+    {
+        id: "supervised-learning",
+        term: "Aprendizaje Supervisado",
+        letter: "A",
+        summary: "Aprendizaje automático donde los modelos se entrenan con pares de entrada-salida etiquetados.",
+        definition: "El aprendizaje supervisado es un paradigma de aprendizaje automático donde un modelo se entrena en un conjunto de datos de ejemplos etiquetados — pares de entradas y sus salidas correctas. El modelo aprende un mapeo de entradas a salidas minimizando la diferencia entre sus predicciones y las etiquetas verdaderas. Las tareas comunes incluyen clasificación (predecir una categoría) y regresión (predecir un valor continuo). Ejemplos incluyen detección de spam, clasificación de imágenes y predicción de precios. El aprendizaje supervisado requiere datos etiquetados, que pueden ser costosos de obtener, pero es el paradigma de ML más utilizado en sistemas de producción.",
+        category: "Paradigma de Aprendizaje",
+        relatedTerms: ["Aprendizaje No Supervisado", "Ajuste Fino", "Red Neuronal", "Aprendizaje por Transferencia"]
+    },
+    {
+        id: "unsupervised-learning",
+        term: "Aprendizaje No Supervisado",
+        letter: "A",
+        summary: "Aprendizaje automático sobre datos no etiquetados para descubrir patrones o estructura ocultos.",
+        definition: "El aprendizaje no supervisado es un paradigma de aprendizaje automático donde los modelos aprenden patrones y estructura de los datos sin salidas etiquetadas. El modelo debe descubrir por sí solo la organización subyacente de los datos. Las técnicas comunes incluyen agrupamiento (agrupar puntos de datos similares, por ejemplo, K-means), reducción de dimensionalidad (por ejemplo, PCA, t-SNE, autoencoders) y estimación de densidad. El aprendizaje no supervisado es valioso cuando los datos etiquetados son escasos o costosos. El aprendizaje auto-supervisado — donde los modelos generan sus propias etiquetas a partir de datos no etiquetados — es una variante poderosa utilizada para preentrenar grandes modelos de lenguaje.",
+        category: "Paradigma de Aprendizaje",
+        relatedTerms: ["Aprendizaje Auto-Supervisado", "Aprendizaje Supervisado", "Agrupamiento", "Preentrenamiento"]
+    },
+    {
+        id: "data-mining",
+        term: "Minería de Datos",
+        letter: "M",
+        summary: "El proceso de descubrir patrones e información útil en grandes conjuntos de datos.",
+        definition: "La minería de datos es el proceso de aplicar técnicas estadísticas, matemáticas y computacionales para extraer patrones significativos, correlaciones e información de grandes colecciones de datos. Se sitúa en la intersección de la estadística, el aprendizaje automático y los sistemas de bases de datos. Las tareas comunes de minería de datos incluyen clasificación, agrupamiento, aprendizaje de reglas de asociación (por ejemplo, análisis de cesta de mercado), detección de anomalías y regresión. La minería de datos es fundamental para la inteligencia empresarial, la detección de fraudes, el descubrimiento científico y los sistemas de recomendación. La minería de datos moderna aprovecha cada vez más las técnicas de aprendizaje automático e IA.",
+        category: "Ciencia de Datos",
+        relatedTerms: ["Aprendizaje Automático", "Aprendizaje Supervisado", "Aprendizaje No Supervisado", "Reconocimiento de Patrones"]
+    },
+    {
+        id: "entity-annotation",
+        term: "Anotación de Entidades",
+        letter: "A",
+        summary: "Etiquetar entidades significativas (nombres, lugares, fechas) en texto o datos para el entrenamiento de IA.",
+        definition: "La anotación de entidades es el proceso de marcar entidades — como nombres de personas, organizaciones, ubicaciones, fechas y nombres de productos — en conjuntos de datos de texto para que los modelos de IA puedan aprender a reconocerlos. Es un paso crítico en la creación de datos de entrenamiento para sistemas de Reconocimiento de Entidades Nombradas (NER) y otras tareas de PLN. La anotación puede realizarse manualmente por anotadores humanos o de forma semi-automática usando modelos preentrenados. La anotación de entidades de alta calidad es esencial para entrenar sistemas precisos de extracción de información utilizados en búsqueda, grafos de conocimiento y pipelines de procesamiento de documentos.",
+        category: "PLN",
+        relatedTerms: ["Extracción de Entidades", "Reconocimiento de Entidades Nombradas", "PLN", "Aprendizaje Supervisado"]
+    },
+    {
+        id: "entity-extraction",
+        term: "Extracción de Entidades",
+        letter: "E",
+        summary: "Identificación y categorización automática de entidades clave en texto no estructurado.",
+        definition: "La extracción de entidades, también conocida como Reconocimiento de Entidades Nombradas (NER), es una tarea de PLN donde un modelo de IA identifica y clasifica automáticamente entidades nombradas en texto no estructurado en categorías predefinidas como personas, organizaciones, ubicaciones, fechas, valores monetarios y más. Por ejemplo, en la oración 'Apple fue fundada por Steve Jobs en Cupertino en 1976', un modelo NER extraería Apple (organización), Steve Jobs (persona), Cupertino (ubicación) y 1976 (fecha). La extracción de entidades es fundamental para la recuperación de información, la construcción de grafos de conocimiento y la inteligencia documental.",
+        category: "PLN",
+        relatedTerms: ["Anotación de Entidades", "PLN", "Comprensión del Lenguaje Natural", "Extracción de Información"]
+    },
+    {
+        id: "intent",
+        term: "Intención",
+        letter: "I",
+        summary: "El objetivo o propósito detrás de la entrada de un usuario en un sistema de IA conversacional.",
+        definition: "En la IA conversacional y el PLN, la intención se refiere al objetivo o propósito subyacente que un usuario pretende lograr con su entrada. Por ejemplo, la consulta '¿Cómo estará el tiempo mañana?' tiene la intención 'obtener pronóstico del tiempo'. El reconocimiento de intención (o clasificación de intención) es la tarea de identificar automáticamente la intención del usuario a partir de su enunciado. Es un componente central de los sistemas de diálogo, asistentes virtuales y chatbots. Los sistemas modernos usan clasificadores de aprendizaje automático o grandes modelos de lenguaje para detectar la intención, permitiendo el enrutamiento y la generación de respuestas apropiadas.",
+        category: "PLN",
+        relatedTerms: ["Comprensión del Lenguaje Natural", "PLN", "Sistema de Diálogo", "Extracción de Entidades"]
+    },
+    {
+        id: "model",
+        term: "Modelo",
+        letter: "M",
+        summary: "Sistema matemático entrenado con datos para hacer predicciones, clasificaciones o generar salidas.",
+        definition: "En IA y aprendizaje automático, un modelo es un sistema computacional que ha aprendido patrones de datos de entrenamiento y puede aplicar ese conocimiento a nuevas entradas. Los modelos se definen por su arquitectura (la estructura del cómputo) y sus parámetros (los pesos aprendidos). Después del entrenamiento, un modelo puede hacer predicciones (regresión, clasificación), generar contenido (lenguaje, imágenes) o tomar acciones (agentes). El término abarca desde simples modelos de regresión lineal hasta redes neuronales con miles de millones de parámetros. La selección, entrenamiento, evaluación y despliegue de modelos son las etapas centrales del ciclo de vida del aprendizaje automático.",
+        category: "Fundamentos",
+        relatedTerms: ["Red Neuronal", "Entrenamiento", "Inferencia", "Modelo Fundacional"]
+    },
+    {
+        id: "nlu",
+        term: "Comprensión del Lenguaje Natural",
+        letter: "C",
+        summary: "IA que interpreta el significado, la intención y el contexto del lenguaje humano.",
+        definition: "La Comprensión del Lenguaje Natural (CLN/NLU) es un subcampo del PLN centrado en permitir que las máquinas comprendan el significado, la intención, el sentimiento y el contexto del lenguaje humano — yendo más allá del procesamiento superficial de texto. Las tareas de CLN incluyen reconocimiento de intención, análisis de sentimientos, etiquetado de roles semánticos, resolución de correferencias y comprensión lectora. La CLN es el componente de 'comprensión' de los sistemas de IA conversacional, permitiéndoles interpretar correctamente lo que los usuarios quieren decir en lugar de solo lo que dicen. La CLN moderna está impulsada por grandes modelos de lenguaje preentrenados como BERT y sus variantes.",
+        category: "PLN",
+        relatedTerms: ["PLN", "Generación de Lenguaje Natural", "Intención", "BERT", "Análisis de Sentimientos"]
+    },
+    {
+        id: "nlg",
+        term: "Generación de Lenguaje Natural",
+        letter: "G",
+        summary: "IA que produce texto o voz coherente y similar al humano a partir de datos u otras entradas.",
+        definition: "La Generación de Lenguaje Natural (GLN/NLG) es un subcampo del PLN centrado en producir automáticamente texto o voz coherente, fluido y contextualmente apropiado a partir de datos estructurados, conocimiento u otras entradas. Las tareas de GLN incluyen resumen de texto, generación de informes, generación de respuestas en diálogos, traducción automática y escritura creativa. La GLN moderna está dominada por modelos de lenguaje autorregresivos como GPT-4, que generan texto token por token. La GLN es el componente de 'generación' de la IA conversacional y se usa en chatbots, periodismo automatizado, sistemas de datos a texto y asistentes virtuales.",
+        category: "PLN",
+        relatedTerms: ["PLN", "Comprensión del Lenguaje Natural", "Modelo de Lenguaje Grande", "Modelo Autorregresivo"]
+    },
+    {
+        id: "overfitting",
+        term: "Sobreajuste",
+        letter: "S",
+        summary: "Cuando un modelo memoriza los datos de entrenamiento con demasiada precisión y no generaliza a datos nuevos.",
+        definition: "El sobreajuste ocurre cuando un modelo de aprendizaje automático aprende los datos de entrenamiento con demasiada precisión — incluyendo su ruido y fluctuaciones aleatorias — en lugar de los patrones generales subyacentes. Un modelo sobreajustado funciona muy bien en los datos de entrenamiento pero mal en datos de prueba no vistos, porque esencialmente ha memorizado los ejemplos de entrenamiento en lugar de aprender patrones transferibles. El sobreajuste es más probable con modelos complejos y conjuntos de datos pequeños. Las estrategias comunes de mitigación incluyen regularización (L1/L2), dropout, parada temprana, aumento de datos y validación cruzada.",
+        category: "Fundamentos",
+        relatedTerms: ["Aprendizaje Supervisado", "Regularización", "Generalización", "Red Neuronal"]
+    },
+    {
+        id: "pattern-recognition",
+        term: "Reconocimiento de Patrones",
+        letter: "R",
+        summary: "La capacidad de los algoritmos para identificar estructuras o regularidades recurrentes en los datos.",
+        definition: "El reconocimiento de patrones es la capacidad de los algoritmos y sistemas de IA para detectar, clasificar y responder a estructuras, regularidades o relaciones recurrentes en los datos. Es una de las tareas fundamentales de la IA y el aprendizaje automático, subyacente a aplicaciones como el reconocimiento de imágenes (detectar rostros u objetos), el reconocimiento de voz (identificar fonemas y palabras), el reconocimiento de escritura a mano, la detección de anomalías y la identificación biométrica. El reconocimiento de patrones moderno se logra en gran medida mediante el aprendizaje profundo, donde las redes neuronales aprenden automáticamente representaciones de características jerárquicas de datos brutos.",
+        category: "Fundamentos",
+        relatedTerms: ["Aprendizaje Profundo", "Visión por Computadora", "Red Neuronal", "Clasificación"]
+    },
+    {
+        id: "context-engineering",
+        term: "Ingeniería de Contexto",
+        letter: "I",
+        summary: "Estructurar y optimizar la información proporcionada a los modelos de IA para mejorar la calidad de la salida.",
+        definition: "La ingeniería de contexto es la práctica de diseñar y estructurar deliberadamente la información proporcionada a un modelo de IA — incluyendo prompts del sistema, historial de conversación, documentos recuperados, ejemplos y datos del entorno — para maximizar la calidad y relevancia de sus salidas. Va más allá de la ingeniería de prompts básica para abarcar la arquitectura de información completa alrededor de una llamada al modelo: qué incluir, cómo formatearlo, qué recuperar y cómo priorizar. A medida que los sistemas de IA se vuelven más capaces, la ingeniería de contexto ha surgido como una disciplina crítica para construir aplicaciones de IA confiables y precisas.",
+        category: "Prompting",
+        relatedTerms: ["Ingeniería de Prompts", "Generación Aumentada por Recuperación", "Ventana de Contexto", "Contexto"]
+    },
+    {
+        id: "turing-test",
+        term: "Test de Turing",
+        letter: "T",
+        summary: "Prueba propuesta por Alan Turing para evaluar si el comportamiento de una máquina es indistinguible del de un humano.",
+        definition: "El Test de Turing, propuesto por el matemático Alan Turing en su artículo de 1950 'Computing Machinery and Intelligence', es una prueba de la capacidad de una máquina para exhibir comportamiento inteligente indistinguible del de un humano. En la formulación original (el Juego de Imitación), un evaluador humano conversa por texto con un humano y una máquina sin saber cuál es cuál; si el evaluador no puede distinguir de manera confiable la máquina del humano, se dice que la máquina ha pasado la prueba. Aunque influyente como referencia filosófica, el Test de Turing ahora se considera insuficiente como medida de la verdadera inteligencia de la IA, ya que los LLMs modernos pueden pasarlo sin poseer comprensión genuina.",
+        category: "Fundamentos",
+        relatedTerms: ["Modelo de Lenguaje Grande", "AGI", "IA Estrecha", "ChatGPT"]
+    },
+    {
+        id: "narrow-ai",
+        term: "IA Estrecha",
+        letter: "I",
+        summary: "IA diseñada para realizar un conjunto específico y limitado de tareas — también llamada IA Débil.",
+        definition: "La IA Estrecha (también llamada IA Débil o Inteligencia Artificial Estrecha, ANI) se refiere a sistemas de IA diseñados y entrenados para realizar una tarea específica o un conjunto limitado de tareas relacionadas. A diferencia de la hipotética Inteligencia Artificial General (AGI), la IA estrecha no puede transferir su conocimiento a dominios fuera de su entrenamiento. Ejemplos incluyen clasificadores de imágenes, filtros de spam, motores de recomendación, programas de ajedrez y sistemas de reconocimiento de voz. A pesar de la etiqueta 'estrecha', los sistemas modernos de IA estrecha como GPT-4 pueden desempeñarse de manera impresionante en muchas tareas de lenguaje, difuminando la línea con capacidades más generales.",
+        category: "Fundamentos",
+        relatedTerms: ["AGI", "Test de Turing", "Modelo de Lenguaje Grande", "Modelo Fundacional"]
+    },
+    {
+        id: "spec-driven-development",
+        term: "Desarrollo Guiado por Especificaciones",
+        letter: "D",
+        summary: "Metodología de desarrollo donde especificaciones detalladas guían el diseño, la implementación y las pruebas.",
+        definition: "El desarrollo guiado por especificaciones (DGE) es una metodología de ingeniería de software en la que se escriben especificaciones claras y estructuradas antes de que comience la implementación. Estas especificaciones definen el comportamiento esperado, entradas, salidas, casos extremos y criterios de aceptación. En el contexto de los sistemas de IA, el DGE es cada vez más importante para definir cómo deben comportarse los componentes de IA, qué salidas son aceptables y cómo evaluar la corrección. Se alinea estrechamente con el desarrollo guiado por pruebas (TDD) y el desarrollo guiado por comportamiento (BDD), y está ganando tracción como forma de construir aplicaciones de IA más confiables y auditables.",
+        category: "Ingeniería",
+        relatedTerms: ["Ingeniería de Contexto", "Ingeniería de Prompts", "Alineación", "Evaluación"]
+    },
+    {
+        id: "nlu-nlg-nlp",
+        term: "CLN / GLN / PLN",
+        letter: "C",
+        summary: "Los tres pilares de la IA del lenguaje: Comprensión, Generación y Procesamiento.",
+        definition: "La CLN (Comprensión del Lenguaje Natural), la GLN (Generación de Lenguaje Natural) y el PLN (Procesamiento de Lenguaje Natural) son tres subcampos estrechamente relacionados pero distintos de la IA del lenguaje. El PLN es el término más amplio, que abarca todas las técnicas computacionales para procesar el lenguaje humano. La CLN se centra específicamente en la comprensión — extraer significado, intención y estructura del texto. La GLN se centra en la producción — generar lenguaje coherente y contextualmente apropiado a partir de datos o conocimiento. Los grandes modelos de lenguaje modernos como GPT-4 integran las tres capacidades: procesan la entrada (PLN), la comprenden (CLN) y generan respuestas (GLN) en una arquitectura unificada.",
+        category: "PLN",
+        relatedTerms: ["PLN", "Comprensión del Lenguaje Natural", "Generación de Lenguaje Natural", "Modelo de Lenguaje Grande"]
     }
 ]
 
 export default glossaryDataEs
+
