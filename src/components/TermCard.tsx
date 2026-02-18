@@ -11,9 +11,10 @@ interface TermCardProps {
     index: number
     onClick: () => void
     readMoreLabel?: string
+    englishTerm?: string
 }
 
-export default function TermCard({ term, index, onClick, readMoreLabel = 'Read more' }: TermCardProps) {
+export default function TermCard({ term, index, onClick, readMoreLabel = 'Read more', englishTerm }: TermCardProps) {
     const { colorMode } = useColorMode()
     const dark = colorMode === 'dark'
 
@@ -62,10 +63,22 @@ export default function TermCard({ term, index, onClick, readMoreLabel = 'Read m
                 fontFamily="Space Grotesk, sans-serif"
                 fontWeight="700" fontSize="17px"
                 color={dark ? '#EAEFEF' : '#25343F'}
-                mb={2} lineHeight={1.3} letterSpacing="-0.01em"
+                mb={englishTerm ? 0.5 : 2} lineHeight={1.3} letterSpacing="-0.01em"
             >
                 {term.term}
             </Text>
+            {englishTerm && (
+                <Text
+                    fontSize="11px"
+                    fontFamily="Space Grotesk, sans-serif"
+                    fontWeight="500"
+                    fontStyle="italic"
+                    color={dark ? 'rgba(191,201,209,0.55)' : 'rgba(37,52,63,0.40)'}
+                    mb={2} lineHeight={1.3} letterSpacing="0.01em"
+                >
+                    {englishTerm}
+                </Text>
+            )}
 
             {/* Summary — good contrast in both modes */}
             <Text

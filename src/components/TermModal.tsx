@@ -16,6 +16,7 @@ interface TermModalProps {
     summaryLabel?: string
     definitionLabel?: string
     relatedTermsLabel?: string
+    englishTerm?: string
 }
 
 export default function TermModal({
@@ -23,6 +24,7 @@ export default function TermModal({
     summaryLabel = 'Summary',
     definitionLabel = 'Full Definition',
     relatedTermsLabel = 'Related Terms',
+    englishTerm,
 }: TermModalProps) {
     const { colorMode } = useColorMode()
     const dark = colorMode === 'dark'
@@ -90,9 +92,20 @@ export default function TermModal({
                                     </span>
                                     <Text fontFamily="Space Grotesk, sans-serif" fontWeight="800"
                                         fontSize={{ base: 'xl', md: '2xl' }}
-                                        color={titleColor} lineHeight={1.2} letterSpacing="-0.02em">
+                                        color={titleColor} lineHeight={1.2} letterSpacing="-0.02em"
+                                        mb={englishTerm ? 0.5 : 0}>
                                         {term.term}
                                     </Text>
+                                    {englishTerm && (
+                                        <Text
+                                            fontFamily="Space Grotesk, sans-serif"
+                                            fontSize="13px" fontWeight="500" fontStyle="italic"
+                                            color={dark ? 'rgba(191,201,209,0.55)' : 'rgba(37,52,63,0.40)'}
+                                            lineHeight={1.3} letterSpacing="0.01em"
+                                        >
+                                            {englishTerm}
+                                        </Text>
+                                    )}
                                 </Box>
                             </Flex>
                         </ModalHeader>

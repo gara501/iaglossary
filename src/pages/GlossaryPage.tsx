@@ -42,6 +42,14 @@ export default function GlossaryPage() {
 
     const glossaryData = language === 'es' ? glossaryDataEs : glossaryDataEn
 
+    // Build English term lookup for Spanish mode
+    const enTermById = useMemo(() => {
+        if (language !== 'es') return null
+        const map: Record<string, string> = {}
+        for (const t of glossaryDataEn) map[t.id] = t.term
+        return map
+    }, [language])
+
     const availableLetters = useMemo(() => {
         return new Set(glossaryData.map((t) => t.letter))
     }, [glossaryData])
@@ -152,7 +160,8 @@ export default function GlossaryPage() {
                         <SimpleGrid key="grid" columns={{ base: 1, sm: 2, lg: 3, xl: 4 }} spacing={4}>
                             {filteredTerms.map((term, i) => (
                                 <TermCard key={term.id} term={term} index={i}
-                                    onClick={() => handleCardClick(term)} readMoreLabel={s.readMore} />
+                                    onClick={() => handleCardClick(term)} readMoreLabel={s.readMore}
+                                    englishTerm={enTermById ? enTermById[term.id] : undefined} />
                             ))}
                         </SimpleGrid>
                     ) : (
@@ -186,6 +195,7 @@ export default function GlossaryPage() {
                 summaryLabel={s.summaryLabel}
                 definitionLabel={s.definitionLabel}
                 relatedTermsLabel={s.relatedTermsLabel}
+                englishTerm={enTermById && selectedTerm ? enTermById[selectedTerm.id] : undefined}
             />
         </Box>
     )
