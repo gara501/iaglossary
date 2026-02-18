@@ -1,13 +1,6 @@
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 import {
-    Box,
-    Container,
-    SimpleGrid,
-    Text,
-    Flex,
-    useDisclosure,
-    Center,
-    Icon,
+    Box, Container, SimpleGrid, Text, Flex, useDisclosure, Center, Icon,
 } from '@chakra-ui/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiSearch } from 'react-icons/fi'
@@ -21,6 +14,7 @@ import glossaryDataEs from '../data/glossaryDataEs'
 import { GlossaryTerm } from '../types/glossary'
 import { useLanguage } from '../context/LanguageContext'
 import { useStrings } from '../i18n/strings'
+import { useColorMode } from '../context/ThemeContext'
 
 const MotionBox = motion(Box)
 
@@ -32,6 +26,19 @@ export default function GlossaryPage() {
 
     const { language } = useLanguage()
     const s = useStrings(language)
+    const { colorMode } = useColorMode()
+    const dark = colorMode === 'dark'
+
+    // Apply body class for CSS dark/light mode
+    useEffect(() => {
+        document.body.classList.remove('dark', 'light')
+        document.body.classList.add(colorMode)
+    }, [colorMode])
+
+    // Apply dark class on mount
+    useEffect(() => {
+        document.body.classList.add('dark')
+    }, [])
 
     const glossaryData = language === 'es' ? glossaryDataEs : glossaryDataEn
 
@@ -72,51 +79,32 @@ export default function GlossaryPage() {
 
     const subtitle = s.subtitle.replace('{count}', String(glossaryData.length))
 
+    const subtitleColor = dark ? 'rgba(245,234,236,0.45)' : 'rgba(26,10,13,0.50)'
+    const countColor = dark ? 'rgba(245,234,236,0.35)' : 'rgba(26,10,13,0.40)'
+    const footerColor = dark ? 'rgba(245,234,236,0.18)' : 'rgba(26,10,13,0.25)'
+    const emptyIconColor = dark ? 'rgba(197,0,60,0.28)' : 'rgba(197,0,60,0.22)'
+    const emptyTextColor = dark ? 'rgba(245,234,236,0.60)' : 'rgba(26,10,13,0.55)'
+    const emptyHintColor = dark ? 'rgba(245,234,236,0.30)' : 'rgba(26,10,13,0.35)'
+
+    // Blob colors
+    const blob1 = dark ? 'rgba(197, 0, 60, 0.22)' : 'rgba(197, 0, 60, 0.10)'
+    const blob2 = dark ? 'rgba(136, 4, 37, 0.18)' : 'rgba(136, 4, 37, 0.07)'
+    const blob3 = dark ? 'rgba(85, 234, 212, 0.06)' : 'rgba(85, 234, 212, 0.08)'
+
     return (
         <Box minH="100vh" position="relative">
-            {/* Glass background */}
             <div className="glass-bg" />
 
             {/* Animated blobs */}
-            <Box
-                position="fixed"
-                top="-15%"
-                left="-5%"
-                w="700px"
-                h="700px"
-                borderRadius="full"
-                bg="rgba(180, 20, 50, 0.22)"
-                filter="blur(120px)"
-                pointerEvents="none"
-                zIndex={0}
-                style={{ animation: 'float-blob 18s ease-in-out infinite' }}
-            />
-            <Box
-                position="fixed"
-                bottom="-20%"
-                right="-10%"
-                w="600px"
-                h="600px"
-                borderRadius="full"
-                bg="rgba(140, 10, 60, 0.18)"
-                filter="blur(100px)"
-                pointerEvents="none"
-                zIndex={0}
-                style={{ animation: 'float-blob 22s ease-in-out infinite reverse' }}
-            />
-            <Box
-                position="fixed"
-                top="40%"
-                left="60%"
-                w="400px"
-                h="400px"
-                borderRadius="full"
-                bg="rgba(100, 10, 35, 0.14)"
-                filter="blur(80px)"
-                pointerEvents="none"
-                zIndex={0}
-                style={{ animation: 'float-blob 26s ease-in-out infinite 4s' }}
-            />
+            <Box position="fixed" top="-15%" left="-5%" w="700px" h="700px" borderRadius="full"
+                bg={blob1} filter="blur(120px)" pointerEvents="none" zIndex={0}
+                style={{ animation: 'float-blob 18s ease-in-out infinite' }} />
+            <Box position="fixed" bottom="-20%" right="-10%" w="600px" h="600px" borderRadius="full"
+                bg={blob2} filter="blur(100px)" pointerEvents="none" zIndex={0}
+                style={{ animation: 'float-blob 22s ease-in-out infinite reverse' }} />
+            <Box position="fixed" top="40%" left="60%" w="400px" h="400px" borderRadius="full"
+                bg={blob3} filter="blur(80px)" pointerEvents="none" zIndex={0}
+                style={{ animation: 'float-blob 26s ease-in-out infinite 4s' }} />
 
             <Container maxW="1400px" px={{ base: 4, md: 8 }} py={12} position="relative" zIndex={1}>
                 {/* Header */}
@@ -129,16 +117,8 @@ export default function GlossaryPage() {
                 >
                     <Logo subtitle={s.logoSubtitle} />
 
-                    <Text
-                        fontSize="sm"
-                        color="rgba(160,185,255,0.5)"
-                        maxW="480px"
-                        mx="auto"
-                        mt={3}
-                        mb={8}
-                        lineHeight={1.7}
-                        fontWeight="400"
-                    >
+                    <Text fontSize="15px" color={subtitleColor} maxW="500px" mx="auto"
+                        mt={3} mb={8} lineHeight={1.75} fontWeight="400">
                         {subtitle}
                     </Text>
 
@@ -159,7 +139,7 @@ export default function GlossaryPage() {
 
                 {/* Results count */}
                 <Flex align="center" mb={5} px={1}>
-                    <Text fontSize="12px" color="rgba(160,185,255,0.4)" fontWeight="500">
+                    <Text fontSize="13px" color={countColor} fontWeight="500">
                         {s.termsCount(filteredTerms.length, glossaryData.length)}
                         {activeLetter && s.letterFilter(activeLetter)}
                         {search && s.searchFilter(search)}
@@ -169,47 +149,25 @@ export default function GlossaryPage() {
                 {/* Grid */}
                 <AnimatePresence mode="wait">
                     {filteredTerms.length > 0 ? (
-                        <SimpleGrid
-                            key="grid"
-                            columns={{ base: 1, sm: 2, lg: 3, xl: 4 }}
-                            spacing={4}
-                        >
+                        <SimpleGrid key="grid" columns={{ base: 1, sm: 2, lg: 3, xl: 4 }} spacing={4}>
                             {filteredTerms.map((term, i) => (
-                                <TermCard
-                                    key={term.id}
-                                    term={term}
-                                    index={i}
-                                    onClick={() => handleCardClick(term)}
-                                    readMoreLabel={s.readMore}
-                                />
+                                <TermCard key={term.id} term={term} index={i}
+                                    onClick={() => handleCardClick(term)} readMoreLabel={s.readMore} />
                             ))}
                         </SimpleGrid>
                     ) : (
-                        <MotionBox
-                            key="empty"
+                        <MotionBox key="empty"
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0 }}
-                            transition={{ duration: 0.25 }}
-                        >
+                            transition={{ duration: 0.25 }}>
                             <Center flexDirection="column" py={20} gap={4}>
-                                <Box
-                                    w="72px"
-                                    h="72px"
-                                    borderRadius="20px"
-                                    className="glass-card"
-                                    display="flex"
-                                    alignItems="center"
-                                    justifyContent="center"
-                                >
-                                    <Icon as={FiSearch} boxSize={7} color="rgba(225,29,72,0.28)" />
+                                <Box w="72px" h="72px" borderRadius="20px" className="glass-card"
+                                    display="flex" alignItems="center" justifyContent="center">
+                                    <Icon as={FiSearch} boxSize={7} color={emptyIconColor} />
                                 </Box>
-                                <Text color="rgba(255,230,235,0.6)" fontSize="md" fontWeight="600">
-                                    {s.noTermsFound}
-                                </Text>
-                                <Text color="rgba(255,200,210,0.32)" fontSize="sm">
-                                    {s.noTermsHint}
-                                </Text>
+                                <Text color={emptyTextColor} fontSize="16px" fontWeight="600">{s.noTermsFound}</Text>
+                                <Text color={emptyHintColor} fontSize="14px">{s.noTermsHint}</Text>
                             </Center>
                         </MotionBox>
                     )}
@@ -217,16 +175,14 @@ export default function GlossaryPage() {
 
                 {/* Footer */}
                 <Box mt={16} textAlign="center">
-                    <Text fontSize="11px" color="rgba(255,200,210,0.20)" letterSpacing="0.04em">
+                    <Text fontSize="12px" color={footerColor} letterSpacing="0.04em">
                         {s.footerText} · {new Date().getFullYear()}
                     </Text>
                 </Box>
             </Container>
 
             <TermModal
-                term={selectedTerm}
-                isOpen={isOpen}
-                onClose={onClose}
+                term={selectedTerm} isOpen={isOpen} onClose={onClose}
                 summaryLabel={s.summaryLabel}
                 definitionLabel={s.definitionLabel}
                 relatedTermsLabel={s.relatedTermsLabel}
