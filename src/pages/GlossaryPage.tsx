@@ -135,7 +135,7 @@ export default function GlossaryPage() {
                 bg={blob3} filter="blur(80px)" pointerEvents="none" zIndex={0}
                 style={{ animation: 'float-blob 26s ease-in-out infinite 4s' }} />
 
-            <Container maxW="1400px" px={{ base: 4, md: 8 }} py={12} position="relative" zIndex={1}>
+            <Container maxW="1400px" px={{ base: 4, md: 8 }} pt={{ base: 28, md: 12 }} pb={12} position="relative" zIndex={1}>
                 {/* Header */}
                 <MotionBox
                     initial={{ opacity: 0, y: -16 }}

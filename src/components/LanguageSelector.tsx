@@ -16,7 +16,7 @@ export default function LanguageSelector({ currentPage, onPageChange }: { curren
     const inactiveText = dark ? 'rgba(234,239,239,0.38)' : 'rgba(37,52,63,0.42)'
 
     return (
-        <Box position="fixed" top={4} right={4} zIndex={1000}>
+        <Box position="fixed" top={4} left={{ base: 4, md: 'auto' }} right={4} zIndex={1000} display="flex" justifyContent={{ base: 'center', md: 'flex-end' }}>
             <HStack spacing={2}>
                 {/* Page Toggle */}
                 <HStack
