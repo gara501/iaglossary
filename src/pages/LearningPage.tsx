@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import {
     Box, Container, SimpleGrid, Text, Flex, Heading, Link, Badge, Icon, Button,
 } from '@chakra-ui/react'
@@ -10,6 +10,7 @@ import learningDataEs from '../data/learningDataES'
 import { useLanguage } from '../context/LanguageContext'
 import { useStrings } from '../i18n/strings'
 import { useColorMode } from '../context/ThemeContext'
+import Pagination from '../components/Pagination'
 
 const MotionBox = motion(Box)
 
@@ -28,7 +29,20 @@ export default function LearningPage({ onReturn }: LearningPageProps) {
         document.body.classList.add(colorMode)
     }, [colorMode])
 
+    const [currentPage, setCurrentPage] = useState(1)
+    const ITEMS_PER_PAGE = 6
+
     const learningData = language === 'es' ? learningDataEs : learningDataEn
+
+    const totalPages = Math.ceil(learningData.length / ITEMS_PER_PAGE)
+    const paginatedData = useMemo(() => {
+        const start = (currentPage - 1) * ITEMS_PER_PAGE
+        return learningData.slice(start, start + ITEMS_PER_PAGE)
+    }, [learningData, currentPage])
+
+    useEffect(() => {
+        setCurrentPage(1)
+    }, [language])
 
     const subtitleColor = dark ? 'rgba(234,239,239,0.55)' : 'rgba(37,52,63,0.60)'
     const footerColor = dark ? 'rgba(234,239,239,0.22)' : 'rgba(37,52,63,0.30)'
@@ -93,7 +107,7 @@ export default function LearningPage({ onReturn }: LearningPageProps) {
 
                 {/* Grid */}
                 <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6} maxW="1000px" mx="auto">
-                    {learningData.map((item, i) => (
+                    {paginatedData.map((item, i) => (
                         <MotionBox
                             key={item.id}
                             initial={{ opacity: 0, y: 20 }}
@@ -154,6 +168,14 @@ export default function LearningPage({ onReturn }: LearningPageProps) {
                         </MotionBox>
                     ))}
                 </SimpleGrid>
+
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                    prevLabel={language === 'es' ? 'Anterior' : 'Prev'}
+                    nextLabel={language === 'es' ? 'Siguiente' : 'Next'}
+                />
 
                 {/* Footer */}
                 <Box mt={16} textAlign="center">

@@ -48,7 +48,24 @@ const learningData: LearningItem[] = [
         summary: "We present basic math related to computation and memory usage for transformers",
         link: "https://blog.eleuther.ai/transformer-math/",
         category: "Article"
-    }
+    },
+    {
+        id: "agent-skills",
+        title: "Agent Skills with Anthropic",
+        creator: "DeepLearning.AI",
+        summary: "Learn how to build agents that can use tools, access information, and perform complex tasks",
+        link: "https://learn.deeplearning.ai/courses/agent-skills-with-anthropic",
+        category: "Course"
+    },
+    {
+        id: "generative-ai-with-llms",
+        title: "Generative AI with LLMs",
+        creator: "DeepLearning.AI",
+        summary: "Understand the generative AI lifecycle. Describe transformer architecture powering LLMs. Apply training/tuning/inference methods. Hear from researchers on generative AI challenges/opportunities.",
+        link: "https://learn.deeplearning.ai/courses/generative-ai-with-llms/lesson/rs5m7/course-introduction",
+        category: "Course"
+    },
+
 ];
 
 export default learningData;

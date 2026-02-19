@@ -49,6 +49,22 @@ const learningDataES: LearningItem[] = [
         link: "https://blog.eleuther.ai/transformer-math/",
         category: "Artículo"
     },
+    {
+        id: "agent-skills",
+        title: "Agent Skills with Anthropic",
+        creator: "DeepLearning.AI",
+        summary: "Aprende a construir agentes que puedan usar herramientas, acceder a información y realizar tareas complejas",
+        link: "https://learn.deeplearning.ai/courses/agent-skills-with-anthropic",
+        category: "Curso"
+    },
+    {
+        id: "generative-ai-with-llms",
+        title: "Generative AI with LLMs",
+        creator: "DeepLearning.AI",
+        summary: "Comprende el ciclo de vida de la IA generativa. Describe la arquitectura transformer que potencia los LLM. Aplica métodos de entrenamiento/ajuste/inferencia. Escucha a investigadores sobre los desafíos/oportunidades de la IA generativa.",
+        link: "https://learn.deeplearning.ai/courses/generative-ai-with-llms/lesson/rs5m7/course-introduction",
+        category: "Curso"
+    }
 
 ];
 
