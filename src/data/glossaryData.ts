@@ -514,6 +514,429 @@ const glossaryData: GlossaryTerm[] = [
         definition: "NLU (Natural Language Understanding), NLG (Natural Language Generation), and NLP (Natural Language Processing) are three closely related but distinct subfields of language AI. NLP is the broadest term, covering all computational techniques for processing human language. NLU focuses specifically on comprehension — extracting meaning, intent, and structure from text. NLG focuses on production — generating coherent, contextually appropriate language from data or knowledge. Modern large language models like GPT-4 integrate all three capabilities: they process input (NLP), understand it (NLU), and generate responses (NLG) in a unified architecture.",
         category: "NLP",
         relatedTerms: ["NLP", "Natural Language Understanding", "Natural Language Generation", "Large Language Model"]
+    },
+    {
+        "id": "tokenization",
+        "term": "Tokenization",
+        "letter": "T",
+        "summary": "The process of converting raw text into tokens that an LLM can process.",
+        "definition": "Tokenization is the preprocessing step in which raw text is split into tokens — the atomic units an LLM understands. Tokenizers like Byte-Pair Encoding (BPE) or SentencePiece split text into subword units, balancing vocabulary size with coverage. Different models use different tokenizers with different vocabularies, which is why the same text can produce different token counts across models. Understanding tokenization is important for managing context window usage and API costs.",
+        "category": "Foundations",
+        "relatedTerms": ["Token", "Context Window", "EOS Token"]
+    },
+    {
+        "id": "eos-token",
+        "term": "EOS Token (End of Sequence)",
+        "letter": "E",
+        "summary": "A special token that signals the end of a model's generated output.",
+        "definition": "The End of Sequence (EOS) token is a special token used to indicate that an LLM has completed its generation. Each model family uses its own EOS token — for example, GPT-4 uses <|endoftext|>, Llama 3 uses <|eot_id|>, and SmolLM2 uses <|im_end|>. The model stops generating once it predicts this token. EOS tokens are part of a broader set of special tokens that structure the model's inputs and outputs.",
+        "category": "Foundations",
+        "relatedTerms": ["Token", "Autoregressive Model", "Special Tokens"]
+    },
+    {
+        "id": "special-tokens",
+        "term": "Special Tokens",
+        "letter": "S",
+        "summary": "Reserved tokens used to structure LLM inputs and outputs, such as marking the start or end of messages.",
+        "definition": "Special tokens are reserved tokens in an LLM's vocabulary that carry structural meaning rather than linguistic content. They are used to demarcate the beginning or end of a sequence, separate system instructions from user messages, or signal tool use and function calls. Examples include EOS tokens, BOS (Beginning of Sequence) tokens, and chat-specific tokens. Different models use different sets of special tokens, making prompt migration between models non-trivial.",
+        "category": "Foundations",
+        "relatedTerms": ["EOS Token", "Token", "System Prompt", "Chat Template"]
+    },
+    {
+        "id": "encoder",
+        "term": "Encoder",
+        "letter": "E",
+        "summary": "A type of Transformer that converts input text into dense vector representations (embeddings).",
+        "definition": "An encoder is a Transformer variant that processes an input sequence and produces a dense vector representation (embedding) of that input. Encoder-based models like BERT are trained to understand and represent text, making them well-suited for tasks like text classification, semantic search, and Named Entity Recognition (NER). Unlike decoders, encoders do not generate new text token by token; instead, they produce fixed-size representations of the entire input.",
+        "category": "Foundations",
+        "relatedTerms": ["Decoder", "Transformer", "Embedding", "Semantic Search"]
+    },
+    {
+        "id": "decoder",
+        "term": "Decoder",
+        "letter": "D",
+        "summary": "A type of Transformer designed to generate new tokens, one at a time, for tasks like text generation.",
+        "definition": "A decoder is a Transformer variant that generates new text by predicting one token at a time, conditioned on all previous tokens. Decoder-only models like GPT-4, Llama, and Mistral are the most common architecture for modern LLMs. They are used for text generation, chatbots, code generation, and reasoning. Their unidirectional attention means they can only look at previous tokens, making them ideal for generation tasks.",
+        "category": "Foundations",
+        "relatedTerms": ["Encoder", "Transformer", "Autoregressive Model", "Large Language Model"]
+    },
+    {
+        "id": "prompt",
+        "term": "Prompt",
+        "letter": "P",
+        "summary": "The input text provided to an LLM to guide its response.",
+        "definition": "A prompt is the input text passed to an LLM that instructs or guides its generation. Prompts can include instructions, examples, context, conversation history, retrieved documents, and system-level directives. The wording, structure, and content of a prompt significantly affect the quality and relevance of the model's output. Prompt design is one of the most accessible and powerful ways to improve LLM performance without retraining.",
+        "category": "Prompting",
+        "relatedTerms": ["Prompt Engineering", "System Prompt", "Chain-of-Thought", "Context Engineering"]
+    },
+    {
+        "id": "system-prompt",
+        "term": "System Prompt",
+        "letter": "S",
+        "summary": "A special prompt that sets the behavior, persona, and constraints of an LLM before the conversation starts.",
+        "definition": "A system prompt is an instruction block that is passed to an LLM before any user message, used to configure the model's behavior, persona, tone, and constraints. It typically contains role descriptions, output format requirements, safety rules, and task-specific instructions. System prompts are a primary tool for customizing LLM behavior in production applications and are part of the broader prompt engineering toolkit.",
+        "category": "Prompting",
+        "relatedTerms": ["Prompt Engineering", "Prompt", "Chat Template", "Context Engineering"]
+    },
+    {
+        "id": "few-shot-prompting",
+        "term": "Few-Shot Prompting",
+        "letter": "F",
+        "summary": "A prompting technique where a few input-output examples are included in the prompt to guide the model's behavior.",
+        "definition": "Few-shot prompting (also called n-shot prompting) is a technique where a small number of input-output examples are embedded directly into the prompt to demonstrate the desired task format and output style. This leverages the LLM's in-context learning ability — the model infers the pattern from the examples and applies it to new inputs. As a rule of thumb, providing at least 5 examples helps the model generalize, and examples should be representative of the real production distribution.",
+        "category": "Prompting",
+        "relatedTerms": ["In-Context Learning", "Zero-Shot Prompting", "Prompt Engineering", "Chain-of-Thought"]
+    },
+    {
+        "id": "in-context-learning",
+        "term": "In-Context Learning",
+        "letter": "I",
+        "summary": "The ability of an LLM to learn a new task from examples provided directly in the prompt, without weight updates.",
+        "definition": "In-context learning is the capability of LLMs to adapt to new tasks or behaviors based solely on examples and instructions provided within the prompt, without any changes to the model's underlying weights. This is in contrast to fine-tuning, which requires updating the model parameters. In-context learning is enabled by the model's ability to detect and generalize patterns from the few examples it sees in the context window.",
+        "category": "Prompting",
+        "relatedTerms": ["Few-Shot Prompting", "Zero-Shot Prompting", "Fine-Tuning", "Prompt Engineering"]
+    },
+    {
+        "id": "zero-shot-prompting",
+        "term": "Zero-Shot Prompting",
+        "letter": "Z",
+        "summary": "Asking an LLM to perform a task with instructions only, providing no examples.",
+        "definition": "Zero-shot prompting is a technique where an LLM is asked to perform a task based only on a natural language instruction, with no input-output examples provided. The model relies entirely on its pre-trained knowledge and instruction-following ability. While simple and flexible, zero-shot performance can be less reliable than few-shot prompting for complex or specialized tasks.",
+        "category": "Prompting",
+        "relatedTerms": ["Few-Shot Prompting", "In-Context Learning", "Prompt Engineering"]
+    },
+    {
+        "id": "semantic-search",
+        "term": "Semantic Search",
+        "letter": "S",
+        "summary": "A search technique that finds documents based on meaning and intent rather than exact keyword matches.",
+        "definition": "Semantic search is a retrieval approach that finds relevant documents by comparing the meaning of a query to the meaning of documents, using embedding vectors and similarity metrics. Unlike keyword search, semantic search can surface relevant results even when the exact words in the query don't appear in the document. It is a key component of RAG pipelines. For best results, semantic search is often combined with keyword search in a hybrid approach.",
+        "category": "Retrieval",
+        "relatedTerms": ["Embedding", "Vector Database", "Hybrid Search", "Retrieval-Augmented Generation"]
+    },
+    {
+        "id": "hybrid-search",
+        "term": "Hybrid Search",
+        "letter": "H",
+        "summary": "A retrieval method that combines semantic (vector) search with traditional keyword (BM25) search for better results.",
+        "definition": "Hybrid search combines semantic search (using embedding similarity) with keyword-based search (such as BM25 or TF-IDF) to retrieve documents. The two rankings are typically merged using techniques like Reciprocal Rank Fusion (RRF). Hybrid search often outperforms either method alone, especially for precise factual queries where keyword matching is important, or for domain-specific terminology that embedding models may not handle well. It is considered a best practice in production RAG systems.",
+        "category": "Retrieval",
+        "relatedTerms": ["Semantic Search", "Retrieval-Augmented Generation", "Vector Database"]
+    },
+    {
+        "id": "grounding",
+        "term": "Grounding",
+        "letter": "G",
+        "summary": "Anchoring LLM outputs to verifiable external sources to improve factual accuracy.",
+        "definition": "Grounding is the practice of connecting LLM-generated outputs to reliable external sources such as retrieved documents, databases, or real-time data. A grounded response is traceable back to a source, reducing hallucination risk. RAG is the most common grounding technique. Grounding is especially important in high-stakes applications like medical, legal, or financial AI systems where factual accuracy is critical.",
+        "category": "Evaluation",
+        "relatedTerms": ["Hallucination", "Retrieval-Augmented Generation", "Guardrails"]
+    },
+    {
+        "id": "tool-use",
+        "term": "Tool Use",
+        "letter": "T",
+        "summary": "The ability of an LLM or AI agent to call external functions or APIs to extend its capabilities.",
+        "definition": "Tool use (also called function calling) is the ability of an LLM to invoke external tools or APIs as part of its reasoning process. Tools can include web search, code interpreters, database queries, calculators, and custom APIs. The model receives a description of available tools, decides which to call and with what arguments, and processes the tool's output to inform its next action. Tool use is a fundamental capability of AI agents.",
+        "category": "Agents",
+        "relatedTerms": ["AI Agent", "Function Calling", "Agentic Loop", "ReAct", "MCP"]
+    },
+    {
+        "id": "react",
+        "term": "ReAct (Reason + Act)",
+        "letter": "R",
+        "summary": "A framework where an LLM interleaves reasoning steps with actions to solve tasks iteratively.",
+        "definition": "ReAct is an agent framework that interleaves reasoning (thinking through what to do next) with acting (calling tools or taking actions) in an iterative loop. The model outputs a Thought describing its reasoning, then an Action specifying a tool call, then an Observation reporting the result, and repeats until the task is complete. ReAct improves on pure reasoning approaches by grounding the agent's thoughts in real observations from the environment.",
+        "category": "Agents",
+        "relatedTerms": ["AI Agent", "Tool Use", "Agentic Loop", "Chain-of-Thought", "Thought-Action-Observation"]
+    },
+    {
+        "id": "agentic-loop",
+        "term": "Agentic Loop",
+        "letter": "A",
+        "summary": "The iterative cycle of reasoning, acting, and observing that drives an AI agent's behavior.",
+        "definition": "The agentic loop is the core operational cycle of an AI agent: the agent receives a goal or observation, reasons about the best next action, executes that action (e.g., calls a tool), receives an observation of the result, updates its understanding, and repeats the cycle until the goal is achieved or it determines it cannot proceed. This loop enables agents to tackle complex, multi-step tasks that cannot be solved in a single LLM call.",
+        "category": "Agents",
+        "relatedTerms": ["AI Agent", "ReAct", "Tool Use", "Thought-Action-Observation", "Orchestration"]
+    },
+    {
+        "id": "multi-agent-system",
+        "term": "Multi-Agent System",
+        "letter": "M",
+        "summary": "A system composed of multiple AI agents collaborating or competing to accomplish complex tasks.",
+        "definition": "A multi-agent system is an architecture where multiple AI agents — each with their own role, tools, and capabilities — work together (or in a structured hierarchy) to accomplish tasks that are too complex for a single agent. Common patterns include a coordinator/orchestrator agent that delegates subtasks to specialized worker agents. Multi-agent systems can improve parallelism, specialization, and robustness but introduce coordination complexity and the risk of error propagation.",
+        "category": "Agents",
+        "relatedTerms": ["AI Agent", "Orchestration", "Agentic Loop", "Tool Use"]
+    },
+    {
+        "id": "orchestration",
+        "term": "Orchestration",
+        "letter": "O",
+        "summary": "The coordination of LLM calls, tool invocations, and data flows to build complex AI pipelines.",
+        "definition": "Orchestration refers to the design and management of sequences of LLM calls, tool invocations, memory retrievals, and data transformations that collectively implement a complex AI workflow or agent. Orchestration frameworks like LangChain, LlamaIndex, and smolagents provide abstractions for building these pipelines. Good orchestration design prioritizes determinism, observability, and graceful error handling, and determines when to use deterministic flows versus LLM-driven decision-making.",
+        "category": "Agents",
+        "relatedTerms": ["AI Agent", "Multi-Agent System", "LLMOps", "Tool Use", "Agentic Loop"]
+    },
+    {
+        "id": "memory",
+        "term": "Memory",
+        "letter": "M",
+        "summary": "Mechanisms that allow AI agents to store and retrieve information across multiple steps or sessions.",
+        "definition": "Memory in AI agent systems refers to mechanisms that allow information to persist and be retrieved beyond the immediate context window. Common memory types include: short-term memory (the current context window), episodic memory (logs of past interactions), semantic memory (retrieved knowledge from vector stores), and procedural memory (learned skills or plans). Effective memory management is essential for agents handling long tasks, personalization, and multi-session continuity.",
+        "category": "Agents",
+        "relatedTerms": ["AI Agent", "Context Window", "Retrieval-Augmented Generation", "Agentic Loop"]
+    },
+    {
+        "id": "mcp",
+        "term": "Model Context Protocol (MCP)",
+        "letter": "M",
+        "summary": "An open standard protocol for connecting AI models with external tools and data sources.",
+        "definition": "The Model Context Protocol (MCP) is an open protocol that standardizes how AI models and agents connect to external tools, APIs, and data sources. Developed by Anthropic and supported by frameworks like Kiro, MCP enables AI systems to access context from diverse external sources — databases, file systems, APIs — through a consistent interface. MCP servers expose capabilities that agents can discover and use, making it easier to build composable, tool-augmented AI applications.",
+        "category": "Agents",
+        "relatedTerms": ["Tool Use", "AI Agent", "Function Calling", "Orchestration"]
+    },
+    {
+        "id": "function-calling",
+        "term": "Function Calling",
+        "letter": "F",
+        "summary": "A model capability to generate structured calls to predefined functions or APIs as part of its output.",
+        "definition": "Function calling (also known as tool use) is a capability in which an LLM generates structured JSON or code to invoke a predefined external function or API, rather than generating plain text. The model is given a schema describing available functions and their parameters, decides which function to call and with what arguments, and returns a structured call that an application can execute. Function calling is essential for building reliable tool-using agents.",
+        "category": "Agents",
+        "relatedTerms": ["Tool Use", "AI Agent", "MCP", "Structured Output"]
+    },
+    {
+        "id": "structured-output",
+        "term": "Structured Output",
+        "letter": "S",
+        "summary": "Constraining LLM output to a defined schema (e.g., JSON) to facilitate downstream processing.",
+        "definition": "Structured output is the practice of constraining an LLM's generation to follow a specific format — such as JSON, XML, or a typed schema — rather than producing free-form text. This simplifies downstream parsing, integration with other systems, and automated validation. Techniques include prompt-based formatting instructions, output parsers, and model-native features like JSON mode or grammar-constrained sampling. Structured output is especially important in agent pipelines and API integrations.",
+        "category": "Prompting",
+        "relatedTerms": ["Function Calling", "Tool Use", "Prompt Engineering", "Guardrails"]
+    },
+    {
+        "id": "guardrails",
+        "term": "Guardrails",
+        "letter": "G",
+        "summary": "Rules and mechanisms that constrain or validate LLM inputs and outputs to ensure safe and appropriate behavior.",
+        "definition": "Guardrails are safety and quality mechanisms applied to LLM inputs or outputs to enforce constraints such as content policy compliance, output format validity, factual accuracy, and instruction adherence. They can be implemented as prompt-based instructions, output classifiers, rule-based filters, or separate validation models. Guardrails are often interchangeable with evaluation mechanisms and are a core component of responsible AI production systems.",
+        "category": "Evaluation",
+        "relatedTerms": ["Hallucination", "LLM-as-Judge", "Structured Output", "Grounding", "Safety"]
+    },
+    {
+        "id": "llm-as-judge",
+        "term": "LLM-as-Judge",
+        "letter": "L",
+        "summary": "Using an LLM to evaluate the quality or correctness of another LLM's outputs.",
+        "definition": "LLM-as-Judge is an evaluation technique where a powerful LLM (often a different model or a larger one) is used to assess the quality, relevance, safety, or correctness of outputs generated by another model. It enables scalable automated evaluation without requiring human annotators for every sample. While useful, LLM-as-Judge has known limitations: it can exhibit bias toward longer or more confident-sounding responses, and it may not catch subtle factual errors. It works best for relative comparisons rather than absolute scoring.",
+        "category": "Evaluation",
+        "relatedTerms": ["Evaluation", "Guardrails", "Hallucination", "Evals"]
+    },
+    {
+        "id": "evals",
+        "term": "Evals (Evaluations)",
+        "letter": "E",
+        "summary": "Tests and benchmarks used to measure LLM or AI system performance on specific tasks.",
+        "definition": "Evals (short for evaluations) are systematic tests designed to measure the performance, accuracy, safety, and reliability of LLMs or AI systems. They range from unit tests on specific input-output pairs to large benchmarks covering diverse capabilities. Strong eval suites are foundational to building trustworthy AI products — they enable rapid iteration, catch regressions, and provide confidence before deployment. Building evals early and investing in a data flywheel is widely considered best practice in production LLM development.",
+        "category": "Evaluation",
+        "relatedTerms": ["LLM-as-Judge", "Guardrails", "Hallucination", "Benchmarks"]
+    },
+    {
+        "id": "llmops",
+        "term": "LLMOps",
+        "letter": "L",
+        "summary": "The operational practices for deploying, monitoring, versioning, and maintaining LLM-based applications in production.",
+        "definition": "LLMOps is the set of practices, tools, and culture for operationalizing LLM-based applications — analogous to MLOps for traditional machine learning. It covers prompt versioning, model versioning, A/B testing, monitoring (tracking input-output quality over time), logging, latency optimization, and cost management. The primary goal of LLMOps is to enable faster iteration cycles and maintain production reliability as models and prompts evolve.",
+        "category": "Operations",
+        "relatedTerms": ["Evals", "Monitoring", "Orchestration", "Prompt Versioning"]
+    },
+    {
+        "id": "temperature",
+        "term": "Temperature",
+        "letter": "T",
+        "summary": "A sampling parameter that controls the randomness and creativity of LLM output.",
+        "definition": "Temperature is a decoding parameter that controls the diversity of an LLM's output by scaling the probability distribution over tokens before sampling. A temperature of 0 makes the model deterministic (always choosing the highest-probability token), while higher values (e.g., 0.7–1.0) introduce more randomness and creativity. Temperature is one of several decoding strategies; others include top-p (nucleus) sampling and top-k sampling. Choosing the right temperature depends on the task: low for factual tasks, higher for creative generation.",
+        "category": "Inference",
+        "relatedTerms": ["Sampling", "Top-P Sampling", "Inference", "Decoding Strategy"]
+    },
+    {
+        "id": "top-p-sampling",
+        "term": "Top-P Sampling (Nucleus Sampling)",
+        "letter": "T",
+        "summary": "A sampling strategy that selects from the smallest set of tokens whose cumulative probability exceeds p.",
+        "definition": "Top-P sampling, also called nucleus sampling, is a decoding strategy where the model samples from only the smallest set of tokens whose cumulative probability mass exceeds a threshold p (e.g., 0.9). This ensures that unlikely tokens are excluded from sampling while still allowing for variability. Top-P is often used alongside temperature to control output diversity, and it tends to produce more coherent outputs than pure temperature scaling at high values.",
+        "category": "Inference",
+        "relatedTerms": ["Temperature", "Sampling", "Decoding Strategy"]
+    },
+    {
+        "id": "beam-search",
+        "term": "Beam Search",
+        "letter": "B",
+        "summary": "A decoding strategy that explores multiple token sequences simultaneously to find the highest-probability output.",
+        "definition": "Beam search is a decoding strategy that maintains a fixed number (the 'beam width') of candidate sequences at each generation step, expanding each candidate with the most probable next tokens and keeping only the top candidates. Unlike greedy decoding (which always picks the single best token), beam search can find higher-quality overall sequences by exploring alternatives. It is commonly used in translation and summarization tasks but is less common in modern chat-oriented LLMs.",
+        "category": "Inference",
+        "relatedTerms": ["Temperature", "Top-P Sampling", "Decoding Strategy", "Autoregressive Model"]
+    },
+    {
+        "id": "caching",
+        "term": "Caching",
+        "letter": "C",
+        "summary": "Storing LLM outputs or intermediate computations to avoid redundant, expensive model calls.",
+        "definition": "Caching in LLM systems refers to storing the results of model calls or intermediate computations (such as KV cache for prefilled prompts) so they can be reused without re-running the model. Prompt caching can significantly reduce latency and API costs for applications with repetitive or large fixed-context prompts. Semantic caching goes further by retrieving cached responses to semantically similar (not just identical) queries. Caching is an underutilized but high-impact optimization in production LLM applications.",
+        "category": "Operations",
+        "relatedTerms": ["LLMOps", "Inference", "Latency", "Prompt Engineering"]
+    },
+    {
+        "id": "alignment",
+        "term": "Alignment",
+        "letter": "A",
+        "summary": "The process of ensuring AI model behavior matches human values, intentions, and preferences.",
+        "definition": "Alignment refers to the challenge and practice of ensuring that AI systems behave in ways that are consistent with human values, intentions, and preferences — particularly as models become more capable and autonomous. Alignment techniques include RLHF, Constitutional AI, and direct preference optimization (DPO). Misaligned AI can produce harmful, deceptive, or unintended behaviors even when technically capable. Alignment is considered one of the central problems in AI safety research.",
+        "category": "Safety",
+        "relatedTerms": ["RLHF", "Safety", "Guardrails", "Constitutional AI"]
+    },
+    {
+        "id": "safety",
+        "term": "Safety",
+        "letter": "S",
+        "summary": "Practices and mechanisms to prevent AI models from generating harmful, dangerous, or inappropriate content.",
+        "definition": "AI safety refers to the practices, techniques, and guidelines designed to prevent AI models from producing content or taking actions that are harmful, illegal, misleading, or dangerous. Safety measures in LLM applications include content moderation classifiers, guardrails, red-teaming, refusal training, and output filtering. Safety considerations are especially critical in agentic systems where the model can take real-world actions with irreversible consequences.",
+        "category": "Safety",
+        "relatedTerms": ["Alignment", "Guardrails", "Red-Teaming", "Responsible AI"]
+    },
+    {
+        "id": "human-in-the-loop",
+        "term": "Human-in-the-Loop (HITL)",
+        "letter": "H",
+        "summary": "A design pattern where humans review or approve AI outputs at critical steps before they take effect.",
+        "definition": "Human-in-the-Loop (HITL) is a design pattern where human oversight is incorporated at key points in an AI workflow — for example, requiring a human to review and approve a model-generated action before it is executed. HITL is especially important in high-stakes applications and agentic systems where errors can have significant consequences. Well-designed HITL interfaces keep humans informed and in control without creating excessive friction or bottlenecks.",
+        "category": "Operations",
+        "relatedTerms": ["AI Agent", "Safety", "Guardrails", "Agentic Loop"]
+    },
+    {
+        "id": "agentic-ide",
+        "term": "Agentic IDE",
+        "letter": "A",
+        "summary": "A development environment powered by AI agents that can autonomously write, edit, and manage code.",
+        "definition": "An agentic IDE is a software development environment that integrates AI agents deeply into the coding workflow, enabling the AI to not just suggest completions but to autonomously plan, generate, refactor, and manage code across a project. Examples include Kiro, which features capabilities like specs (structured feature planning), steering (custom AI rules), hooks (automated triggers), and MCP integration. Agentic IDEs represent a shift from AI as a code assistant to AI as a collaborative engineering partner.",
+        "category": "Tooling",
+        "relatedTerms": ["AI Agent", "MCP", "Specs", "Steering", "Hooks"]
+    },
+    {
+        "id": "specs",
+        "term": "Specs (Specifications)",
+        "letter": "S",
+        "summary": "Structured documents that define the requirements, design, and implementation plan for a feature before coding begins.",
+        "definition": "In the context of agentic development tools like Kiro, specs (specifications) are structured documents that an AI agent helps generate before writing code. A spec typically includes a requirements document, a system design document, and a set of implementation tasks. This spec-driven approach ensures AI-generated code is aligned with user intent and project architecture before any implementation begins, reducing costly rework.",
+        "category": "Tooling",
+        "relatedTerms": ["Agentic IDE", "Steering", "Hooks", "AI Agent"]
+    },
+    {
+        "id": "steering",
+        "term": "Steering",
+        "letter": "S",
+        "summary": "Custom rules and context provided to an AI system to guide its behavior within a specific project.",
+        "definition": "Steering refers to the use of custom rules, constraints, and context to guide the behavior of an AI system within a specific environment. In Kiro, steering files allow developers to define project-specific conventions — such as coding standards, architectural patterns, or preferred libraries — that the AI agent follows consistently across all interactions. Steering is analogous to a persistent, project-scoped system prompt.",
+        "category": "Tooling",
+        "relatedTerms": ["Agentic IDE", "Specs", "System Prompt", "Context Engineering"]
+    },
+    {
+        "id": "hooks",
+        "term": "Hooks",
+        "letter": "H",
+        "summary": "Automated triggers that execute AI actions in response to specific development events.",
+        "definition": "Hooks are automated triggers in agentic development environments (like Kiro) that execute AI-driven actions in response to predefined events — such as a file being saved, a test failing, or a pull request being opened. Hooks enable repetitive tasks to be automated without manual intervention, embedding AI assistance directly into the development workflow. They are a form of event-driven automation for AI agent actions.",
+        "category": "Tooling",
+        "relatedTerms": ["Agentic IDE", "Specs", "AI Agent", "Orchestration"]
+    },
+    {
+        "id": "model-selection",
+        "term": "Model Selection",
+        "letter": "M",
+        "summary": "The process of choosing the most appropriate LLM for a given task based on capability, cost, and latency.",
+        "definition": "Model selection is the practice of choosing the most suitable LLM for a specific use case by balancing factors including task complexity, required quality, inference cost, and latency constraints. A key principle is to start with the smallest model that achieves acceptable quality — avoiding overpaying for capability that isn't needed. Model selection also involves versioning and pinning model versions to avoid unexpected behavior changes when providers update their models.",
+        "category": "Operations",
+        "relatedTerms": ["Inference", "LLMOps", "Fine-Tuning", "Latency"]
+    },
+    {
+        "id": "latency",
+        "term": "Latency",
+        "letter": "L",
+        "summary": "The time it takes for an LLM to begin or complete a response after receiving a prompt.",
+        "definition": "Latency in LLM systems refers to the delay between submitting a prompt and receiving a response. It is commonly measured as Time to First Token (TTFT) — how long until the model starts streaming output — and total generation time. Latency is a critical factor in user experience and is influenced by model size, hardware, context length, and system architecture. Optimization techniques include caching, smaller models, streaming, and batching.",
+        "category": "Operations",
+        "relatedTerms": ["Inference", "Caching", "Model Selection", "Streaming"]
+    },
+    {
+        "id": "streaming",
+        "term": "Streaming",
+        "letter": "S",
+        "summary": "Delivering LLM output token by token as it is generated, rather than waiting for the full response.",
+        "definition": "Streaming is a technique where an LLM's output is transmitted to the user token by token as it is generated, rather than waiting for the complete response. This significantly improves perceived latency since users see the response forming in real time. Streaming is supported by most major LLM APIs and is standard practice for chat interfaces and long-form generation tasks.",
+        "category": "Inference",
+        "relatedTerms": ["Latency", "Inference", "Autoregressive Model"]
+    },
+    {
+        "id": "agentic-rag",
+        "term": "Agentic RAG",
+        "letter": "A",
+        "summary": "A RAG architecture where an AI agent dynamically decides when and how to retrieve information.",
+        "definition": "Agentic RAG combines the retrieval capabilities of Retrieval-Augmented Generation with the planning and decision-making capabilities of an AI agent. Instead of always retrieving documents as a fixed preprocessing step, the agent decides dynamically when retrieval is needed, what queries to issue, and how to synthesize results from multiple retrieval rounds. Agentic RAG enables more complex, multi-hop reasoning over large knowledge bases and is a key pattern in advanced agent architectures.",
+        "category": "Agents",
+        "relatedTerms": ["Retrieval-Augmented Generation", "AI Agent", "Agentic Loop", "Tool Use", "Memory"]
+    },
+    {
+        "id": "prompt-versioning",
+        "term": "Prompt Versioning",
+        "letter": "P",
+        "summary": "Tracking and managing changes to prompts over time, analogous to version control for code.",
+        "definition": "Prompt versioning is the practice of tracking, storing, and managing different versions of prompts used in production LLM applications. Like software version control, it allows teams to roll back to previous prompt versions, compare performance across versions, and safely deploy changes. Because prompt changes can significantly affect model behavior, versioning is a critical part of LLMOps for maintaining stability and enabling systematic improvement.",
+        "category": "Operations",
+        "relatedTerms": ["LLMOps", "Evals", "Prompt Engineering"]
+    },
+    {
+        "id": "product-market-fit",
+        "term": "Product-Market Fit (PMF) for AI",
+        "letter": "P",
+        "summary": "Validating that an AI-powered product solves a real user need before investing heavily in infrastructure.",
+        "definition": "In the context of LLM product development, Product-Market Fit (PMF) refers to the validation that an AI-powered product genuinely solves a real user need before making large infrastructure investments like training custom models or building complex ML pipelines. A widely cited heuristic is 'No GPUs before PMF' — start with inference APIs, prompt engineering, and RAG before committing to custom training. Achieving PMF with minimal infrastructure reduces risk and accelerates learning.",
+        "category": "Strategy",
+        "relatedTerms": ["LLMOps", "Fine-Tuning", "Inference", "Model Selection"]
+    },
+    {
+        "id": "data-flywheel",
+        "term": "Data Flywheel",
+        "letter": "D",
+        "summary": "A self-reinforcing cycle where product usage generates data that improves the AI, which attracts more users.",
+        "definition": "A data flywheel is a strategic pattern in AI product development where product usage generates training and evaluation data, which is used to improve the AI model, which improves the product, which attracts more users, and so on. Building a data flywheel early — by instrumenting production to capture input-output pairs, user feedback, and edge cases — creates a compounding advantage over time. It is considered one of the most valuable strategic assets in AI product development.",
+        "category": "Strategy",
+        "relatedTerms": ["Evals", "Fine-Tuning", "LLMOps", "Product-Market Fit"]
+    },
+    {
+        "id": "red-teaming",
+        "term": "Red-Teaming",
+        "letter": "R",
+        "summary": "The practice of adversarially testing an AI system to find safety and reliability failures before deployment.",
+        "definition": "Red-teaming is a safety practice borrowed from cybersecurity where a dedicated team attempts to find flaws, jailbreaks, failure modes, and harmful behaviors in an AI system by adversarially probing it. Red-teaming uncovers issues that standard evals may miss, including edge cases, prompt injections, and content policy violations. It is considered a best practice for responsible AI deployment, especially for systems with broad user access or high-stakes applications.",
+        "category": "Safety",
+        "relatedTerms": ["Safety", "Alignment", "Guardrails", "Evals"]
+    },
+    {
+        "id": "reward-model",
+        "term": "Reward Model",
+        "letter": "R",
+        "summary": "A model trained to score LLM outputs based on human preference, used in RLHF training.",
+        "definition": "A reward model is a neural network trained to predict how much a human would prefer one model output over another. It is trained on human comparison data (e.g., annotators ranking pairs of model outputs) and produces a scalar score for any given output. In RLHF, the reward model serves as a proxy for human preference, guiding the LLM's policy updates during reinforcement learning. The quality of the reward model is critical to alignment success.",
+        "category": "Training",
+        "relatedTerms": ["RLHF", "Fine-Tuning", "Alignment", "Evals"]
+    },
+    {
+        "id": "autonomous-agent",
+        "term": "Autonomous Agent",
+        "letter": "A",
+        "summary": "An AI agent capable of completing complex, multi-step tasks with minimal human intervention.",
+        "definition": "An autonomous agent is an AI agent designed to operate with a high degree of independence, capable of planning, executing, and adapting across long sequences of actions to achieve a user-specified goal. Unlike simple chatbots or single-turn assistants, autonomous agents manage their own tool calls, memory, and decision-making over extended workflows. Kiro's autonomous agent, for example, can execute agentic tasks end-to-end through a CLI or IDE interface.",
+        "category": "Agents",
+        "relatedTerms": ["AI Agent", "Agentic Loop", "Tool Use", "Orchestration", "Human-in-the-Loop"]
     }
 ];
 

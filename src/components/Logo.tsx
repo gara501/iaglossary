@@ -46,7 +46,7 @@ export default function Logo({ subtitle = 'AI & Generative AI Terms' }: LogoProp
                         className="glow-text"
                         letterSpacing="-0.02em"
                     >
-                        IA Glossary
+                        AI Glossary
                     </Text>
                     <Text
                         fontSize="10px"

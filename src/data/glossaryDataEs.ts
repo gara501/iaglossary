@@ -514,8 +514,422 @@ const glossaryDataEs: GlossaryTerm[] = [
         definition: "La CLN (Comprensión del Lenguaje Natural), la GLN (Generación de Lenguaje Natural) y el PLN (Procesamiento de Lenguaje Natural) son tres subcampos estrechamente relacionados pero distintos de la IA del lenguaje. El PLN es el término más amplio, que abarca todas las técnicas computacionales para procesar el lenguaje humano. La CLN se centra específicamente en la comprensión — extraer significado, intención y estructura del texto. La GLN se centra en la producción — generar lenguaje coherente y contextualmente apropiado a partir de datos o conocimiento. Los grandes modelos de lenguaje modernos como GPT-4 integran las tres capacidades: procesan la entrada (PLN), la comprenden (CLN) y generan respuestas (GLN) en una arquitectura unificada.",
         category: "PLN",
         relatedTerms: ["PLN", "Comprensión del Lenguaje Natural", "Generación de Lenguaje Natural", "Modelo de Lenguaje Grande"]
+    },
+    {
+        "id": "tokenization",
+        "term": "Tokenización",
+        "letter": "T",
+        "summary": "El proceso de convertir texto en tokens que un LLM puede procesar.",
+        "definition": "La tokenización es el paso de preprocesamiento en el que el texto crudo se divide en tokens: las unidades atómicas que un LLM entiende. Los tokenizadores como Byte-Pair Encoding (BPE) o SentencePiece dividen el texto en unidades de subpalabras, equilibrando el tamaño del vocabulario con la cobertura. Diferentes modelos usan diferentes tokenizadores con diferentes vocabularios, por lo que el mismo texto puede producir conteos de tokens distintos entre modelos.",
+        "category": "Fundamentos",
+        "relatedTerms": ["Token", "Ventana de Contexto", "Token EOS"]
+    },
+    {
+        "id": "eos-token",
+        "term": "Token EOS (Fin de Secuencia)",
+        "letter": "T",
+        "summary": "Un token especial que indica el fin de la generación de un modelo.",
+        "definition": "El token de Fin de Secuencia (EOS) es un token especial que indica que un LLM ha completado su generación. Cada familia de modelos usa su propio token EOS; por ejemplo, GPT-4 usa <|endoftext|>, Llama 3 usa <|eot_id|> y SmolLM2 usa <|im_end|>. El modelo deja de generar una vez que predice este token. Los tokens EOS forman parte de un conjunto más amplio de tokens especiales que estructuran las entradas y salidas del modelo.",
+        "category": "Fundamentos",
+        "relatedTerms": ["Token", "Modelo Autorregresivo", "Tokens Especiales"]
+    },
+    {
+        "id": "special-tokens",
+        "term": "Tokens Especiales",
+        "letter": "T",
+        "summary": "Tokens reservados usados para estructurar las entradas y salidas de un LLM, como marcar el inicio o fin de mensajes.",
+        "definition": "Los tokens especiales son tokens reservados en el vocabulario de un LLM que tienen significado estructural en lugar de contenido lingüístico. Se usan para delimitar el inicio o fin de una secuencia, separar instrucciones del sistema de mensajes del usuario, o señalar el uso de herramientas y llamadas a funciones. Diferentes modelos usan diferentes conjuntos de tokens especiales, lo que hace que la migración de prompts entre modelos no sea trivial.",
+        "category": "Fundamentos",
+        "relatedTerms": ["Token EOS", "Token", "Prompt de Sistema", "Plantilla de Chat"]
+    },
+    {
+        "id": "encoder",
+        "term": "Codificador (Encoder)",
+        "letter": "C",
+        "summary": "Un tipo de Transformer que convierte texto en representaciones vectoriales densas (embeddings).",
+        "definition": "Un codificador es una variante del Transformer que procesa una secuencia de entrada y produce una representación vectorial densa (embedding) de esa entrada. Los modelos basados en codificadores como BERT son adecuados para tareas como clasificación de texto, búsqueda semántica y Reconocimiento de Entidades Nombradas (NER). A diferencia de los decodificadores, los codificadores no generan nuevo texto token a token; en cambio, producen representaciones de tamaño fijo de toda la entrada.",
+        "category": "Fundamentos",
+        "relatedTerms": ["Decodificador", "Transformer", "Embedding", "Búsqueda Semántica"]
+    },
+    {
+        "id": "decoder",
+        "term": "Decodificador (Decoder)",
+        "letter": "D",
+        "summary": "Un tipo de Transformer diseñado para generar nuevos tokens, uno a la vez, para tareas como la generación de texto.",
+        "definition": "Un decodificador es una variante del Transformer que genera texto nuevo prediciendo un token a la vez, condicionado por todos los tokens anteriores. Los modelos solo de decodificador como GPT-4, Llama y Mistral son la arquitectura más común para los LLM modernos. Se utilizan para generación de texto, chatbots, generación de código y razonamiento.",
+        "category": "Fundamentos",
+        "relatedTerms": ["Codificador", "Transformer", "Modelo Autorregresivo", "Modelo de Lenguaje Grande"]
+    },
+    {
+        "id": "prompt",
+        "term": "Prompt",
+        "letter": "P",
+        "summary": "El texto de entrada proporcionado a un LLM para guiar su respuesta.",
+        "definition": "Un prompt es el texto de entrada que se pasa a un LLM para instruirlo o guiar su generación. Los prompts pueden incluir instrucciones, ejemplos, contexto, historial de conversación, documentos recuperados y directivas de nivel sistema. La redacción, estructura y contenido de un prompt afectan significativamente la calidad y relevancia de la salida del modelo. El diseño del prompt es una de las formas más accesibles y poderosas de mejorar el rendimiento de los LLM sin reentrenamiento.",
+        "category": "Prompting",
+        "relatedTerms": ["Ingeniería de Prompts", "Prompt de Sistema", "Cadena de Pensamiento", "Ingeniería de Contexto"]
+    },
+    {
+        "id": "system-prompt",
+        "term": "Prompt de Sistema",
+        "letter": "P",
+        "summary": "Un prompt especial que configura el comportamiento, la personalidad y las restricciones de un LLM antes de la conversación.",
+        "definition": "Un prompt de sistema es un bloque de instrucciones que se pasa a un LLM antes de cualquier mensaje del usuario, utilizado para configurar el comportamiento, la personalidad, el tono y las restricciones del modelo. Típicamente contiene descripciones de roles, requisitos de formato de salida, reglas de seguridad e instrucciones específicas de la tarea. Los prompts de sistema son una herramienta principal para personalizar el comportamiento de los LLM en aplicaciones de producción.",
+        "category": "Prompting",
+        "relatedTerms": ["Ingeniería de Prompts", "Prompt", "Plantilla de Chat", "Ingeniería de Contexto"]
+    },
+    {
+        "id": "few-shot-prompting",
+        "term": "Prompting de Pocos Ejemplos (Few-Shot)",
+        "letter": "P",
+        "summary": "Una técnica de prompting donde se incluyen unos pocos ejemplos de entrada-salida en el prompt para guiar al modelo.",
+        "definition": "El prompting de pocos ejemplos (también llamado n-shot prompting) es una técnica donde un pequeño número de ejemplos de entrada-salida se integran directamente en el prompt para demostrar el formato y estilo de salida deseados. Aprovecha la capacidad de aprendizaje en contexto del LLM: el modelo infiere el patrón a partir de los ejemplos y lo aplica a nuevas entradas. Como regla general, proporcionar al menos 5 ejemplos ayuda al modelo a generalizar.",
+        "category": "Prompting",
+        "relatedTerms": ["Aprendizaje en Contexto", "Prompting Sin Ejemplos", "Ingeniería de Prompts", "Cadena de Pensamiento"]
+    },
+    {
+        "id": "in-context-learning",
+        "term": "Aprendizaje en Contexto",
+        "letter": "A",
+        "summary": "La capacidad de un LLM de aprender una nueva tarea a partir de ejemplos dados directamente en el prompt, sin actualizar pesos.",
+        "definition": "El aprendizaje en contexto es la capacidad de los LLM de adaptarse a nuevas tareas o comportamientos basándose únicamente en ejemplos e instrucciones proporcionados dentro del prompt, sin ningún cambio en los pesos subyacentents del modelo. Esto contrasta con el ajuste fino, que requiere actualizar los parámetros del modelo. El aprendizaje en contexto es habilitado por la capacidad del modelo de detectar y generalizar patrones a partir de los pocos ejemplos que ve.",
+        "category": "Prompting",
+        "relatedTerms": ["Prompting de Pocos Ejemplos", "Prompting Sin Ejemplos", "Ajuste Fino", "Ingeniería de Prompts"]
+    },
+    {
+        "id": "zero-shot-prompting",
+        "term": "Prompting Sin Ejemplos (Zero-Shot)",
+        "letter": "P",
+        "summary": "Pedir a un LLM que realice una tarea solo con instrucciones, sin proporcionar ejemplos.",
+        "definition": "El prompting sin ejemplos (zero-shot) es una técnica donde se pide a un LLM que realice una tarea basándose únicamente en una instrucción en lenguaje natural, sin proporcionar ejemplos de entrada-salida. El modelo se basa completamente en su conocimiento preentrenado y su capacidad de seguir instrucciones. Si bien es simple y flexible, el rendimiento sin ejemplos puede ser menos fiable que el prompting con pocos ejemplos para tareas complejas o especializadas.",
+        "category": "Prompting",
+        "relatedTerms": ["Prompting de Pocos Ejemplos", "Aprendizaje en Contexto", "Ingeniería de Prompts"]
+    },
+    {
+        "id": "semantic-search",
+        "term": "Búsqueda Semántica",
+        "letter": "B",
+        "summary": "Una técnica de búsqueda que encuentra documentos basándose en el significado e intención, no en coincidencias exactas de palabras.",
+        "definition": "La búsqueda semántica es un enfoque de recuperación que encuentra documentos relevantes comparando el significado de una consulta con el significado de los documentos, usando vectores de embeddings y métricas de similitud. A diferencia de la búsqueda por palabras clave, la búsqueda semántica puede encontrar resultados relevantes incluso cuando las palabras exactas de la consulta no aparecen en el documento. Es un componente clave de los pipelines de RAG.",
+        "category": "Recuperación",
+        "relatedTerms": ["Embedding", "Base de Datos Vectorial", "Búsqueda Híbrida", "Generación Aumentada por Recuperación"]
+    },
+    {
+        "id": "hybrid-search",
+        "term": "Búsqueda Híbrida",
+        "letter": "B",
+        "summary": "Un método de recuperación que combina búsqueda semántica (vectorial) con búsqueda tradicional por palabras clave para mejores resultados.",
+        "definition": "La búsqueda híbrida combina la búsqueda semántica (usando similitud de embeddings) con la búsqueda basada en palabras clave (como BM25 o TF-IDF) para recuperar documentos. Los dos rankings se fusionan típicamente usando técnicas como la Fusión de Rango Recíproco (RRF). La búsqueda híbrida frecuentemente supera a cualquiera de los métodos por sí solos, especialmente para consultas factuales precisas o terminología especializada. Es considerada una mejor práctica en sistemas RAG de producción.",
+        "category": "Recuperación",
+        "relatedTerms": ["Búsqueda Semántica", "Generación Aumentada por Recuperación", "Base de Datos Vectorial"]
+    },
+    {
+        "id": "grounding",
+        "term": "Anclaje (Grounding)",
+        "letter": "A",
+        "summary": "Anclar las salidas de los LLM a fuentes externas verificables para mejorar la precisión factual.",
+        "definition": "El anclaje (grounding) es la práctica de conectar las salidas generadas por un LLM a fuentes externas confiables como documentos recuperados, bases de datos o datos en tiempo real. Una respuesta anclada es trazable hasta una fuente, reduciendo el riesgo de alucinación. RAG es la técnica de anclaje más común. Es especialmente importante en aplicaciones de IA de alto riesgo como sistemas médicos, legales o financieros donde la precisión factual es crítica.",
+        "category": "Evaluación",
+        "relatedTerms": ["Alucinación", "Generación Aumentada por Recuperación", "Guardianes"]
+    },
+    {
+        "id": "tool-use",
+        "term": "Uso de Herramientas (Tool Use)",
+        "letter": "U",
+        "summary": "La capacidad de un LLM o agente de IA de llamar funciones externas o APIs para ampliar sus capacidades.",
+        "definition": "El uso de herramientas (también llamado llamada a funciones) es la capacidad de un LLM de invocar herramientas o APIs externas como parte de su proceso de razonamiento. Las herramientas pueden incluir búsqueda web, intérpretes de código, consultas a bases de datos, calculadoras y APIs personalizadas. El modelo recibe una descripción de las herramientas disponibles, decide cuál llamar y con qué argumentos, y procesa la salida de la herramienta para informar su siguiente acción.",
+        "category": "Agentes",
+        "relatedTerms": ["Agente de IA", "Llamada a Funciones", "Bucle Agéntico", "ReAct", "MCP"]
+    },
+    {
+        "id": "react",
+        "term": "ReAct (Razonar + Actuar)",
+        "letter": "R",
+        "summary": "Un marco donde un LLM intercala pasos de razonamiento con acciones para resolver tareas de forma iterativa.",
+        "definition": "ReAct es un marco de agente que intercala el razonamiento (pensar qué hacer a continuación) con actuar (llamar a herramientas o tomar acciones) en un bucle iterativo. El modelo produce un Pensamiento describiendo su razonamiento, luego una Acción especificando una llamada a herramienta, luego una Observación reportando el resultado, y repite hasta completar la tarea. ReAct mejora los enfoques de razonamiento puro al anclar los pensamientos del agente en observaciones reales del entorno.",
+        "category": "Agentes",
+        "relatedTerms": ["Agente de IA", "Uso de Herramientas", "Bucle Agéntico", "Cadena de Pensamiento", "Ciclo Pensamiento-Acción-Observación"]
+    },
+    {
+        "id": "agentic-loop",
+        "term": "Bucle Agéntico",
+        "letter": "B",
+        "summary": "El ciclo iterativo de razonamiento, acción y observación que impulsa el comportamiento de un agente de IA.",
+        "definition": "El bucle agéntico es el ciclo operacional central de un agente de IA: el agente recibe un objetivo u observación, razona sobre la mejor siguiente acción, ejecuta esa acción (p. ej., llama a una herramienta), recibe una observación del resultado, actualiza su comprensión y repite el ciclo hasta lograr el objetivo o determinar que no puede avanzar. Este bucle permite a los agentes abordar tareas complejas de múltiples pasos que no pueden resolverse en una sola llamada al LLM.",
+        "category": "Agentes",
+        "relatedTerms": ["Agente de IA", "ReAct", "Uso de Herramientas", "Ciclo Pensamiento-Acción-Observación", "Orquestación"]
+    },
+    {
+        "id": "multi-agent-system",
+        "term": "Sistema Multi-Agente",
+        "letter": "S",
+        "summary": "Un sistema compuesto por múltiples agentes de IA que colaboran para realizar tareas complejas.",
+        "definition": "Un sistema multi-agente es una arquitectura donde múltiples agentes de IA — cada uno con su propio rol, herramientas y capacidades — trabajan juntos (o en una jerarquía estructurada) para realizar tareas demasiado complejas para un solo agente. Los patrones comunes incluyen un agente coordinador/orquestador que delega subtareas a agentes trabajadores especializados. Los sistemas multi-agente pueden mejorar el paralelismo, la especialización y la robustez, pero introducen complejidad de coordinación.",
+        "category": "Agentes",
+        "relatedTerms": ["Agente de IA", "Orquestación", "Bucle Agéntico", "Uso de Herramientas"]
+    },
+    {
+        "id": "orchestration",
+        "term": "Orquestación",
+        "letter": "O",
+        "summary": "La coordinación de llamadas a LLM, invocaciones de herramientas y flujos de datos para construir pipelines de IA complejos.",
+        "definition": "La orquestación se refiere al diseño y gestión de secuencias de llamadas a LLM, invocaciones de herramientas, recuperaciones de memoria y transformaciones de datos que implementan colectivamente un flujo de trabajo o agente de IA complejo. Frameworks de orquestación como LangChain, LlamaIndex y smolagents proporcionan abstracciones para construir estos pipelines. Un buen diseño de orquestación prioriza el determinismo, la observabilidad y el manejo elegante de errores.",
+        "category": "Agentes",
+        "relatedTerms": ["Agente de IA", "Sistema Multi-Agente", "LLMOps", "Uso de Herramientas", "Bucle Agéntico"]
+    },
+    {
+        "id": "memory",
+        "term": "Memoria",
+        "letter": "M",
+        "summary": "Mecanismos que permiten a los agentes de IA almacenar y recuperar información a través de múltiples pasos o sesiones.",
+        "definition": "La memoria en sistemas de agentes de IA se refiere a mecanismos que permiten que la información persista y se recupere más allá de la ventana de contexto inmediata. Los tipos comunes de memoria incluyen: memoria a corto plazo (la ventana de contexto actual), memoria episódica (registros de interacciones pasadas), memoria semántica (conocimiento recuperado de almacenes vectoriales) y memoria procedimental (habilidades o planes aprendidos). La gestión efectiva de la memoria es esencial para agentes que manejan tareas largas.",
+        "category": "Agentes",
+        "relatedTerms": ["Agente de IA", "Ventana de Contexto", "Generación Aumentada por Recuperación", "Bucle Agéntico"]
+    },
+    {
+        "id": "mcp",
+        "term": "Protocolo de Contexto de Modelo (MCP)",
+        "letter": "P",
+        "summary": "Un protocolo estándar abierto para conectar modelos de IA con herramientas externas y fuentes de datos.",
+        "definition": "El Protocolo de Contexto de Modelo (MCP) es un protocolo abierto que estandariza cómo los modelos y agentes de IA se conectan con herramientas externas, APIs y fuentes de datos. Desarrollado por Anthropic y soportado por frameworks como Kiro, MCP permite a los sistemas de IA acceder a contexto desde diversas fuentes externas — bases de datos, sistemas de archivos, APIs — a través de una interfaz consistente. Los servidores MCP exponen capacidades que los agentes pueden descubrir y usar.",
+        "category": "Agentes",
+        "relatedTerms": ["Uso de Herramientas", "Agente de IA", "Llamada a Funciones", "Orquestación"]
+    },
+    {
+        "id": "function-calling",
+        "term": "Llamada a Funciones (Function Calling)",
+        "letter": "L",
+        "summary": "Una capacidad del modelo para generar llamadas estructuradas a funciones o APIs predefinidas como parte de su salida.",
+        "definition": "La llamada a funciones (también conocida como uso de herramientas) es una capacidad en la que un LLM genera JSON estructurado o código para invocar una función o API externa predefinida, en lugar de generar texto sin formato. El modelo recibe un esquema que describe las funciones disponibles y sus parámetros, decide cuál función llamar y con qué argumentos, y devuelve una llamada estructurada que una aplicación puede ejecutar. La llamada a funciones es esencial para construir agentes confiables.",
+        "category": "Agentes",
+        "relatedTerms": ["Uso de Herramientas", "Agente de IA", "MCP", "Salida Estructurada"]
+    },
+    {
+        "id": "structured-output",
+        "term": "Salida Estructurada",
+        "letter": "S",
+        "summary": "Restringir la salida de un LLM a un esquema definido (p. ej., JSON) para facilitar el procesamiento posterior.",
+        "definition": "La salida estructurada es la práctica de restringir la generación de un LLM para que siga un formato específico — como JSON, XML o un esquema tipado — en lugar de producir texto libre. Esto simplifica el análisis posterior, la integración con otros sistemas y la validación automática. Las técnicas incluyen instrucciones de formato basadas en prompts, parsers de salida y características nativas del modelo como el modo JSON o el muestreo con restricciones gramaticales.",
+        "category": "Prompting",
+        "relatedTerms": ["Llamada a Funciones", "Uso de Herramientas", "Ingeniería de Prompts", "Guardianes"]
+    },
+    {
+        "id": "guardrails",
+        "term": "Guardianes (Guardrails)",
+        "letter": "G",
+        "summary": "Reglas y mecanismos que restringen o validan las entradas y salidas de los LLM para garantizar un comportamiento seguro y apropiado.",
+        "definition": "Los guardianes son mecanismos de seguridad y calidad aplicados a las entradas o salidas de los LLM para hacer cumplir restricciones como el cumplimiento de políticas de contenido, la validez del formato de salida, la precisión factual y la adherencia a instrucciones. Pueden implementarse como instrucciones basadas en prompts, clasificadores de salida, filtros basados en reglas o modelos de validación separados. Los guardianes son un componente central de los sistemas de IA de producción responsables.",
+        "category": "Evaluación",
+        "relatedTerms": ["Alucinación", "LLM como Juez", "Salida Estructurada", "Anclaje", "Seguridad"]
+    },
+    {
+        "id": "evals",
+        "term": "Evals (Evaluaciones)",
+        "letter": "E",
+        "summary": "Pruebas y benchmarks usados para medir el rendimiento de LLMs o sistemas de IA en tareas específicas.",
+        "definition": "Los evals (abreviatura de evaluaciones) son pruebas sistemáticas diseñadas para medir el rendimiento, la precisión, la seguridad y la confiabilidad de los LLMs o sistemas de IA. Van desde pruebas unitarias sobre pares específicos de entrada-salida hasta grandes benchmarks que cubren capacidades diversas. Conjuntos de evals sólidos son fundamentales para construir productos de IA confiables: permiten iteración rápida, detectan regresiones y brindan confianza antes del despliegue.",
+        "category": "Evaluación",
+        "relatedTerms": ["LLM como Juez", "Guardianes", "Alucinación", "Benchmarks"]
+    },
+    {
+        "id": "llmops",
+        "term": "LLMOps",
+        "letter": "L",
+        "summary": "Las prácticas operacionales para desplegar, monitorear, versionar y mantener aplicaciones basadas en LLMs en producción.",
+        "definition": "LLMOps es el conjunto de prácticas, herramientas y cultura para operacionalizar aplicaciones basadas en LLMs — análogo a MLOps para el aprendizaje automático tradicional. Cubre el versionado de prompts, el versionado de modelos, las pruebas A/B, el monitoreo (seguimiento de la calidad de entrada-salida a lo largo del tiempo), el registro, la optimización de latencia y la gestión de costos. El objetivo principal de LLMOps es permitir ciclos de iteración más rápidos y mantener la confiabilidad en producción.",
+        "category": "Operaciones",
+        "relatedTerms": ["Evals", "Monitoreo", "Orquestación", "Versionado de Prompts"]
+    },
+    {
+        "id": "temperature",
+        "term": "Temperatura",
+        "letter": "T",
+        "summary": "Un parámetro de muestreo que controla la aleatoriedad y creatividad de las salidas de los LLM.",
+        "definition": "La temperatura es un parámetro de decodificación que controla la diversidad de la salida de un LLM escalando la distribución de probabilidad sobre los tokens antes del muestreo. Una temperatura de 0 hace al modelo determinista (siempre elige el token de mayor probabilidad), mientras que valores más altos (p. ej., 0.7–1.0) introducen más aleatoriedad y creatividad. Elegir la temperatura correcta depende de la tarea: baja para tareas factuales, más alta para generación creativa.",
+        "category": "Inferencia",
+        "relatedTerms": ["Muestreo", "Muestreo Top-P", "Inferencia", "Estrategia de Decodificación"]
+    },
+    {
+        "id": "top-p-sampling",
+        "term": "Muestreo Top-P (Muestreo de Núcleo)",
+        "letter": "M",
+        "summary": "Una estrategia de muestreo que selecciona del conjunto más pequeño de tokens cuya probabilidad acumulada supera p.",
+        "definition": "El muestreo Top-P, también llamado muestreo de núcleo, es una estrategia de decodificación donde el modelo muestrea solo del conjunto más pequeño de tokens cuya masa de probabilidad acumulada supera un umbral p (p. ej., 0.9). Esto asegura que los tokens improbables queden excluidos del muestreo mientras se permite cierta variabilidad. Top-P se usa a menudo junto con la temperatura para controlar la diversidad de la salida.",
+        "category": "Inferencia",
+        "relatedTerms": ["Temperatura", "Muestreo", "Estrategia de Decodificación"]
+    },
+    {
+        "id": "beam-search",
+        "term": "Búsqueda de Haz (Beam Search)",
+        "letter": "B",
+        "summary": "Una estrategia de decodificación que explora múltiples secuencias de tokens simultáneamente para encontrar la salida de mayor probabilidad.",
+        "definition": "La búsqueda de haz es una estrategia de decodificación que mantiene un número fijo (el 'ancho del haz') de secuencias candidatas en cada paso de generación, expandiendo cada candidato con los tokens más probables y manteniendo solo los mejores candidatos. A diferencia de la decodificación codiciosa, la búsqueda de haz puede encontrar secuencias de mayor calidad general al explorar alternativas. Es comúnmente usada en traducción y resumen.",
+        "category": "Inferencia",
+        "relatedTerms": ["Temperatura", "Muestreo Top-P", "Estrategia de Decodificación", "Modelo Autorregresivo"]
+    },
+    {
+        "id": "caching",
+        "term": "Caché (Caching)",
+        "letter": "C",
+        "summary": "Almacenar salidas de LLM o cómputos intermedios para evitar llamadas redundantes y costosas al modelo.",
+        "definition": "El caché en sistemas de LLMs se refiere a almacenar los resultados de llamadas al modelo o cómputos intermedios para que puedan reutilizarse sin volver a ejecutar el modelo. El caché de prompts puede reducir significativamente la latencia y los costos de API para aplicaciones con prompts fijos grandes o repetitivos. El caché semántico va más lejos al recuperar respuestas cacheadas para consultas semánticamente similares. El caché es una optimización subutilizada pero de alto impacto.",
+        "category": "Operaciones",
+        "relatedTerms": ["LLMOps", "Inferencia", "Latencia", "Ingeniería de Prompts"]
+    },
+    {
+        "id": "alignment",
+        "term": "Alineación (Alignment)",
+        "letter": "A",
+        "summary": "El proceso de asegurar que el comportamiento del modelo de IA coincide con los valores, intenciones y preferencias humanas.",
+        "definition": "La alineación se refiere al desafío y la práctica de asegurar que los sistemas de IA se comporten de manera consistente con los valores, intenciones y preferencias humanas, especialmente a medida que los modelos se vuelven más capaces y autónomos. Las técnicas de alineación incluyen RLHF, IA Constitucional y optimización directa de preferencias (DPO). Una IA desalineada puede producir comportamientos dañinos, engañosos o no deseados incluso cuando es técnicamente capaz.",
+        "category": "Seguridad",
+        "relatedTerms": ["RLHF", "Seguridad", "Guardianes", "IA Constitucional"]
+    },
+    {
+        "id": "safety",
+        "term": "Seguridad (Safety)",
+        "letter": "S",
+        "summary": "Prácticas y mecanismos para evitar que los modelos de IA generen contenido dañino, peligroso o inapropiado.",
+        "definition": "La seguridad en IA se refiere a las prácticas, técnicas y directrices diseñadas para evitar que los modelos de IA produzcan contenido o tomen acciones que sean dañinas, ilegales, engañosas o peligrosas. Las medidas de seguridad en aplicaciones de LLMs incluyen clasificadores de moderación de contenido, guardianes, red-teaming, entrenamiento de rechazo y filtrado de salidas. Las consideraciones de seguridad son especialmente críticas en sistemas agénticos donde el modelo puede tomar acciones del mundo real con consecuencias irreversibles.",
+        "category": "Seguridad",
+        "relatedTerms": ["Alineación", "Guardianes", "Red-Teaming", "IA Responsable"]
+    },
+    {
+        "id": "human-in-the-loop",
+        "term": "Humano en el Bucle (HITL)",
+        "letter": "H",
+        "summary": "Un patrón de diseño donde los humanos revisan o aprueban las salidas de la IA en pasos críticos antes de que surtan efecto.",
+        "definition": "El Humano en el Bucle (HITL) es un patrón de diseño donde la supervisión humana se incorpora en puntos clave de un flujo de trabajo de IA — por ejemplo, exigiendo que un humano revise y apruebe una acción generada por el modelo antes de que se ejecute. HITL es especialmente importante en aplicaciones de alto riesgo y sistemas agénticos donde los errores pueden tener consecuencias significativas. Las interfaces HITL bien diseñadas mantienen a los humanos informados y en control sin crear fricción excesiva.",
+        "category": "Operaciones",
+        "relatedTerms": ["Agente de IA", "Seguridad", "Guardianes", "Bucle Agéntico"]
+    },
+    {
+        "id": "agentic-ide",
+        "term": "IDE Agéntico",
+        "letter": "I",
+        "summary": "Un entorno de desarrollo impulsado por agentes de IA capaces de escribir, editar y gestionar código de forma autónoma.",
+        "definition": "Un IDE agéntico es un entorno de desarrollo de software que integra profundamente agentes de IA en el flujo de trabajo de codificación, permitiendo a la IA no solo sugerir completados sino planificar, generar, refactorizar y gestionar código de forma autónoma en un proyecto. Ejemplos incluyen Kiro, que cuenta con capacidades como specs (planificación estructurada de características), steering (reglas de IA personalizadas), hooks (disparadores automatizados) e integración MCP. Los IDEs agénticos representan un cambio de la IA como asistente de código a la IA como socio ingeniero colaborativo.",
+        "category": "Herramientas",
+        "relatedTerms": ["Agente de IA", "MCP", "Specs", "Steering", "Hooks"]
+    },
+    {
+        "id": "specs",
+        "term": "Specs (Especificaciones)",
+        "letter": "S",
+        "summary": "Documentos estructurados que definen los requisitos, diseño y plan de implementación de una característica antes de codificar.",
+        "definition": "En el contexto de herramientas de desarrollo agéntico como Kiro, los specs (especificaciones) son documentos estructurados que un agente de IA ayuda a generar antes de escribir código. Un spec típicamente incluye un documento de requisitos, un documento de diseño del sistema y un conjunto de tareas de implementación. Este enfoque impulsado por specs asegura que el código generado por IA esté alineado con la intención del usuario y la arquitectura del proyecto antes de que comience cualquier implementación.",
+        "category": "Herramientas",
+        "relatedTerms": ["IDE Agéntico", "Steering", "Hooks", "Agente de IA"]
+    },
+    {
+        "id": "steering",
+        "term": "Steering (Guía)",
+        "letter": "S",
+        "summary": "Reglas y contexto personalizados proporcionados a un sistema de IA para guiar su comportamiento en un proyecto específico.",
+        "definition": "El steering se refiere al uso de reglas, restricciones y contexto personalizados para guiar el comportamiento de un sistema de IA dentro de un entorno específico. En Kiro, los archivos de steering permiten a los desarrolladores definir convenciones específicas del proyecto — como estándares de codificación, patrones arquitectónicos o bibliotecas preferidas — que el agente de IA sigue consistentemente en todas las interacciones. El steering es análogo a un prompt de sistema persistente con alcance de proyecto.",
+        "category": "Herramientas",
+        "relatedTerms": ["IDE Agéntico", "Specs", "Prompt de Sistema", "Ingeniería de Contexto"]
+    },
+    {
+        "id": "hooks",
+        "term": "Hooks (Ganchos)",
+        "letter": "H",
+        "summary": "Disparadores automatizados que ejecutan acciones de IA en respuesta a eventos específicos de desarrollo.",
+        "definition": "Los hooks son disparadores automatizados en entornos de desarrollo agéntico (como Kiro) que ejecutan acciones impulsadas por IA en respuesta a eventos predefinidos — como guardar un archivo, fallar una prueba o abrir un pull request. Los hooks permiten automatizar tareas repetitivas sin intervención manual, integrando la asistencia de IA directamente en el flujo de trabajo de desarrollo. Son una forma de automatización orientada a eventos para acciones de agentes de IA.",
+        "category": "Herramientas",
+        "relatedTerms": ["IDE Agéntico", "Specs", "Agente de IA", "Orquestación"]
+    },
+    {
+        "id": "model-selection",
+        "term": "Selección de Modelo",
+        "letter": "S",
+        "summary": "El proceso de elegir el LLM más apropiado para una tarea dada según capacidad, costo y latencia.",
+        "definition": "La selección de modelo es la práctica de elegir el LLM más adecuado para un caso de uso específico equilibrando factores como la complejidad de la tarea, la calidad requerida, el costo de inferencia y las restricciones de latencia. Un principio clave es comenzar con el modelo más pequeño que logre calidad aceptable, evitando pagar de más por capacidades que no se necesitan. La selección de modelo también implica versionar y fijar versiones de modelo para evitar cambios de comportamiento inesperados.",
+        "category": "Operaciones",
+        "relatedTerms": ["Inferencia", "LLMOps", "Ajuste Fino", "Latencia"]
+    },
+    {
+        "id": "latency",
+        "term": "Latencia",
+        "letter": "L",
+        "summary": "El tiempo que tarda un LLM en comenzar o completar una respuesta después de recibir un prompt.",
+        "definition": "La latencia en sistemas de LLMs se refiere al retraso entre enviar un prompt y recibir una respuesta. Se mide comúnmente como Tiempo al Primer Token (TTFT) — cuánto tarda el modelo en comenzar a transmitir salida — y el tiempo total de generación. La latencia es un factor crítico en la experiencia del usuario y está influenciada por el tamaño del modelo, el hardware, la longitud del contexto y la arquitectura del sistema. Las técnicas de optimización incluyen caché, modelos más pequeños, streaming y agrupación.",
+        "category": "Operaciones",
+        "relatedTerms": ["Inferencia", "Caché", "Selección de Modelo", "Streaming"]
+    },
+    {
+        "id": "streaming",
+        "term": "Streaming",
+        "letter": "S",
+        "summary": "Entregar la salida de un LLM token a token a medida que se genera, en lugar de esperar la respuesta completa.",
+        "definition": "El streaming es una técnica donde la salida de un LLM se transmite al usuario token a token a medida que se genera, en lugar de esperar la respuesta completa. Esto mejora significativamente la latencia percibida ya que los usuarios ven la respuesta formarse en tiempo real. El streaming es soportado por la mayoría de las principales APIs de LLM y es práctica estándar para interfaces de chat y tareas de generación de forma larga.",
+        "category": "Inferencia",
+        "relatedTerms": ["Latencia", "Inferencia", "Modelo Autorregresivo"]
+    },
+    {
+        "id": "agentic-rag",
+        "term": "RAG Agéntico",
+        "letter": "R",
+        "summary": "Una arquitectura RAG donde un agente de IA decide dinámicamente cuándo y cómo recuperar información.",
+        "definition": "El RAG Agéntico combina las capacidades de recuperación de la Generación Aumentada por Recuperación con las capacidades de planificación y toma de decisiones de un agente de IA. En lugar de recuperar siempre documentos como un paso fijo de preprocesamiento, el agente decide dinámicamente cuándo se necesita la recuperación, qué consultas emitir y cómo sintetizar resultados de múltiples rondas de recuperación. El RAG Agéntico permite un razonamiento más complejo sobre grandes bases de conocimiento.",
+        "category": "Agentes",
+        "relatedTerms": ["Generación Aumentada por Recuperación", "Agente de IA", "Bucle Agéntico", "Uso de Herramientas", "Memoria"]
+    },
+    {
+        "id": "prompt-versioning",
+        "term": "Versionado de Prompts",
+        "letter": "V",
+        "summary": "Rastrear y gestionar los cambios en los prompts a lo largo del tiempo, análogo al control de versiones para código.",
+        "definition": "El versionado de prompts es la práctica de rastrear, almacenar y gestionar diferentes versiones de los prompts usados en aplicaciones de LLMs de producción. Al igual que el control de versiones de software, permite a los equipos revertir a versiones anteriores de prompts, comparar el rendimiento entre versiones y desplegar cambios de forma segura. Dado que los cambios de prompts pueden afectar significativamente el comportamiento del modelo, el versionado es una parte crítica de LLMOps.",
+        "category": "Operaciones",
+        "relatedTerms": ["LLMOps", "Evals", "Ingeniería de Prompts"]
+    },
+    {
+        "id": "product-market-fit",
+        "term": "Ajuste Producto-Mercado (PMF) para IA",
+        "letter": "A",
+        "summary": "Validar que un producto impulsado por IA resuelve una necesidad real del usuario antes de invertir en infraestructura.",
+        "definition": "En el contexto del desarrollo de productos LLM, el Ajuste Producto-Mercado (PMF) se refiere a la validación de que un producto impulsado por IA genuinamente resuelve una necesidad real del usuario antes de realizar grandes inversiones en infraestructura como entrenar modelos personalizados. Una heurística ampliamente citada es 'Sin GPUs antes del PMF': comenzar con APIs de inferencia, ingeniería de prompts y RAG antes de comprometerse con entrenamiento personalizado.",
+        "category": "Estrategia",
+        "relatedTerms": ["LLMOps", "Ajuste Fino", "Inferencia", "Selección de Modelo"]
+    },
+    {
+        "id": "data-flywheel",
+        "term": "Volante de Datos (Data Flywheel)",
+        "letter": "V",
+        "summary": "Un ciclo auto-reforzante donde el uso del producto genera datos que mejoran la IA, lo que atrae más usuarios.",
+        "definition": "El volante de datos es un patrón estratégico en el desarrollo de productos de IA donde el uso del producto genera datos de entrenamiento y evaluación, que se usan para mejorar el modelo de IA, lo que mejora el producto, atrae más usuarios, y así sucesivamente. Construir un volante de datos temprano — instrumentando la producción para capturar pares de entrada-salida, retroalimentación de usuarios y casos extremos — crea una ventaja compuesta con el tiempo.",
+        "category": "Estrategia",
+        "relatedTerms": ["Evals", "Ajuste Fino", "LLMOps", "Ajuste Producto-Mercado"]
+    },
+    {
+        "id": "red-teaming",
+        "term": "Red-Teaming",
+        "letter": "R",
+        "summary": "La práctica de probar adversarialmente un sistema de IA para encontrar fallos de seguridad y confiabilidad antes del despliegue.",
+        "definition": "El red-teaming es una práctica de seguridad tomada de la ciberseguridad donde un equipo dedicado intenta encontrar fallas, jailbreaks, modos de fallo y comportamientos dañinos en un sistema de IA al sondearlo adversarialmente. El red-teaming descubre problemas que los evals estándar pueden pasar por alto, incluyendo casos extremos, inyecciones de prompts y violaciones de políticas de contenido. Se considera una mejor práctica para el despliegue responsable de IA.",
+        "category": "Seguridad",
+        "relatedTerms": ["Seguridad", "Alineación", "Guardianes", "Evals"]
+    },
+    {
+        "id": "reward-model",
+        "term": "Modelo de Recompensa",
+        "letter": "M",
+        "summary": "Un modelo entrenado para puntuar salidas de LLMs según la preferencia humana, usado en el entrenamiento RLHF.",
+        "definition": "Un modelo de recompensa es una red neuronal entrenada para predecir cuánto preferiría un humano una salida del modelo sobre otra. Se entrena con datos de comparación humana (p. ej., anotadores que clasifican pares de salidas del modelo) y produce una puntuación escalar para cualquier salida dada. En RLHF, el modelo de recompensa sirve como proxy de la preferencia humana, guiando las actualizaciones de la política del LLM durante el aprendizaje por refuerzo.",
+        "category": "Entrenamiento",
+        "relatedTerms": ["RLHF", "Ajuste Fino", "Alineación", "Evals"]
+    },
+    {
+        "id": "autonomous-agent",
+        "term": "Agente Autónomo",
+        "letter": "A",
+        "summary": "Un agente de IA capaz de completar tareas complejas de múltiples pasos con mínima intervención humana.",
+        "definition": "Un agente autónomo es un agente de IA diseñado para operar con un alto grado de independencia, capaz de planificar, ejecutar y adaptarse a través de largas secuencias de acciones para lograr un objetivo especificado por el usuario. A diferencia de los chatbots simples o asistentes de un solo turno, los agentes autónomos gestionan sus propias llamadas a herramientas, memoria y toma de decisiones en flujos de trabajo extendidos. El agente autónomo de Kiro, por ejemplo, puede ejecutar tareas agénticas de principio a fin a través de una interfaz CLI o IDE.",
+        "category": "Agentes",
+        "relatedTerms": ["Agente de IA", "Bucle Agéntico", "Uso de Herramientas", "Orquestación", "Humano en el Bucle"]
     }
-]
+];
 
 export default glossaryDataEs
 

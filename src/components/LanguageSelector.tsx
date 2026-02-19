@@ -3,7 +3,7 @@ import { FiSun, FiMoon } from 'react-icons/fi'
 import { useLanguage } from '../context/LanguageContext'
 import { useColorMode } from '../context/ThemeContext'
 
-export default function LanguageSelector() {
+export default function LanguageSelector({ currentPage, onPageChange }: { currentPage: 'glossary' | 'learning', onPageChange: (page: 'glossary' | 'learning') => void }) {
     const { language, setLanguage } = useLanguage()
     const { colorMode, toggleColorMode } = useColorMode()
     const dark = colorMode === 'dark'
@@ -18,6 +18,38 @@ export default function LanguageSelector() {
     return (
         <Box position="fixed" top={4} right={4} zIndex={1000}>
             <HStack spacing={2}>
+                {/* Page Toggle */}
+                <HStack
+                    spacing={0}
+                    bg={pillBg}
+                    backdropFilter="blur(16px)"
+                    border={`1px solid ${pillBorder}`}
+                    borderRadius="12px" p="3px"
+                    boxShadow={dark ? '0 4px 24px rgba(0,0,0,0.30)' : '0 2px 12px rgba(37,52,63,0.08)'}
+                >
+                    {(['glossary', 'learning'] as const).map((page) => {
+                        const isActive = currentPage === page
+                        return (
+                            <Box
+                                key={page} as="button"
+                                onClick={() => onPageChange(page)}
+                                px={3} py={1.5} borderRadius="9px"
+                                bg={isActive ? activeBg : 'transparent'}
+                                border={isActive ? `1px solid ${activeBdr}` : '1px solid transparent'}
+                                transition="all 0.18s"
+                                _hover={{ bg: isActive ? undefined : 'rgba(255,155,81,0.08)' }}
+                                cursor="pointer"
+                            >
+                                <Text fontSize="11px" fontWeight="700"
+                                    color={isActive ? activeText : inactiveText}
+                                    letterSpacing="0.06em">
+                                    {page === 'glossary' ? (language === 'es' ? 'GLOSARIO' : 'GLOSSARY') : (language === 'es' ? 'APRENDIZAJE' : 'LEARNING')}
+                                </Text>
+                            </Box>
+                        )
+                    })}
+                </HStack>
+
                 {/* Dark/Light toggle */}
                 <Box
                     as="button"

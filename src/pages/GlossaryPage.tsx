@@ -7,6 +7,7 @@ import { FiSearch } from 'react-icons/fi'
 import Logo from '../components/Logo'
 import SearchBar from '../components/SearchBar'
 import AlphabetNav from '../components/AlphabetNav'
+import Pagination from '../components/Pagination'
 import TermCard from '../components/TermCard'
 import TermModal from '../components/TermModal'
 import glossaryDataEn from '../data/glossaryData'
@@ -23,6 +24,9 @@ export default function GlossaryPage() {
     const [activeLetter, setActiveLetter] = useState<string | null>(null)
     const [selectedTerm, setSelectedTerm] = useState<GlossaryTerm | null>(null)
     const { isOpen, onOpen, onClose } = useDisclosure()
+
+    const [currentPage, setCurrentPage] = useState(1)
+    const ITEMS_PER_PAGE = 10
 
     const { language } = useLanguage()
     const s = useStrings(language)
@@ -57,7 +61,12 @@ export default function GlossaryPage() {
     useMemo(() => {
         setActiveLetter(null)
         setSearch('')
+        setCurrentPage(1)
     }, [language])
+
+    useEffect(() => {
+        setCurrentPage(1)
+    }, [activeLetter, search])
 
     const filteredTerms = useMemo(() => {
         let terms = glossaryData
@@ -75,6 +84,12 @@ export default function GlossaryPage() {
         return terms.sort((a, b) => a.term.localeCompare(b.term))
     }, [activeLetter, search, glossaryData])
 
+    const totalPages = Math.ceil(filteredTerms.length / ITEMS_PER_PAGE)
+    const paginatedTerms = useMemo(() => {
+        const start = (currentPage - 1) * ITEMS_PER_PAGE
+        return filteredTerms.slice(start, start + ITEMS_PER_PAGE)
+    }, [filteredTerms, currentPage])
+
     const handleCardClick = useCallback((term: GlossaryTerm) => {
         setSelectedTerm(term)
         onOpen()
@@ -83,6 +98,12 @@ export default function GlossaryPage() {
     const handleLetterClick = useCallback((letter: string | null) => {
         setActiveLetter(letter)
         setSearch('')
+        setCurrentPage(1)
+    }, [])
+
+    const handleSearchChange = useCallback((value: string) => {
+        setSearch(value)
+        setCurrentPage(1)
     }, [])
 
     const subtitle = s.subtitle.replace('{count}', String(glossaryData.length))
@@ -130,7 +151,7 @@ export default function GlossaryPage() {
                         {subtitle}
                     </Text>
 
-                    <SearchBar value={search} onChange={setSearch} placeholder={s.searchPlaceholder} />
+                    <SearchBar value={search} onChange={handleSearchChange} placeholder={s.searchPlaceholder} />
                 </MotionBox>
 
                 {/* A-Z Nav */}
@@ -156,14 +177,24 @@ export default function GlossaryPage() {
 
                 {/* Grid */}
                 <AnimatePresence mode="wait">
-                    {filteredTerms.length > 0 ? (
-                        <SimpleGrid key="grid" columns={{ base: 1, sm: 2, lg: 3, xl: 4 }} spacing={4}>
-                            {filteredTerms.map((term, i) => (
-                                <TermCard key={term.id} term={term} index={i}
-                                    onClick={() => handleCardClick(term)} readMoreLabel={s.readMore}
-                                    englishTerm={enTermById ? enTermById[term.id] : undefined} />
-                            ))}
-                        </SimpleGrid>
+                    {paginatedTerms.length > 0 ? (
+                        <>
+                            <SimpleGrid key="grid" columns={{ base: 1, sm: 2, lg: 3, xl: 4 }} spacing={4}>
+                                {paginatedTerms.map((term, i) => (
+                                    <TermCard key={term.id} term={term} index={i}
+                                        onClick={() => handleCardClick(term)} readMoreLabel={s.readMore}
+                                        englishTerm={enTermById ? enTermById[term.id] : undefined} />
+                                ))}
+                            </SimpleGrid>
+
+                            <Pagination
+                                currentPage={currentPage}
+                                totalPages={totalPages}
+                                onPageChange={setCurrentPage}
+                                prevLabel={language === 'es' ? 'Anterior' : 'Prev'}
+                                nextLabel={language === 'es' ? 'Siguiente' : 'Next'}
+                            />
+                        </>
                     ) : (
                         <MotionBox key="empty"
                             initial={{ opacity: 0, scale: 0.95 }}
