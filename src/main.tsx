@@ -1,21 +1,25 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
 import { ChakraProvider } from '@chakra-ui/react'
-import App from './App'
-import theme from './theme'
+import { BrowserRouter } from 'react-router-dom'
 import { LanguageProvider } from './context/LanguageContext'
 import { ThemeProvider } from './context/ThemeContext'
+import { AuthProvider } from './context/AuthContext'
+import App from './App'
 import './index.css'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
-        <ThemeProvider>
-            <LanguageProvider>
-                <ChakraProvider theme={theme}>
-                    <App />
-                </ChakraProvider>
-            </LanguageProvider>
-        </ThemeProvider>
-    </React.StrictMode>,
+createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+        <ChakraProvider>
+            <BrowserRouter basename="/iaglossary">
+                <LanguageProvider>
+                    <ThemeProvider>
+                        <AuthProvider>
+                            <App />
+                        </AuthProvider>
+                    </ThemeProvider>
+                </LanguageProvider>
+            </BrowserRouter>
+        </ChakraProvider>
+    </StrictMode>,
 )
-

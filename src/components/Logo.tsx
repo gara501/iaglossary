@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { FaBrain } from 'react-icons/fa'
 import { useColorMode } from '../context/ThemeContext'
 
-const MotionBox = motion(Box)
+const MotionBox = motion.create(Box)
 
 interface LogoProps {
     subtitle?: string

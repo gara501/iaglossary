@@ -4,7 +4,7 @@ import { FiArrowRight } from 'react-icons/fi'
 import { GlossaryTerm } from '../types/glossary'
 import { useColorMode } from '../context/ThemeContext'
 
-const MotionBox = motion(Box)
+const MotionBox = motion.create(Box)
 
 interface TermCardProps {
     term: GlossaryTerm

@@ -1,28 +1,26 @@
 import { useEffect, useState, useMemo } from 'react'
 import {
-    Box, Container, SimpleGrid, Text, Flex, Heading, Link, Badge, Icon, Button,
+    Box, Container, SimpleGrid, Text, Flex, Heading, Link, Badge, Icon, Button, Spinner, Center,
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { FiArrowLeft, FiExternalLink, FiBookOpen } from 'react-icons/fi'
+import { useNavigate } from 'react-router-dom'
 import Logo from '../components/Logo'
-import learningDataEn from '../data/learningData'
-import learningDataEs from '../data/learningDataES'
 import { useLanguage } from '../context/LanguageContext'
 import { useStrings } from '../i18n/strings'
 import { useColorMode } from '../context/ThemeContext'
 import Pagination from '../components/Pagination'
+import { fetchLearningItems } from '../services/learningService'
+import { LearningItem } from '../types/learning'
 
-const MotionBox = motion(Box)
+const MotionBox = motion.create(Box)
 
-interface LearningPageProps {
-    onReturn: () => void;
-}
-
-export default function LearningPage({ onReturn }: LearningPageProps) {
+export default function LearningPage() {
     const { language } = useLanguage()
     const s = useStrings(language)
     const { colorMode } = useColorMode()
     const dark = colorMode === 'dark'
+    const navigate = useNavigate()
 
     useEffect(() => {
         document.body.classList.remove('dark', 'light')
@@ -32,7 +30,23 @@ export default function LearningPage({ onReturn }: LearningPageProps) {
     const [currentPage, setCurrentPage] = useState(1)
     const ITEMS_PER_PAGE = 6
 
-    const learningData = language === 'es' ? learningDataEs : learningDataEn
+    const [learningData, setLearningData] = useState<LearningItem[]>([])
+    const [dataLoading, setDataLoading] = useState(true)
+
+    // Fetch from Supabase
+    useEffect(() => {
+        let cancelled = false
+        setDataLoading(true)
+        const load = async () => {
+            const data = await fetchLearningItems(language)
+            if (!cancelled) {
+                setLearningData(data)
+                setDataLoading(false)
+            }
+        }
+        load()
+        return () => { cancelled = true }
+    }, [language])
 
     const totalPages = Math.ceil(learningData.length / ITEMS_PER_PAGE)
     const paginatedData = useMemo(() => {
@@ -97,7 +111,7 @@ export default function LearningPage({ onReturn }: LearningPageProps) {
                     <Button
                         leftIcon={<FiArrowLeft />}
                         variant="ghost"
-                        onClick={onReturn}
+                        onClick={() => navigate('/')}
                         color={creatorColor}
                         _hover={{ bg: dark ? 'rgba(255,155,81,0.12)' : 'rgba(255,155,81,0.08)' }}
                     >
@@ -105,77 +119,83 @@ export default function LearningPage({ onReturn }: LearningPageProps) {
                     </Button>
                 </MotionBox>
 
-                {/* Grid */}
-                <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6} maxW="1000px" mx="auto">
-                    {paginatedData.map((item, i) => (
-                        <MotionBox
-                            key={item.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: i * 0.1 }}
-                            p={8}
-                            borderRadius="24px"
-                            bg={cardBg}
-                            border="1px solid"
-                            borderColor={cardBorder}
-                            backdropFilter="blur(20px)"
-                            boxShadow={dark ? '0 8px 32px rgba(0,0,0,0.2)' : '0 8px 32px rgba(37,52,63,0.05)'}
-                            position="relative"
-                            overflow="hidden"
-                            role="group"
-                            display="flex"
-                            flexDirection="column"
-                            justifyContent="space-between"
-                        >
-                            <Box>
-                                <Flex justify="space-between" align="start" mb={4}>
-                                    <Badge
-                                        px={2} py={0.5} borderRadius="6px"
-                                        variant="subtle" colorScheme="orange" fontSize="10px"
-                                        bg={dark ? 'rgba(255,155,81,0.15)' : 'rgba(255,155,81,0.10)'}
+                {dataLoading ? (
+                    <Center py={20}><Spinner size="xl" color="orange.400" thickness="3px" /></Center>
+                ) : (
+                    <>
+                        {/* Grid */}
+                        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6} maxW="1000px" mx="auto">
+                            {paginatedData.map((item, i) => (
+                                <MotionBox
+                                    key={item.id}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                                    p={8}
+                                    borderRadius="24px"
+                                    bg={cardBg}
+                                    border="1px solid"
+                                    borderColor={cardBorder}
+                                    backdropFilter="blur(20px)"
+                                    boxShadow={dark ? '0 8px 32px rgba(0,0,0,0.2)' : '0 8px 32px rgba(37,52,63,0.05)'}
+                                    position="relative"
+                                    overflow="hidden"
+                                    role="group"
+                                    display="flex"
+                                    flexDirection="column"
+                                    justifyContent="space-between"
+                                >
+                                    <Box>
+                                        <Flex justify="space-between" align="start" mb={4}>
+                                            <Badge
+                                                px={2} py={0.5} borderRadius="6px"
+                                                variant="subtle" colorScheme="orange" fontSize="10px"
+                                                bg={dark ? 'rgba(255,155,81,0.15)' : 'rgba(255,155,81,0.10)'}
+                                            >
+                                                {item.category || 'COURSE'}
+                                            </Badge>
+                                            <Icon as={FiBookOpen} color={creatorColor} opacity={0.5} boxSize={5} />
+                                        </Flex>
+
+                                        <Heading size="md" mb={2} color={titleColor} fontWeight="700">
+                                            {item.title}
+                                        </Heading>
+
+                                        <Text fontSize="13px" color={creatorColor} fontWeight="600" mb={4} textTransform="uppercase" letterSpacing="0.05em">
+                                            {item.creator}
+                                        </Text>
+
+                                        <Text fontSize="15px" color={textColor} lineHeight="1.6" mb={6}>
+                                            {item.summary}
+                                        </Text>
+                                    </Box>
+
+                                    <Link
+                                        href={item.link}
+                                        isExternal
+                                        display="inline-flex"
+                                        alignItems="center"
+                                        color={creatorColor}
+                                        fontWeight="700"
+                                        fontSize="14px"
+                                        _hover={{ textDecoration: 'none', opacity: 0.8 }}
                                     >
-                                        {item.category || 'COURSE'}
-                                    </Badge>
-                                    <Icon as={FiBookOpen} color={creatorColor} opacity={0.5} boxSize={5} />
-                                </Flex>
+                                        {language === 'es' ? 'Ir al recurso' : 'Visit resource'}
+                                        <Icon as={FiExternalLink} ml={2} />
+                                    </Link>
+                                </MotionBox>
+                            ))}
+                        </SimpleGrid>
 
-                                <Heading size="md" mb={2} color={titleColor} fontWeight="700">
-                                    {item.title}
-                                </Heading>
-
-                                <Text fontSize="13px" color={creatorColor} fontWeight="600" mb={4} textTransform="uppercase" letterSpacing="0.05em">
-                                    {item.creator}
-                                </Text>
-
-                                <Text fontSize="15px" color={textColor} lineHeight="1.6" mb={6}>
-                                    {item.summary}
-                                </Text>
-                            </Box>
-
-                            <Link
-                                href={item.link}
-                                isExternal
-                                display="inline-flex"
-                                alignItems="center"
-                                color={creatorColor}
-                                fontWeight="700"
-                                fontSize="14px"
-                                _hover={{ textDecoration: 'none', opacity: 0.8 }}
-                            >
-                                {language === 'es' ? 'Ir al recurso' : 'Visit resource'}
-                                <Icon as={FiExternalLink} ml={2} />
-                            </Link>
-                        </MotionBox>
-                    ))}
-                </SimpleGrid>
-
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={setCurrentPage}
-                    prevLabel={language === 'es' ? 'Anterior' : 'Prev'}
-                    nextLabel={language === 'es' ? 'Siguiente' : 'Next'}
-                />
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={setCurrentPage}
+                            prevLabel={language === 'es' ? 'Anterior' : 'Prev'}
+                            nextLabel={language === 'es' ? 'Siguiente' : 'Next'}
+                        />
+                    </>
+                )}
 
                 {/* Footer */}
                 <Box mt={16} textAlign="center">

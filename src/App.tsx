@@ -1,15 +1,35 @@
-import { useState } from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import GlossaryPage from './pages/GlossaryPage'
 import LearningPage from './pages/LearningPage'
+import LoginPage from './pages/LoginPage'
+import AdminLayout from './pages/admin/AdminLayout'
+import GlossaryAdmin from './pages/admin/GlossaryAdmin'
+import LearningAdmin from './pages/admin/LearningAdmin'
 import LanguageSelector from './components/LanguageSelector'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
-    const [currentPage, setCurrentPage] = useState<'glossary' | 'learning'>('glossary')
-
     return (
         <>
-            <LanguageSelector currentPage={currentPage} onPageChange={setCurrentPage} />
-            {currentPage === 'glossary' ? <GlossaryPage /> : <LearningPage onReturn={() => setCurrentPage('glossary')} />}
+            <Routes>
+                {/* Public routes */}
+                <Route path="/" element={<><LanguageSelector /><GlossaryPage /></>} />
+                <Route path="/learning" element={<><LanguageSelector /><LearningPage /></>} />
+
+                {/* Auth */}
+                <Route path="/login" element={<LoginPage />} />
+
+                {/* Protected admin routes */}
+                <Route path="/admin" element={
+                    <ProtectedRoute>
+                        <AdminLayout />
+                    </ProtectedRoute>
+                }>
+                    <Route index element={<Navigate to="/admin/glossary" replace />} />
+                    <Route path="glossary" element={<GlossaryAdmin />} />
+                    <Route path="learning" element={<LearningAdmin />} />
+                </Route>
+            </Routes>
         </>
     )
 }

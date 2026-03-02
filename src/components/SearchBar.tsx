@@ -3,7 +3,7 @@ import { FiSearch } from 'react-icons/fi'
 import { motion } from 'framer-motion'
 import { useColorMode } from '../context/ThemeContext'
 
-const MotionBox = motion(Box)
+const MotionBox = motion.create(Box)
 
 interface SearchBarProps {
     value: string

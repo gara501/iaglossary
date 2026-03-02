@@ -1,7 +1,7 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
-const MotionBox = motion(Box)
+const MotionBox = motion.create(Box)
 
 const EN_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 const ES_ALPHABET = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('')

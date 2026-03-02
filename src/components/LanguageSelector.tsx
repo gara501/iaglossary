@@ -1,12 +1,17 @@
 import { Box, HStack, Text, Icon } from '@chakra-ui/react'
 import { FiSun, FiMoon } from 'react-icons/fi'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useLanguage } from '../context/LanguageContext'
 import { useColorMode } from '../context/ThemeContext'
 
-export default function LanguageSelector({ currentPage, onPageChange }: { currentPage: 'glossary' | 'learning', onPageChange: (page: 'glossary' | 'learning') => void }) {
+export default function LanguageSelector() {
     const { language, setLanguage } = useLanguage()
     const { colorMode, toggleColorMode } = useColorMode()
     const dark = colorMode === 'dark'
+    const location = useLocation()
+    const navigate = useNavigate()
+
+    const currentPage = location.pathname === '/learning' ? 'learning' : 'glossary'
 
     const pillBg = dark ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.72)'
     const pillBorder = dark ? 'rgba(255,255,255,0.08)' : 'rgba(191,201,209,0.60)'
@@ -27,12 +32,12 @@ export default function LanguageSelector({ currentPage, onPageChange }: { curren
                     borderRadius="12px" p="3px"
                     boxShadow={dark ? '0 4px 24px rgba(0,0,0,0.30)' : '0 2px 12px rgba(37,52,63,0.08)'}
                 >
-                    {(['glossary', 'learning'] as const).map((page) => {
-                        const isActive = currentPage === page
+                    {([{ key: 'glossary', path: '/' }, { key: 'learning', path: '/learning' }] as const).map(({ key, path }) => {
+                        const isActive = currentPage === key
                         return (
                             <Box
-                                key={page} as="button"
-                                onClick={() => onPageChange(page)}
+                                key={key} as="button"
+                                onClick={() => navigate(path)}
                                 px={3} py={1.5} borderRadius="9px"
                                 bg={isActive ? activeBg : 'transparent'}
                                 border={isActive ? `1px solid ${activeBdr}` : '1px solid transparent'}
@@ -43,7 +48,7 @@ export default function LanguageSelector({ currentPage, onPageChange }: { curren
                                 <Text fontSize="11px" fontWeight="700"
                                     color={isActive ? activeText : inactiveText}
                                     letterSpacing="0.06em">
-                                    {page === 'glossary' ? (language === 'es' ? 'GLOSARIO' : 'GLOSSARY') : (language === 'es' ? 'APRENDIZAJE' : 'LEARNING')}
+                                    {key === 'glossary' ? (language === 'es' ? 'GLOSARIO' : 'GLOSSARY') : (language === 'es' ? 'APRENDIZAJE' : 'LEARNING')}
                                 </Text>
                             </Box>
                         )

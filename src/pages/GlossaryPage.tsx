@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback, useEffect } from 'react'
 import {
-    Box, Container, SimpleGrid, Text, Flex, useDisclosure, Center, Icon,
+    Box, Container, SimpleGrid, Text, Flex, useDisclosure, Center, Icon, Spinner,
 } from '@chakra-ui/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiSearch } from 'react-icons/fi'
@@ -10,14 +10,13 @@ import AlphabetNav from '../components/AlphabetNav'
 import Pagination from '../components/Pagination'
 import TermCard from '../components/TermCard'
 import TermModal from '../components/TermModal'
-import glossaryDataEn from '../data/glossaryData'
-import glossaryDataEs from '../data/glossaryDataEs'
 import { GlossaryTerm } from '../types/glossary'
 import { useLanguage } from '../context/LanguageContext'
 import { useStrings } from '../i18n/strings'
 import { useColorMode } from '../context/ThemeContext'
+import { fetchGlossaryTerms } from '../services/glossaryService'
 
-const MotionBox = motion(Box)
+const MotionBox = motion.create(Box)
 
 export default function GlossaryPage() {
     const [search, setSearch] = useState('')
@@ -33,6 +32,31 @@ export default function GlossaryPage() {
     const { colorMode } = useColorMode()
     const dark = colorMode === 'dark'
 
+    const [glossaryData, setGlossaryData] = useState<GlossaryTerm[]>([])
+    const [enTermsData, setEnTermsData] = useState<GlossaryTerm[]>([])
+    const [dataLoading, setDataLoading] = useState(true)
+
+    // Fetch data from Supabase
+    useEffect(() => {
+        let cancelled = false
+        setDataLoading(true)
+        const load = async () => {
+            const data = await fetchGlossaryTerms(language)
+            if (!cancelled) {
+                setGlossaryData(data)
+                setDataLoading(false)
+            }
+        }
+        load()
+        return () => { cancelled = true }
+    }, [language])
+
+    // Fetch English terms for Spanish mode cross-reference
+    useEffect(() => {
+        if (language !== 'es') return
+        fetchGlossaryTerms('en').then(setEnTermsData)
+    }, [language])
+
     // Apply body class for CSS dark/light mode
     useEffect(() => {
         document.body.classList.remove('dark', 'light')
@@ -44,15 +68,13 @@ export default function GlossaryPage() {
         document.body.classList.add('dark')
     }, [])
 
-    const glossaryData = language === 'es' ? glossaryDataEs : glossaryDataEn
-
     // Build English term lookup for Spanish mode
     const enTermById = useMemo(() => {
         if (language !== 'es') return null
         const map: Record<string, string> = {}
-        for (const t of glossaryDataEn) map[t.id] = t.term
+        for (const t of enTermsData) map[t.id] = t.term
         return map
-    }, [language])
+    }, [language, enTermsData])
 
     const availableLetters = useMemo(() => {
         return new Set(glossaryData.map((t) => t.letter))
@@ -176,6 +198,9 @@ export default function GlossaryPage() {
                 </Flex>
 
                 {/* Grid */}
+                {dataLoading ? (
+                    <Center py={20}><Spinner size="xl" color="orange.400" thickness="3px" /></Center>
+                ) : (
                 <AnimatePresence mode="wait">
                     {paginatedTerms.length > 0 ? (
                         <>
@@ -212,6 +237,7 @@ export default function GlossaryPage() {
                         </MotionBox>
                     )}
                 </AnimatePresence>
+                )}
 
                 {/* Footer */}
                 <Box mt={16} textAlign="center">
