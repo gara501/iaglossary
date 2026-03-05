@@ -11,7 +11,11 @@ export default function LanguageSelector() {
     const location = useLocation()
     const navigate = useNavigate()
 
-    const currentPage = location.pathname === '/learning' ? 'learning' : 'glossary'
+    const currentPage = location.pathname.startsWith('/simulations')
+        ? 'simulations'
+        : location.pathname === '/learning'
+            ? 'learning'
+            : 'glossary'
 
     const pillBg = dark ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.72)'
     const pillBorder = dark ? 'rgba(255,255,255,0.08)' : 'rgba(191,201,209,0.60)'
@@ -32,7 +36,11 @@ export default function LanguageSelector() {
                     borderRadius="12px" p="3px"
                     boxShadow={dark ? '0 4px 24px rgba(0,0,0,0.30)' : '0 2px 12px rgba(37,52,63,0.08)'}
                 >
-                    {([{ key: 'glossary', path: '/' }, { key: 'learning', path: '/learning' }] as const).map(({ key, path }) => {
+                    {([
+                        { key: 'glossary', path: '/' },
+                        { key: 'learning', path: '/learning' },
+                        { key: 'simulations', path: '/simulations' },
+                    ] as const).map(({ key, path }) => {
                         const isActive = currentPage === key
                         return (
                             <Box
@@ -48,7 +56,11 @@ export default function LanguageSelector() {
                                 <Text fontSize="11px" fontWeight="700"
                                     color={isActive ? activeText : inactiveText}
                                     letterSpacing="0.06em">
-                                    {key === 'glossary' ? (language === 'es' ? 'GLOSARIO' : 'GLOSSARY') : (language === 'es' ? 'APRENDIZAJE' : 'LEARNING')}
+                                    {key === 'glossary'
+                                        ? (language === 'es' ? 'GLOSARIO' : 'GLOSSARY')
+                                        : key === 'learning'
+                                            ? (language === 'es' ? 'APRENDIZAJE' : 'LEARNING')
+                                            : (language === 'es' ? 'SIMULACIONES' : 'SIMULATIONS')}
                                 </Text>
                             </Box>
                         )

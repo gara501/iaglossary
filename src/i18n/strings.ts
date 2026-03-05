@@ -16,6 +16,13 @@ export interface UIStrings {
     relatedTermsLabel: string
     footerText: string
     logoSubtitle: string
+    // Simulations
+    simulationsNav: string
+    simulationsSidebarTitle: string
+    tokenizationSimTitle: string
+    tokenizationSimSubtitle: string
+    ragSimTitle: string
+    ragSimSubtitle: string
 }
 
 const strings: Record<Language, UIStrings> = {
@@ -36,6 +43,13 @@ const strings: Record<Language, UIStrings> = {
         relatedTermsLabel: 'Related Terms',
         footerText: 'IA Glossary · AI & Generative AI Reference - Aram',
         logoSubtitle: 'AI & Generative AI Terms',
+        // Simulations
+        simulationsNav: 'SIMULATIONS',
+        simulationsSidebarTitle: 'Simulations',
+        tokenizationSimTitle: 'Tokenization',
+        tokenizationSimSubtitle: 'How LLMs split text into tokens',
+        ragSimTitle: 'RAG Pipeline',
+        ragSimSubtitle: 'Retrieval-Augmented Generation flow',
     },
     es: {
         subtitle: 'Explora {count} términos esenciales de Inteligencia Artificial e IA Generativa — desde fundamentos hasta conceptos de vanguardia.',
@@ -54,6 +68,13 @@ const strings: Record<Language, UIStrings> = {
         relatedTermsLabel: 'Términos Relacionados',
         footerText: 'IA Glossary · Referencia de IA e IA Generativa - Aram',
         logoSubtitle: 'Términos de IA e IA Generativa',
+        // Simulations
+        simulationsNav: 'SIMULACIONES',
+        simulationsSidebarTitle: 'Simulaciones',
+        tokenizationSimTitle: 'Tokenización',
+        tokenizationSimSubtitle: 'Cómo los LLMs dividen el texto en tokens',
+        ragSimTitle: 'Pipeline RAG',
+        ragSimSubtitle: 'Flujo de Retrieval-Augmented Generation',
     },
 }
 
