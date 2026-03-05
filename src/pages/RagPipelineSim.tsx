@@ -189,8 +189,9 @@ export default function RagPipelineSim() {
     }
 
     useEffect(() => {
-        const container = containerRef.current
-        if (!container) return
+        if (!containerRef.current) return
+        // Safe: guarded above. The ! assertion lets TS see HTMLDivElement (not null) inside closures.
+        const container = containerRef.current!
         runningRef.current = false
 
         // ── Build HTML ──────────────────────────────────────────────────────────
