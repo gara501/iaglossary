@@ -13,9 +13,11 @@ export default function LanguageSelector() {
 
     const currentPage = location.pathname.startsWith('/simulations')
         ? 'simulations'
-        : location.pathname === '/learning'
-            ? 'learning'
-            : 'glossary'
+        : location.pathname.startsWith('/howto')
+            ? 'howto'
+            : location.pathname === '/learning'
+                ? 'learning'
+                : 'glossary'
 
     const pillBg = dark ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.72)'
     const pillBorder = dark ? 'rgba(255,255,255,0.08)' : 'rgba(191,201,209,0.60)'
@@ -40,6 +42,7 @@ export default function LanguageSelector() {
                         { key: 'glossary', path: '/' },
                         { key: 'learning', path: '/learning' },
                         { key: 'simulations', path: '/simulations' },
+                        { key: 'howto', path: '/howto' },
                     ] as const).map(({ key, path }) => {
                         const isActive = currentPage === key
                         return (
@@ -60,7 +63,9 @@ export default function LanguageSelector() {
                                         ? (language === 'es' ? 'GLOSARIO' : 'GLOSSARY')
                                         : key === 'learning'
                                             ? (language === 'es' ? 'APRENDIZAJE' : 'LEARNING')
-                                            : (language === 'es' ? 'SIMULACIONES' : 'SIMULATIONS')}
+                                            : key === 'simulations'
+                                                ? (language === 'es' ? 'SIMULACIONES' : 'SIMULATIONS')
+                                                : (language === 'es' ? 'CÓMO FUNCIONA' : 'HOW TO')}
                                 </Text>
                             </Box>
                         )

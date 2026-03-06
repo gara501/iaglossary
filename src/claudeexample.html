@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquitectura y Funcionamiento de Claude Code</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            background-color: transparent;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto space-y-10">
+        
+        <!-- Encabezado -->
+        <header class="text-center space-y-4">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 tracking-tight">Cómo funciona Claude Code</h1>
+            <p class="text-lg text-stone-600 max-w-3xl mx-auto">
+                Una visualización de la arquitectura "Cliente-Servidor Agéntico". Muestra cómo un entorno local (CLI) colabora con un modelo de IA remoto mediante un bucle de razonamiento y uso de herramientas.
+            </p>
+        </header>
+
+        <!-- Contenedor del Diagrama -->
+        <section class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 md:p-10 overflow-x-auto">
+            <h2 class="text-2xl font-bold text-stone-800 mb-6 text-center text-amber-600">Arquitectura del Bucle Agéntico</h2>
+            <div class="mermaid">
+                graph TD
+                    User[👤 Desarrollador] -->|1. Escribe prompt en CLI| CLI[💻 Claude Code CLI]
+
+                    subgraph Entorno_Local["Entorno Local (Tu Computadora)"]
+                        CLI
+                        CLI -->|Ejecuta y captura salida| Tools[🛠️ Herramientas Locales]
+                        Tools -->|Lee / Edita| Files[📁 Archivos del Proyecto]
+                        Tools -->|Ejecuta| Bash[📟 Terminal / Bash / Git]
+                        CLI -.->|Lee instrucciones base| CLAUDEMD[📄 CLAUDE.md]
+                    end
+
+                    subgraph Nube_Anthropic["Anthropic Cloud (El Cerebro)"]
+                        API[🌐 Interfaz API]
+                        Model[🧠 Modelo Claude]
+                        API <--> Model
+                    end
+
+                    CLI -->|2. Envía Prompt + Contexto + Lista de Herramientas| API
+                    API -->|3. Responde: Pide ejecutar herramienta Ej: buscar archivo| CLI
+                    CLI -->|4. Ejecuta y devuelve los resultados de la herramienta| API
+                    API -->|5. Bucle Inteligente evalúa si necesita más herramientas| API
+                    API -->|6. Respuesta final o acción completada| CLI
+                    CLI -->|Muestra cambios / Pide confirmación| User
+
+                    style CLI fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#082f49
+                    style Model fill:#faf5ff,stroke:#9333ea,stroke-width:2px,color:#4c1d95
+                    style Tools fill:#f1f5f9,stroke:#64748b,stroke-width:2px,color:#0f172a
+                    style API fill:#fff1f2,stroke:#e11d48,stroke-width:2px,color:#881337
+            </div>
+        </section>
+
+        <!-- Desglose de Componentes -->
+        <section class="space-y-6">
+            <h2 class="text-3xl font-bold text-stone-800 text-center mb-8">Desglose de los Componentes</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Tarjeta 1 -->
+                <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 hover:shadow-md transition-shadow">
+                    <div class="text-3xl mb-3">💻</div>
+                    <h3 class="text-xl font-semibold text-stone-800 mb-2">Claude Code (El Arnés Local)</h3>
+                    <p class="text-stone-600 text-sm">
+                        La herramienta de línea de comandos (CLI) que instalas. Actúa como el intermediario: gestiona las sesiones, envía peticiones a la API y <strong>ejecuta físicamente las herramientas</strong> en tu máquina (lee archivos, corre comandos).
+                    </p>
+                </div>
+
+                <!-- Tarjeta 2 -->
+                <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 hover:shadow-md transition-shadow">
+                    <div class="text-3xl mb-3">🧠</div>
+                    <h3 class="text-xl font-semibold text-stone-800 mb-2">El Modelo Claude</h3>
+                    <p class="text-stone-600 text-sm">
+                        La inteligencia en la nube. No tiene acceso directo a tus archivos. En su lugar, lee un "menú" de herramientas que el CLI le envía y razona: <em>"Para resolver esto, primero necesito pedirle al CLI que ejecute un 'ls' en esta carpeta"</em>.
+                    </p>
+                </div>
+
+                <!-- Tarjeta 3 -->
+                <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 hover:shadow-md transition-shadow">
+                    <div class="text-3xl mb-3">🛠️</div>
+                    <h3 class="text-xl font-semibold text-stone-800 mb-2">Las Herramientas (Tools)</h3>
+                    <p class="text-stone-600 text-sm">
+                        Lo que transforma a un chatbot en un <strong>agente</strong>. Las herramientas permiten a Claude interactuar con la realidad: buscar en el código, editar líneas específicas, ejecutar tests (bash), leer logs de errores o hacer commits en Git.
+                    </p>
+                </div>
+
+                <!-- Tarjeta 4 -->
+                <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 hover:shadow-md transition-shadow">
+                    <div class="text-3xl mb-3">📄</div>
+                    <h3 class="text-xl font-semibold text-stone-800 mb-2">CLAUDE.md</h3>
+                    <p class="text-stone-600 text-sm">
+                        Tu archivo de memoria y reglas. El CLI no lo "entiende", simplemente lo adjunta como texto en cada petición para que el modelo sepa cuáles son los estándares de tu equipo, comandos de build o arquitectura preferida.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- El Bucle y Resumen Analógico -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- El Bucle Agéntico -->
+            <section class="bg-emerald-50 rounded-2xl p-8 border border-emerald-100">
+                <h3 class="text-2xl font-bold text-emerald-900 mb-4 flex items-center">
+                    <span class="mr-2">🔄</span> Las 3 Fases del Bucle Agéntico
+                </h3>
+                <p class="text-emerald-800 mb-4 text-sm">
+                    A diferencia de una simple respuesta de chat, Claude Code opera en un ciclo continuo hasta resolver el problema:
+                </p>
+                <ul class="space-y-4 text-sm text-emerald-800">
+                    <li>
+                        <strong>1. Recopilar Contexto (Explore):</strong> Ante una petición (ej. "Arregla el bug de login"), Claude primero pide ejecutar búsquedas en los archivos para entender cómo funciona la autenticación en tu proyecto específico.
+                    </li>
+                    <li>
+                        <strong>2. Tomar Acción (Plan & Implement):</strong> Con la información recopilada, Claude decide qué código cambiar y envía una petición estructurada para que la herramienta local edite los archivos exactos.
+                    </li>
+                    <li>
+                        <strong>3. Verificar Resultados (Verify):</strong> Claude Code se distingue por su capacidad de autoevaluación. Puede pedir ejecutar los tests de tu proyecto. Si fallan, lee el error, vuelve a razonar y corrige su propio código.
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Analogía del Asesor Remoto -->
+            <section class="bg-indigo-50 rounded-2xl p-8 border border-indigo-100">
+                <h3 class="text-2xl font-bold text-indigo-900 mb-4 flex items-center">
+                    <span class="mr-2">📞</span> La Analogía del Asesor Remoto
+                </h3>
+                <p class="text-indigo-800 mb-4 text-sm">
+                    Imagina cómo funcionan juntos el modelo y la herramienta local:
+                </p>
+                <ul class="space-y-3 text-sm text-indigo-800">
+                    <li class="flex"><span class="mr-2">👤</span> <span><strong>Tú:</strong> Le pides a tu asistente local que resuelva un problema complejo.</span></li>
+                    <li class="flex"><span class="mr-2">💻</span> <span><strong>Asistente Local (CLI):</strong> Está en tu oficina. Tiene manos para abrir archivos y teclear, pero necesita que le digan qué hacer. Llama por teléfono a un Experto.</span></li>
+                    <li class="flex"><span class="mr-2">🧠</span> <span><strong>Experto Remoto (Claude):</strong> Es un genio, pero no tiene acceso físico a tu oficina. Le dice al Asistente: <em>"Abre la carpeta de cuentas y dítame qué archivos hay"</em>.</span></li>
+                    <li class="flex"><span class="mr-2">🔄</span> <span><strong>El Bucle:</strong> El Asistente lo hace y se lo lee por teléfono. El Experto piensa y dice: <em>"Bien, ahora abre el archivo auth.js y cambia la línea 5"</em>. Este proceso continúa hasta solucionar el bug.</span></li>
+                </ul>
+            </section>
+        </div>
+
+    </div>
+
+    <!-- Script de inicialización de Mermaid -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        
+        mermaid.initialize({ 
+            startOnLoad: true, 
+            theme: 'base',
+            themeVariables: {
+                fontFamily: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+                primaryColor: '#f8fafc',
+                primaryTextColor: '#1c1917',
+                primaryBorderColor: '#e7e5e4',
+                lineColor: '#57534e',
+                secondaryColor: '#f5f5f4',
+                tertiaryColor: '#e2e8f0'
+            },
+            flowchart: {
+                curve: 'basis' // Líneas más suaves
+            }
+        });
+    </script>
+</body>
+</html>

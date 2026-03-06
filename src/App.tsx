@@ -8,6 +8,10 @@ import LearningAdmin from './pages/admin/LearningAdmin'
 import SimulationsLayout from './pages/SimulationsLayout'
 import TokenizationSim from './pages/TokenizationSim'
 import RagPipelineSim from './pages/RagPipelineSim'
+import TransformerAttentionSim from './pages/TransformerAttentionSim'
+import HowToLayout from './pages/HowToLayout'
+import HowChatGPTWorks from './pages/HowChatGPTWorks'
+import HowClaudeCodeWorks from './pages/HowClaudeCodeWorks'
 import LanguageSelector from './components/LanguageSelector'
 import ProtectedRoute from './components/ProtectedRoute'
 
@@ -24,6 +28,14 @@ function App() {
                     <Route index element={<Navigate to="/simulations/tokenization" replace />} />
                     <Route path="tokenization" element={<TokenizationSim />} />
                     <Route path="rag" element={<RagPipelineSim />} />
+                    <Route path="attention" element={<TransformerAttentionSim />} />
+                </Route>
+
+                {/* How To */}
+                <Route path="/howto" element={<><LanguageSelector /><HowToLayout /></>}>
+                    <Route index element={<Navigate to="/howto/chatgpt" replace />} />
+                    <Route path="chatgpt" element={<HowChatGPTWorks />} />
+                    <Route path="claudecode" element={<HowClaudeCodeWorks />} />
                 </Route>
 
                 {/* Auth */}

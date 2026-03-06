@@ -23,6 +23,15 @@ export interface UIStrings {
     tokenizationSimSubtitle: string
     ragSimTitle: string
     ragSimSubtitle: string
+    attentionSimTitle: string
+    attentionSimSubtitle: string
+    // How To
+    howToNav: string
+    howToSidebarTitle: string
+    howChatGPTTitle: string
+    howChatGPTSubtitle: string
+    howClaudeCodeTitle: string
+    howClaudeCodeSubtitle: string
 }
 
 const strings: Record<Language, UIStrings> = {
@@ -50,6 +59,15 @@ const strings: Record<Language, UIStrings> = {
         tokenizationSimSubtitle: 'How LLMs split text into tokens',
         ragSimTitle: 'RAG Pipeline',
         ragSimSubtitle: 'Retrieval-Augmented Generation flow',
+        attentionSimTitle: 'Transformer Attention',
+        attentionSimSubtitle: 'How self-attention and multi-head attention work',
+        // How To
+        howToNav: 'HOW TO',
+        howToSidebarTitle: 'How To',
+        howChatGPTTitle: 'How ChatGPT Works',
+        howChatGPTSubtitle: 'Architecture flow from prompt to response',
+        howClaudeCodeTitle: 'How Claude Code Works',
+        howClaudeCodeSubtitle: 'Agentic CLI + cloud model loop',
     },
     es: {
         subtitle: 'Explora {count} términos esenciales de Inteligencia Artificial e IA Generativa — desde fundamentos hasta conceptos de vanguardia.',
@@ -75,6 +93,15 @@ const strings: Record<Language, UIStrings> = {
         tokenizationSimSubtitle: 'Cómo los LLMs dividen el texto en tokens',
         ragSimTitle: 'Pipeline RAG',
         ragSimSubtitle: 'Flujo de Retrieval-Augmented Generation',
+        attentionSimTitle: 'Atención Transformer',
+        attentionSimSubtitle: 'Cómo funciona la auto-atención y la atención multi-cabeza',
+        // How To
+        howToNav: 'CÓMO FUNCIONA',
+        howToSidebarTitle: 'Cómo Funciona',
+        howChatGPTTitle: 'Cómo funciona ChatGPT',
+        howChatGPTSubtitle: 'Arquitectura desde el prompt hasta la respuesta',
+        howClaudeCodeTitle: 'Cómo funciona Claude Code',
+        howClaudeCodeSubtitle: 'Bucle agéntico CLI + modelo en la nube',
     },
 }
 
